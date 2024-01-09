@@ -4,7 +4,7 @@ interface FetchOptions extends RequestInit {
 
 type Interceptor<T> = (input: T) => T;
 
-class ServerChain {
+export default class ServerChain {
   private baseURL: string;
   private headers: HeadersInit;
   private interceptors: {
@@ -64,5 +64,3 @@ class ServerChain {
     this.interceptors.response = interceptor;
   }
 }
-
-export default ServerChain;
