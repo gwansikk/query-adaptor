@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es6", "dom"],
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "rootDir": "src",
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
     "declaration": true,
-    "sourceMap": true
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "sourceMap": true,
+    "lib": ["ESNext", "DOM"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
