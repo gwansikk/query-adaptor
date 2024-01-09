@@ -1,3 +1,10 @@
 .vscode
 .yarn
 src
+.editorconfig
+.gitattributes
+.pnp.cjs
+.pnp.loader.mjs
+.yarnrc.yml
+rollup.config.js
+tsconfig.json
