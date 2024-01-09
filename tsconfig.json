@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5", // 구형 브라우저 호환성을 위해 es5 유지
-    "lib": ["dom", "es2015", "es2016", "es2017", "es2018", "es2019", "es2020"], // 필요한 모든 ECMAScript 기능을 포함
+    "lib": ["es6", "dom"],
     "module": "ESNext", // 최신 모듈 기능 사용
     "moduleResolution": "node", // Node.js 스타일 모듈 해석 사용
     "outDir": "dist", // 빌드 출력 디렉토리 설정
