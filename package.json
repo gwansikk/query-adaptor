@@ -1,5 +1,5 @@
 {
-  "name": "server-chain",
+  "name": "@gwansikk/server-chain",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/cjs/index.js",

@@ -33,6 +33,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gwansikk/server-chain@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@gwansikk/server-chain@workspace:."
+  dependencies:
+    "@rollup/plugin-commonjs": "npm:^25.0.7"
+    "@rollup/plugin-node-resolve": "npm:^15.2.3"
+    "@rollup/plugin-typescript": "npm:^11.1.5"
+    rollup: "npm:^4.9.4"
+    rollup-plugin-dts: "npm:^6.1.0"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -1182,20 +1196,6 @@ __metadata:
   checksum: 5160b06975a38b11c1ab55950cb5b8a23db78df88275d3d8a42ccf1f29e55112ac995b3a26a522c36e3b5f76b0445f1eef70d696b8c7862a2b4303d7b0e7609e
   languageName: node
   linkType: hard
-
-"server-chain@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "server-chain@workspace:."
-  dependencies:
-    "@rollup/plugin-commonjs": "npm:^25.0.7"
-    "@rollup/plugin-node-resolve": "npm:^15.2.3"
-    "@rollup/plugin-typescript": "npm:^11.1.5"
-    rollup: "npm:^4.9.4"
-    rollup-plugin-dts: "npm:^6.1.0"
-    tslib: "npm:^2.6.2"
-    typescript: "npm:^5.3.3"
-  languageName: unknown
-  linkType: soft
 
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
