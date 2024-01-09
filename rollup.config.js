@@ -10,21 +10,17 @@ export default [
     input: "src/index.ts",
     output: [
       {
-        file: packageJson.main, // CommonJS 형식으로 번들링된 파일
+        file: packageJson.main,
         format: "cjs",
         sourcemap: true,
       },
       {
-        file: packageJson.module, // ES 모듈 형식으로 번들링된 파일
+        file: packageJson.module,
         format: "esm",
         sourcemap: true,
       },
     ],
-    plugins: [
-      resolve(), // Node.js의 모듈 해석 방식을 사용
-      commonjs(), // CommonJS 모듈을 ES6 모듈로 변환
-      typescript({ tsconfig: "./tsconfig.json" }), // TypeScript 플러그인 사용
-    ],
+    plugins: [resolve(), commonjs(), typescript()],
   },
   {
     input: "dist/esm/index.d.ts",

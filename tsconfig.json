@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5", // 구형 브라우저 호환성을 위해 es5 유지
+    "target": "es5",
     "lib": ["es6", "dom"],
-    "module": "ESNext", // 최신 모듈 기능 사용
-    "moduleResolution": "node", // Node.js 스타일 모듈 해석 사용
-    "outDir": "dist", // 빌드 출력 디렉토리 설정
-    "rootDir": "src", // 소스 파일의 루트 디렉토리 설정
-    "strict": true, // 엄격한 타입 체킹 활성화
-    "esModuleInterop": true, // CommonJS와 ES 모듈 간 상호 운용성 활성화
-    "forceConsistentCasingInFileNames": true, // 파일 이름의 일관된 대소문자 강제
-    "skipLibCheck": true, // 성능 최적화를 위해 타입 정의 파일의 체크 스킵
-    "declaration": true, // 타입 정의 파일 생성 (라이브러리 배포시 유용)
-    "sourceMap": true // 소스맵 생성 (디버깅에 유용)
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true
   },
-  "include": ["src/**/*"], // 모든 소스 파일 포함
-  "exclude": ["node_modules", "dist"] // 빌드 프로세스에서 제외할 경로 설정
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
