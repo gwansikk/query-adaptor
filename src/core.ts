@@ -48,7 +48,9 @@ export class ServerChain {
     url = formatPath(url);
 
     if (this.interceptors.request) {
-      options = this.interceptors.request(options);
+      options =
+        this.interceptors.request(options) ||
+        log('interceptor', 'request intercepted; must return');
     }
 
     try {
