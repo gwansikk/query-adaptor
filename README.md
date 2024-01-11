@@ -27,6 +27,13 @@ npm i @gwansikk/server-chain
 yarn add @gwansikk/server-chain
 ```
 
+# Roadmap
+
+- [x] instance
+- [x] interceptor
+- [ ] error handling
+- [ ] retry & timeout
+
 ## Contributing
 
 Information describing how to contribute can be found in the file.  
