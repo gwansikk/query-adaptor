@@ -1,5 +1,5 @@
-export const log = (title: string, massage: string): void => {
-  console.warn('[chain]', `${title}: `, massage);
+export const log = (key: string, title: string, massage: string): void => {
+  console.warn(key, '[chain]', `${title}: `, massage);
 };
 
 export const createBaseURL = (url: string): string => {
