@@ -8,4 +8,4 @@ src
 .yarnrc.yml
 rollup.config.js
 tsconfig.json
-example
+test
