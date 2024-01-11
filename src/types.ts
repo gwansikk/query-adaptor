@@ -14,3 +14,14 @@ export interface PostArgs {
 }
 
 export type Interceptor<T> = (input: T) => T;
+
+export interface ServerChainArgs {
+  baseURL: string;
+  headers?: HeadersInit;
+  interceptors?: {
+    request: Interceptor<FetchOptions> | null;
+    response: Interceptor<Response> | null;
+    error: Interceptor<Response> | null;
+  };
+  debug?: boolean;
+}
