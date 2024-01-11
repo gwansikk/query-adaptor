@@ -1,7 +1,7 @@
-import { FetchOptions, GetArgs, Interceptor, PostArgs } from "./types";
-import { logging } from "./utils";
+import { FetchOptions, GetArgs, Interceptor, PostArgs, ServerChainArgs } from './types';
+import { createBaseURL, formatPath, log } from './utils';
 
-export default class ServerChain {
+export class ServerChain {
   private baseURL: string;
   private headers: HeadersInit;
   private interceptors: {
@@ -9,15 +9,22 @@ export default class ServerChain {
     response: Interceptor<Response> | null;
     error: Interceptor<Response> | null;
   };
+  private debug: boolean;
 
-  constructor(baseURL: string) {
-    this.baseURL = baseURL;
-    this.headers = {};
-    this.interceptors = {
+  constructor({
+    baseURL,
+    headers = {},
+    interceptors = {
       request: null,
       response: null,
       error: null,
-    };
+    },
+    debug = false,
+  }: ServerChainArgs) {
+    this.baseURL = createBaseURL(baseURL);
+    this.headers = headers;
+    this.interceptors = interceptors;
+    this.debug = debug;
   }
 
   setHeaders(headers: HeadersInit): void {
@@ -38,34 +45,82 @@ export default class ServerChain {
 
   private async fetch(url: string, options: FetchOptions): Promise<any> {
     options.headers = { ...this.headers, ...options.headers };
+    url = formatPath(url);
 
     if (this.interceptors.request) {
       options = this.interceptors.request(options);
     }
 
-    const endpoint = [this.baseURL, url].join("/");
-    const response = await fetch(endpoint, options);
+    try {
+      const response = await fetch(`${this.baseURL}/${url}`, options);
 
-    if (this.interceptors.error && response.status >= 400) {
-      return logging(this.interceptors.error(response)?.json());
+      if (response.status >= 400) {
+        if (this.debug) {
+          log('debug', `Error ${response.status}`);
+        } else if (this.interceptors.error) {
+          return (
+            this.interceptors.error(response)?.json() ||
+            log('interceptor', 'Error intercepted; must return')
+          );
+        }
+      }
+
+      if (this.interceptors.response) {
+        return (
+          this.interceptors.response(response)?.json() ||
+          log('interceptor', 'Response intercepted; must return')
+        );
+      }
+
+      return response.json();
+    } catch (error) {
+      throw error;
     }
-
-    if (this.interceptors.response) {
-      return logging(this.interceptors.response(response)?.json());
-    }
-
-    return response.json();
   }
 
-  get({ url, options = {} }: GetArgs): Promise<any> {
-    return this.fetch(url, { ...options, method: "GET" });
-  }
-
-  post({ url, body, options = {} }: PostArgs): Promise<any> {
-    return this.fetch(url, {
+  async request({
+    method,
+    url,
+    body,
+    options,
+  }: {
+    method: string;
+    url: string;
+    body?: { [key: string]: unknown };
+    options?: FetchOptions;
+  }): Promise<any> {
+    const fetchOptions: FetchOptions = {
       ...options,
-      body: JSON.stringify(body),
-      method: "POST",
+      method,
+      headers: { ...this.headers, ...options?.headers },
+      body: body ? JSON.stringify(body) : null,
+    };
+
+    return this.fetch(url, fetchOptions);
+  }
+
+  post({ url, body, options }: PostArgs): Promise<any> {
+    return this.request({
+      method: 'POST',
+      url,
+      body,
+      options,
     });
+  }
+
+  get({ url, options }: GetArgs): Promise<any> {
+    return this.request({
+      method: 'GET',
+      url,
+      options,
+    });
+  }
+
+  put({ url, body, options }: PostArgs): Promise<any> {
+    return this.request({ method: 'PUT', url, body, options });
+  }
+
+  delete({ url, body, options }: PostArgs): Promise<any> {
+    return this.request({ method: 'DELETE', url, body, options });
   }
 }
