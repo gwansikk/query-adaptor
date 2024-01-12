@@ -38,7 +38,7 @@ const server = ServerChain({
   headers: { 'Content-Type': 'application/json' },
 });
 
-server.get({ url: 'posts/1' }).then(res => console.log(res.data));
+server.get({ url: 'posts/1' }).then(data => console.log(data));
 ```
 
 ## Interceptor
@@ -87,5 +87,5 @@ The list below is a roadmap to get to version 1.0.
 
 ## Contributing
 
-Information describing how to contribute can be found in the file.
+Information describing how to contribute can be found in the file.  
 [CONTRIBUTING.md](./CONTRIBUTING.md)

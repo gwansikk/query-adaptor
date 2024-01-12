@@ -38,7 +38,7 @@ const server = ServerChain({
   headers: { 'Content-Type': 'application/json' },
 });
 
-server.get({ url: 'posts/1' }).then(res => console.log(res.data));
+server.get({ url: 'posts/1' }).then(data => console.log(data));
 ```
 
 ## Interceptor
