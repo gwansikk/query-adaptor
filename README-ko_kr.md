@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>⛓️ server-chain</h1>
-<p><b>A Simple, Lightweight and Easy-to-Use Extension Library for Fetch API.</b></p>
+<p><b>사용하기 쉽고 가벼운 Fetch API용 확장 라이브러리입니다.</b></p>
 
 [![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
 [![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
@@ -51,8 +51,8 @@ const server = ServerChain({
   interceptors: {
     request: request => {
       console.log('** request interceptor **');
-      // You need to modify the request and return the modified request.
-      // For example, you can add a specific header to the request or modify the URL.
+      // 요청을 수정하고 수정된 요청을 반환해야 합니다.
+      // 예를 들어, 요청에 특정 헤더를 추가하거나 URL을 수정할 수 있습니다.
       request.headers = {
         ...request.headers,
         Authorization: 'Bearer YOUR_ACCESS_TOKEN',
@@ -61,12 +61,12 @@ const server = ServerChain({
     },
     response: response => {
       console.log('** response interceptor **');
-      // You need to modify the response and return the modified response.
+      // 응답을 수정하고 수정된 응답을 반환해야 합니다.
       return response;
     },
     error: response => {
       console.log('** error interceptor **');
-      // You need to modify the error response and return the modified response.
+      // 에러 응답을 수정하고 수정된 응답을 반환해야 합니다.
       return response;
     },
   },
@@ -77,15 +77,15 @@ const server = ServerChain({
 
 The list below is a roadmap to get to version 1.0.
 
-- [x] Automatic JSON Conversion
-- [x] Instance Creation
-- [x] Global Settings
-- [x] Request and Response Interceptors
-- [ ] Error Status Handling
-- [ ] Request Cancellation
-- [ ] Progress Bar/Loading Indicator
+- [x] 자동 JSON 변환
+- [x] 인스턴스 생성
+- [x] 전역 설정
+- [x] 요청 및 응답 인터셉터
+- [ ] 오류 상태 처리
+- [ ] 요청 취소
+- [ ] 진행 상태 / 로딩 인디케이터
 
 ## Contributing
 
-Information describing how to contribute can be found in the file.
+해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.  
 [CONTRIBUTING.md](./CONTRIBUTING.md)
