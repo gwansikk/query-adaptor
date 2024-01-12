@@ -35,7 +35,6 @@ yarn add @gwansikk/server-chain
 const server = ServerChain({
   key: 'INSTANCE',
   baseURL: 'https://jsonplaceholder.typicode.com',
-  headers: { 'Content-Type': 'application/json' },
 });
 
 server.get({ url: 'posts/1' }).then(data => console.log(data));
@@ -47,7 +46,6 @@ server.get({ url: 'posts/1' }).then(data => console.log(data));
 const server = ServerChain({
   key: 'INTERCEPTOR',
   baseURL: 'https://jsonplaceholder.typicode.com',
-  headers: { 'Content-Type': 'application/json' },
   interceptors: {
     request: request => {
       console.log('** request interceptor **');
