@@ -2,15 +2,15 @@
   "name": "@gwansikk/server-chain",
   "version": "0.2.0",
   "description": "The server-chain is a simple and lightweight HTTP Request library.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "watch": "rollup -cw --bundleConfigAsCjs",
-    "build": "npm run clean && rollup -c --bundleConfigAsCjs",
+    "build": "yarn clean && rollup -c --bundleConfigAsCjs",
     "test": "vitest",
     "test:run": "vitest run",
     "clean": "rimraf dist"
