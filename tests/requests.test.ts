@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import ServerChain from '../src';
 
-describe('ServerChain Test', () => {
+describe('requests Test', () => {
   it('should create an instance of ServerChain', () => {
-    const server = ServerChain({
+    const chain = ServerChain({
       key: 'INSTANCE',
       baseURL: 'https://jsonplaceholder.typicode.com',
     });
-    expect(server).toBeTruthy();
+    expect(chain).toBeTruthy();
   });
 
   it('should handle request and response interceptors', async () => {
@@ -40,7 +40,12 @@ describe('ServerChain Test', () => {
     });
 
     // server.get 호출
-    const data = await server.get({ url: 'posts/1' });
+    const data = await server.get<{
+      userId: number;
+      id: number;
+      title: string;
+      body: string;
+    }>({ url: 'posts/1' });
     expect(data).toEqual({
       userId: 1,
       id: 1,
