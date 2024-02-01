@@ -7,13 +7,13 @@ export interface HttpArgs {
   options?: FetchOptions;
 }
 
-export interface HttpBodyArgs {
+export interface HttpBodyArgs<T = { [key: string]: unknown }> {
   url: string;
-  body?: { [key: string]: unknown };
+  body?: T;
   options?: FetchOptions;
 }
 
-export type ResponseData = { [key: string]: unknown };
+export type ResponseData<R = { [key: string]: unknown }> = R;
 
 export type Interceptor<T> = (input: T) => T;
 

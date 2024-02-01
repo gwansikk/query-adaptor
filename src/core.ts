@@ -35,7 +35,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     interceptors.error = interceptor;
   };
 
-  const fetchFn = async (url: string, options: FetchOptions): Promise<ResponseData> => {
+  const fetchFn = async <R>(url: string, options: FetchOptions): Promise<ResponseData<R>> => {
     options.headers = { ...headers, ...options.headers };
     url = formatPath(url);
 
@@ -68,14 +68,14 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     return response.json();
   };
 
-  const request = async ({
+  const request = async <T, R>({
     method,
     url,
     body,
     options,
   }: {
     method: string;
-  } & HttpBodyArgs): Promise<ResponseData> => {
+  } & HttpBodyArgs<T>): Promise<ResponseData<R>> => {
     const fetchOptions: FetchOptions = {
       ...options,
       method,
@@ -86,26 +86,23 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     return fetchFn(url, fetchOptions);
   };
 
-  const post = ({ url, body, options }: HttpBodyArgs): Promise<ResponseData> =>
+  const post = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
     request({
+      ...args,
       method: 'POST',
-      url,
-      body,
-      options,
     });
 
-  const get = ({ url, options }: HttpArgs): Promise<ResponseData> =>
+  const get = <R>(args: HttpArgs): Promise<ResponseData<R>> =>
     request({
+      ...args,
       method: 'GET',
-      url,
-      options,
     });
 
-  const put = ({ url, body, options }: HttpBodyArgs): Promise<ResponseData> =>
-    request({ method: 'PUT', url, body, options });
+  const put = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
+    request({ ...args, method: 'PUT' });
 
-  const del = ({ url, body, options }: HttpBodyArgs): Promise<ResponseData> =>
-    request({ method: 'DELETE', url, body, options });
+  const del = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
+    request({ ...args, method: 'DELETE' });
 
   return {
     setHeaders,
