@@ -95,6 +95,12 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
       method: 'GET',
     });
 
+  const patch = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
+    request({
+      ...args,
+      method: 'patch',
+    });
+
   const put = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
     request({ ...args, method: 'PUT' });
 
@@ -109,6 +115,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     request,
     post,
     get,
+    patch,
     put,
     del,
   };
