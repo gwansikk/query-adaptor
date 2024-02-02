@@ -2,6 +2,7 @@ import {
   FetchOptions,
   HttpArgs,
   HttpBodyArgs,
+  HttpBodyArgsWithMethod,
   Interceptor,
   ResponseData,
   ServerChainOptions,
@@ -13,11 +14,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
   const baseURL = createBaseURL(serverChainArgs.baseURL);
   const debug = serverChainArgs.debug || false;
   let headers = serverChainArgs.headers || {};
-  const interceptors = serverChainArgs.interceptors || {
-    request: null,
-    response: null,
-    error: null,
-  };
+  const interceptors = serverChainArgs.interceptors || {};
 
   const setHeaders = (newHeaders: HeadersInit): void => {
     headers = { ...headers, ...newHeaders };
@@ -46,9 +43,8 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     const response = await fetch(`${baseURL}/${url}`, options);
 
     if (response.status >= 400) {
-      if (debug) {
-        log(key, 'debug', `Error ${response.status}`);
-      }
+      if (debug) log(key, 'debug', `Error ${response.status}`);
+
       if (interceptors.error) {
         const errorResponse = await Promise.resolve(interceptors.error(response, options.method));
         return errorResponse.json();
@@ -70,9 +66,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     url,
     body,
     options,
-  }: {
-    method: string;
-  } & HttpBodyArgs<T>): Promise<ResponseData<R>> => {
+  }: HttpBodyArgsWithMethod<T>): Promise<ResponseData<R>> => {
     const fetchOptions: FetchOptions = {
       ...options,
       method,
@@ -112,7 +106,6 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     setRequestInterceptor,
     setResponseInterceptor,
     setErrorInterceptor,
-    request,
     post,
     get,
     patch,

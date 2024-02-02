@@ -14,6 +14,10 @@ export interface HttpBodyArgs<T = { [key: string]: unknown }> {
   options?: FetchOptions;
 }
 
+export interface HttpBodyArgsWithMethod<T = { [key: string]: unknown }> extends HttpBodyArgs<T> {
+  method: string;
+}
+
 export type ResponseData<R = { [key: string]: unknown }> = R;
 
 export type Interceptor<T> = (input: T, method: string) => T | Promise<T>;
