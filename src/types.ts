@@ -1,4 +1,5 @@
 export interface FetchOptions extends RequestInit {
+  method: string;
   headers?: HeadersInit;
 }
 
@@ -15,7 +16,7 @@ export interface HttpBodyArgs<T = { [key: string]: unknown }> {
 
 export type ResponseData<R = { [key: string]: unknown }> = R;
 
-export type Interceptor<T> = (input: T, method?: string) => T | Promise<T>;
+export type Interceptor<T> = (input: T, method: string) => T | Promise<T>;
 
 export interface ServerChainOptions {
   key: string;
