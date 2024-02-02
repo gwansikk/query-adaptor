@@ -40,7 +40,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     url = formatPath(url);
 
     if (interceptors.request) {
-      options = await Promise.resolve(interceptors.request(options));
+      options = await Promise.resolve(interceptors.request(options, options.method));
     }
 
     const response = await fetch(`${baseURL}/${url}`, options);
@@ -50,13 +50,15 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
         log(key, 'debug', `Error ${response.status}`);
       }
       if (interceptors.error) {
-        const errorResponse = await Promise.resolve(interceptors.error(response));
+        const errorResponse = await Promise.resolve(interceptors.error(response, options.method));
         return errorResponse.json();
       }
     }
 
     if (interceptors.response) {
-      const modifiedResponse = await Promise.resolve(interceptors.response(response));
+      const modifiedResponse = await Promise.resolve(
+        interceptors.response(response, options.method)
+      );
       return modifiedResponse.json();
     }
 
