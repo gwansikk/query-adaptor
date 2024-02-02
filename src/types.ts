@@ -15,7 +15,7 @@ export interface HttpBodyArgs<T = { [key: string]: unknown }> {
 
 export type ResponseData<R = { [key: string]: unknown }> = R;
 
-export type Interceptor<T> = (input: T) => T;
+export type Interceptor<T> = (input: T) => T | Promise<T>;
 
 export interface ServerChainOptions {
   key: string;
@@ -23,8 +23,8 @@ export interface ServerChainOptions {
   debug?: boolean;
   headers?: HeadersInit;
   interceptors?: {
-    request: Interceptor<FetchOptions> | null;
-    response: Interceptor<Response> | null;
-    error: Interceptor<Response> | null;
+    request?: Interceptor<FetchOptions>;
+    response?: Interceptor<Response>;
+    error?: Interceptor<Response>;
   };
 }

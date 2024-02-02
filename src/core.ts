@@ -40,9 +40,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     url = formatPath(url);
 
     if (interceptors.request) {
-      options =
-        interceptors.request(options) ||
-        log(key, 'interceptor', 'request intercepted; must return');
+      options = await Promise.resolve(interceptors.request(options));
     }
 
     const response = await fetch(`${baseURL}/${url}`, options);
@@ -50,19 +48,16 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     if (response.status >= 400) {
       if (debug) {
         log(key, 'debug', `Error ${response.status}`);
-      } else if (interceptors.error) {
-        return (
-          interceptors.error(response)?.json() ||
-          log(key, 'interceptor', 'Error intercepted; must return')
-        );
+      }
+      if (interceptors.error) {
+        const errorResponse = await Promise.resolve(interceptors.error(response));
+        return errorResponse.json();
       }
     }
 
     if (interceptors.response) {
-      return (
-        interceptors.response(response)?.json() ||
-        log(key, 'interceptor', 'Response intercepted; must return')
-      );
+      const modifiedResponse = await Promise.resolve(interceptors.response(response));
+      return modifiedResponse.json();
     }
 
     return response.json();
@@ -109,6 +104,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     setRequestInterceptor,
     setResponseInterceptor,
     setErrorInterceptor,
+    request,
     post,
     get,
     put,
