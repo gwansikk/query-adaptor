@@ -1,5 +1,7 @@
+type MethodType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
 export interface FetchOptions extends RequestInit {
-  method: string;
+  method: MethodType;
   headers?: HeadersInit;
 }
 
@@ -15,7 +17,7 @@ export interface HttpBodyArgs<T = { [key: string]: unknown }> {
 }
 
 export interface HttpBodyArgsWithMethod<T = { [key: string]: unknown }> extends HttpBodyArgs<T> {
-  method: string;
+  method: MethodType;
 }
 
 export type ResponseData<R = { [key: string]: unknown }> = R;
@@ -32,4 +34,16 @@ export interface ServerChainOptions {
     response?: Interceptor<Response>;
     error?: Interceptor<Response>;
   };
+}
+
+export interface ServerChainType {
+  setHeaders: (newHeaders: HeadersInit) => void;
+  setRequestInterceptor: (interceptor: Interceptor<FetchOptions>) => void;
+  setResponseInterceptor: (interceptor: Interceptor<Response>) => void;
+  setErrorInterceptor: (interceptor: Interceptor<Response>) => void;
+  get: <R>(args: HttpArgs) => Promise<ResponseData<R>>;
+  post: <T, R>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  patch: <T, R>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  put: <T, R>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  del: <T, R>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
 }
