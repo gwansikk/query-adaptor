@@ -6,10 +6,11 @@ import {
   Interceptor,
   ResponseData,
   ServerChainOptions,
+  ServerChainType,
 } from './types';
 import { createBaseURL, formatPath, log } from './utils';
 
-const ServerChain = (serverChainArgs: ServerChainOptions) => {
+const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
   const key = serverChainArgs.key;
   const baseURL = createBaseURL(serverChainArgs.baseURL);
   const debug = serverChainArgs.debug || false;
@@ -77,22 +78,22 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     return fetchFn(url, fetchOptions);
   };
 
-  const post = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request({
-      ...args,
-      method: 'POST',
-    });
-
   const get = <R>(args: HttpArgs): Promise<ResponseData<R>> =>
     request({
       ...args,
       method: 'GET',
     });
 
+  const post = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
+    request({
+      ...args,
+      method: 'POST',
+    });
+
   const patch = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
     request({
       ...args,
-      method: 'patch',
+      method: 'PATCH',
     });
 
   const put = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
@@ -106,8 +107,8 @@ const ServerChain = (serverChainArgs: ServerChainOptions) => {
     setRequestInterceptor,
     setResponseInterceptor,
     setErrorInterceptor,
-    post,
     get,
+    post,
     patch,
     put,
     del,
