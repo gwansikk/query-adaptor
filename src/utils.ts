@@ -3,6 +3,10 @@ export const log = (key: string, title: string, massage: string): void => {
 };
 
 export const createBaseURL = (url: string): string => {
+  if (!url) {
+    throw new Error('Base URL is not set: ' + url);
+  }
+
   const match = url.match(/^(https?:\/\/)?(.*)$/);
   const protocol = match ? match[1] || 'https://' : 'https://';
   let restOfUrl = match ? match[2] : url;

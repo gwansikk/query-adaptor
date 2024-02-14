@@ -34,10 +34,6 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
   };
 
   const fetchFn = async <R>(url: string, options: FetchOptions): Promise<ResponseData<R>> => {
-    if (!baseURL) {
-      throw new Error('Base URL is not set');
-    }
-
     options.headers = { ...headers, ...options.headers };
     url = formatPath(url);
 
