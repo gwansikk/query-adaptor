@@ -1,6 +1,6 @@
 {
   "name": "@gwansikk/server-chain",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "The server-chain is a simple and lightweight HTTP Request library.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
