@@ -72,35 +72,35 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
       ...options,
       method,
       headers: { ...headers, ...options?.headers },
-      body: body ? JSON.stringify(body) : null,
+      body: body instanceof FormData ? body : body ? JSON.stringify(body) : null,
     };
 
     return fetchFn(url, fetchOptions);
   };
 
   const get = <R>(args: HttpArgs): Promise<ResponseData<R>> =>
-    request({
+    request<unknown, R>({
       ...args,
       method: 'GET',
     });
 
   const post = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request({
+    request<T, R>({
       ...args,
       method: 'POST',
     });
 
   const patch = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request({
+    request<T, R>({
       ...args,
       method: 'PATCH',
     });
 
   const put = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request({ ...args, method: 'PUT' });
+    request<T, R>({ ...args, method: 'PUT' });
 
   const del = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request({ ...args, method: 'DELETE' });
+    request<T, R>({ ...args, method: 'DELETE' });
 
   return {
     setHeaders,
