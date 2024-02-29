@@ -71,7 +71,11 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
     const fetchOptions: FetchOptions = {
       ...options,
       method,
-      headers: { ...headers, ...options?.headers },
+      headers: {
+        ...(body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+        ...headers,
+        ...options?.headers,
+      },
       body: body instanceof FormData ? body : body ? JSON.stringify(body) : null,
     };
 
