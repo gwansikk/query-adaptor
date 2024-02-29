@@ -10,7 +10,7 @@ describe('ServerChain requests', () => {
       key: 'GET',
       baseURL: 'https://jsonplaceholder.typicode.com',
       headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       interceptors: {
         request: request => {
