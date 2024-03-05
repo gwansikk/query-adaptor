@@ -3,6 +3,7 @@
 <h1>⛓️ server-chain</h1>
 <p><b>A Simple, Lightweight and Easy-to-Use Extension Library for Fetch API.</b></p>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1e35f0a5aab44c849722b9eb6830b7e7)](https://app.codacy.com/gh/gwansikk/server-chain?utm_source=github.com&utm_medium=referral&utm_content=gwansikk/server-chain&utm_campaign=Badge_Grade)
 [![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
 [![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
