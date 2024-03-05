@@ -6,6 +6,7 @@
 [![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
 [![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/119ff7105f9c4e47bd57e43606850e59)](https://app.codacy.com/gh/gwansikk/server-chain/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 [English](./README.md)
 &nbsp;&nbsp;•&nbsp;&nbsp;
