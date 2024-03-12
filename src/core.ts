@@ -15,6 +15,7 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
   const baseURL = createBaseURL(serverChainArgs.baseURL);
   const debug = serverChainArgs.debug || false;
   let headers = serverChainArgs.headers || {};
+  const options = serverChainArgs.options || {};
   const interceptors = serverChainArgs.interceptors || {};
 
   const setHeaders = (newHeaders: HeadersInit): void => {
@@ -33,28 +34,33 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
     interceptors.error = interceptor;
   };
 
-  const fetchFn = async <R>(url: string, options: FetchOptions): Promise<ResponseData<R>> => {
-    options.headers = { ...headers, ...options.headers };
+  const fetchFn = async <R>(url: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> => {
+    fetchOptions.headers = { ...headers, ...fetchOptions.headers };
     url = formatPath(url);
 
     if (interceptors.request) {
-      options = await Promise.resolve(interceptors.request(options, options.method));
+      fetchOptions = await Promise.resolve(interceptors.request(fetchOptions, fetchOptions.method));
     }
 
-    const response = await fetch(`${baseURL}/${url}`, options);
+    const response = await fetch(`${baseURL}/${url}`, {
+      ...options,
+      ...fetchOptions,
+    });
 
     if (response.status >= 400) {
       if (debug) log(key, 'debug', `Error ${response.status}`);
 
       if (interceptors.error) {
-        const errorResponse = await Promise.resolve(interceptors.error(response, options.method));
+        const errorResponse = await Promise.resolve(
+          interceptors.error(response, fetchOptions.method)
+        );
         return errorResponse.json();
       }
     }
 
     if (interceptors.response) {
       const modifiedResponse = await Promise.resolve(
-        interceptors.response(response, options.method)
+        interceptors.response(response, fetchOptions.method)
       );
       return modifiedResponse.json();
     }
@@ -84,29 +90,32 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
     return fetchFn(url, fetchOptions);
   };
 
-  const get = <R>(args: HttpArgs): Promise<ResponseData<R>> =>
+  const get = <R>(args: HttpArgs, options?: FetchOptions): Promise<ResponseData<R>> =>
     request<unknown, R>({
       ...args,
       method: 'GET',
+      options,
     });
 
-  const post = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
+  const post = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
     request<T, R>({
       ...args,
       method: 'POST',
+      options,
     });
 
-  const patch = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
+  const patch = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
     request<T, R>({
       ...args,
       method: 'PATCH',
+      options,
     });
 
-  const put = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request<T, R>({ ...args, method: 'PUT' });
+  const put = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
+    request<T, R>({ ...args, method: 'PUT', options });
 
-  const del = <T, R>(args: HttpBodyArgs<T>): Promise<ResponseData<R>> =>
-    request<T, R>({ ...args, method: 'DELETE' });
+  const del = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
+    request<T, R>({ ...args, method: 'DELETE', options });
 
   return {
     setHeaders,

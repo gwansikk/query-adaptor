@@ -29,6 +29,7 @@ export interface ServerChainOptions {
   baseURL: string;
   debug?: boolean;
   headers?: HeadersInit;
+  options: FetchOptions;
   interceptors?: {
     request?: Interceptor<FetchOptions>;
     response?: Interceptor<Response>;
