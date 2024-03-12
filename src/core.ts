@@ -12,7 +12,9 @@ import { createBaseURL, formatPath, log } from './utils';
 
 const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
   const key = serverChainArgs.key;
-  const baseURL = createBaseURL(serverChainArgs.baseURL);
+  const mode = serverChainArgs.mode;
+  const baseURL =
+    mode === 'development' ? serverChainArgs.baseURL : createBaseURL(serverChainArgs.baseURL);
   const debug = serverChainArgs.debug || false;
   let headers = serverChainArgs.headers || {};
   const options = serverChainArgs.options || {};

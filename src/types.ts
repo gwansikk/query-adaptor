@@ -1,4 +1,5 @@
 type MethodType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+type ModeType = 'development' | 'production';
 
 export interface FetchOptions extends RequestInit {
   method?: MethodType;
@@ -25,6 +26,7 @@ export type Interceptor<T> = (input: T, method?: string) => T | Promise<T>;
 
 export interface ServerChainOptions {
   key: string;
+  mode: ModeType;
   baseURL: string;
   debug?: boolean;
   headers?: HeadersInit;
