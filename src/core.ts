@@ -68,15 +68,17 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
     body,
     options,
   }: HttpBodyArgsWithMethod<T>): Promise<ResponseData<R>> => {
+    const isFormDataOrURLSearchParams = body instanceof FormData || body instanceof URLSearchParams;
+
     const fetchOptions: FetchOptions = {
       ...options,
       method,
       headers: {
-        ...(body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+        ...(isFormDataOrURLSearchParams ? {} : { 'Content-Type': 'application/json' }),
         ...headers,
         ...options?.headers,
       },
-      body: body instanceof FormData ? body : body ? JSON.stringify(body) : null,
+      body: isFormDataOrURLSearchParams ? body : body ? JSON.stringify(body) : null,
     };
 
     return fetchFn(url, fetchOptions);
