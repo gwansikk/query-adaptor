@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>⛓️ server-chain</h1>
+<h1>🔗 Chain</h1>
 <p><b>사용하기 쉽고 가벼운 Fetch API용 확장 라이브러리입니다.</b></p>
 
 [![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)

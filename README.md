@@ -1,7 +1,7 @@
 <div align="center">
 
-<h1>⛓️ server-chain</h1>
-<p><b>A Simple, Lightweight and Easy-to-Use Extension Library for Fetch API.</b></p>
+<h1>🔗 Chain</h1>
+<p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
 [![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
 [![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
