@@ -14,7 +14,9 @@
     "build": "pnpm clean && rollup -c --bundleConfigAsCjs",
     "test": "vitest",
     "test:run": "vitest run",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "docs:dev": "pnpm --filter docs dev",
+    "docs:build": "pnpm --filter docs build"
   },
   "homepage": "https://github.com/gwansikk/server-chain",
   "repository": {
