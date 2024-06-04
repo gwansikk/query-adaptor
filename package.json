@@ -9,8 +9,9 @@
     "dist"
   ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "watch": "rollup -cw --bundleConfigAsCjs",
-    "build": "yarn clean && rollup -c --bundleConfigAsCjs",
+    "build": "pnpm clean && rollup -c --bundleConfigAsCjs",
     "test": "vitest",
     "test:run": "vitest run",
     "clean": "rimraf dist"
@@ -22,7 +23,9 @@
   },
   "author": "gwansikk",
   "license": "MIT",
-  "packageManager": "yarn@4.0.2",
+  "workspaces": [
+    "docs"
+  ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -45,10 +48,6 @@
     "fetch",
     "http",
     "request",
-    "axios",
-    "react",
-    "react-query",
-    "tanstack-query",
-    "nextjs"
+    "axios"
   ]
 }

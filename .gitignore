@@ -1,18 +1,47 @@
-dist
-node_modules
+# Logs
+logs
+*.log
+npm-debug.log*
 
+# Dependency directory
+**/node_modules/**
+_node_modules
+.pnp.cjs
+
+# Coverage directory used by tools like istanbul
+coverage
+
+.tmp
+_docpress
+
+lib
+dist
+tsconfig.tsbuildinfo
+
+# Visual Studio Code configs
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# macOS
 .DS_Store
 
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+# pnpm uses npm for publishing a new version with
+# dependencies bundled but the npm lockfile is not needed
+# because pnpm use pnpm for installation
+package-lock.json
 
-# Swap the comments on the following lines if you wish to use zero-installs
-# In that case, don't forget to run `yarn config set enableGlobalCache false`!
-# Documentation here: https://yarnpkg.com/features/caching#zero-installs
+__package_previews__
+.store
 
-#!.yarn/cache
-.pnp.*
+privatePackages/store
+
+## Verdaccio storage
+storage
+
+RELEASE.md
+
+.jest-cache
+.verdaccio-cache
+.turbo
