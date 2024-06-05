@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
+    "moduleResolution": "Node",
     "declaration": true,
-    "declarationDir": "types",
     "outDir": "dist",
     "rootDir": "src",
     "importHelpers": true,
