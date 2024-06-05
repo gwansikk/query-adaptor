@@ -1,25 +1,29 @@
-export const log = (key: string, title: string, massage: string): void => {
-  console.warn(key, '[chain]', `${title}: `, massage);
-};
-
-export const createBaseURL = (url: string): string => {
+/**
+ * Creates a base URL by combining a key and a URL.
+ * @param key - The key used to identify the base URL.
+ * @param url - The URL to be combined with the key.
+ * @returns The combined base URL.
+ * @throws {Error} If the URL is not provided.
+ */
+export function createBaseURL(key: string, url: string): string {
   if (!url) {
-    throw new Error('Base URL is not set: ' + url);
+    throw new Error('Base URL is not set: ' + key);
   }
 
   const match = url.match(/^(https?:\/\/)?(.*)$/);
-  const protocol = match ? match[1] || 'https://' : 'https://';
-  let restOfUrl = match ? match[2] : url;
+  const protocol = match?.[1] ?? 'https://';
+  const baseUrl = formatPath(match?.[2] ?? '');
 
-  restOfUrl = restOfUrl.replace(/\/\/+/g, '/');
+  return protocol + baseUrl;
+}
 
-  if (restOfUrl.endsWith('/')) {
-    restOfUrl = restOfUrl.substring(0, restOfUrl.length - 1);
-  }
-
-  return protocol + restOfUrl;
-};
-
-export const formatPath = (path: string): string => {
-  return path.replace(/^\//, '').replace(/\/+/g, '/');
-};
+/**
+ * Formats the given path by removing leading and trailing slashes,
+ * and replacing multiple consecutive slashes with a single slash.
+ *
+ * @param path - The path to be formatted.
+ * @returns The formatted path.
+ */
+export function formatPath(path: string): string {
+  return path.replace(/^\//, '').replace(/\/+/g, '/').replace(/\/$/, '');
+}
