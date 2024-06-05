@@ -3,7 +3,7 @@
   "version": "0.5.7",
   "description": "The server-chain is a simple and lightweight HTTP Request library.",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -11,7 +11,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "watch": "rollup -cw --bundleConfigAsCjs",
-    "build": "pnpm clean && rollup -c --bundleConfigAsCjs",
+    "build": "tsup",
     "test": "vitest",
     "test:run": "vitest run",
     "clean": "rimraf dist",
@@ -29,20 +29,13 @@
     "docs"
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
     "@types/eslint": "^8",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "eslint": "^8.56.0",
     "prettier": "^3.1.1",
-    "rimraf": "^5.0.5",
-    "rollup": "^4.9.4",
-    "rollup-plugin-dts": "^6.1.0",
-    "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.6.2",
+    "tsup": "^8.1.0",
     "typescript": "^5.3.3",
     "vitest": "^1.1.3"
   },
