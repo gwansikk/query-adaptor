@@ -1,81 +1,96 @@
-import {
+import type {
   FetchOptions,
   HttpArgs,
   HttpBodyArgs,
   HttpBodyArgsWithMethod,
   Interceptor,
   ResponseData,
-  ServerChainOptions,
-  ServerChainType,
+  ChainOptions,
+  ChainType,
 } from './types';
-import { createBaseURL, formatPath, log } from './utils';
+import { createBaseURL, formatPath } from './utils';
 
-const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
-  const key = serverChainArgs.key;
-  const mode = serverChainArgs.mode;
-  const baseURL =
-    mode === 'development' ? serverChainArgs.baseURL : createBaseURL(serverChainArgs.baseURL);
-  const debug = serverChainArgs.debug || false;
-  let headers = serverChainArgs.headers || {};
-  const options = serverChainArgs.options || {};
-  const interceptors = serverChainArgs.interceptors || {};
+const Chain = (chainArgs: ChainOptions): ChainType => {
+  const $key = chainArgs.key;
+  const $baseURL = createBaseURL($key, chainArgs.baseURL);
+  const $options = chainArgs.options ?? {};
+  const $interceptors = chainArgs.interceptors ?? {};
+  let headers = chainArgs.headers ?? {};
 
-  const setHeaders = (newHeaders: HeadersInit): void => {
+  /**
+   * Sets the headers for instance.
+   */
+  function setHeaders(newHeaders: HeadersInit) {
     headers = { ...headers, ...newHeaders };
-  };
+  }
 
-  const setRequestInterceptor = (interceptor: Interceptor<FetchOptions>): void => {
-    interceptors.request = interceptor;
-  };
+  /**
+   * Sets the request interceptor for instance.
+   */
+  function setRequestInterceptor(interceptor: Interceptor<FetchOptions>) {
+    $interceptors.request = interceptor;
+  }
 
-  const setResponseInterceptor = (interceptor: Interceptor<Response>): void => {
-    interceptors.response = interceptor;
-  };
+  /**
+   * Sets the response interceptor for instance.
+   */
+  function setResponseInterceptor(interceptor: Interceptor<Response>) {
+    $interceptors.response = interceptor;
+  }
 
-  const setErrorInterceptor = (interceptor: Interceptor<Response>): void => {
-    interceptors.error = interceptor;
-  };
+  /**
+   * Sets the error interceptor for instance.
+   */
+  function setErrorInterceptor(interceptor: Interceptor<Response>) {
+    $interceptors.error = interceptor;
+  }
 
-  const fetchFn = async <R>(url: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> => {
+  /**
+   * Fetches data from the given URL using the given fetch options.
+   */
+  async function $fetchFn<R>(url: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
     fetchOptions.headers = { ...headers, ...fetchOptions.headers };
     url = formatPath(url);
 
-    if (interceptors.request) {
-      fetchOptions = await Promise.resolve(interceptors.request(fetchOptions, fetchOptions.method));
+    if ($interceptors.request) {
+      fetchOptions = await Promise.resolve(
+        $interceptors.request(fetchOptions, fetchOptions.method)
+      );
     }
 
-    const response = await fetch(`${baseURL}/${url}`, {
-      ...options,
+    const response = await fetch(`${$baseURL}/${url}`, {
+      ...$options,
       ...fetchOptions,
     });
 
     if (response.status >= 400) {
-      if (debug) log(key, 'debug', `Error ${response.status}`);
-
-      if (interceptors.error) {
+      if ($interceptors.error) {
         const errorResponse = await Promise.resolve(
-          interceptors.error(response, fetchOptions.method)
+          $interceptors.error(response, fetchOptions.method)
         );
-        return errorResponse.json();
+        return await errorResponse.json();
       }
     }
 
-    if (interceptors.response) {
+    if ($interceptors.response) {
       const modifiedResponse = await Promise.resolve(
-        interceptors.response(response, fetchOptions.method)
+        $interceptors.response(response, fetchOptions.method)
       );
-      return modifiedResponse.json();
+      return await modifiedResponse.json();
     }
 
-    return response.json();
-  };
+    return await response.json();
+  }
 
-  const request = async <T, R>({
+  /**
+   * Sends a request to the given URL using the given method and body.
+   */
+  async function $request<T, R>({
     method,
     url,
     body,
     options,
-  }: HttpBodyArgsWithMethod<T>): Promise<ResponseData<R>> => {
+  }: HttpBodyArgsWithMethod<T>): Promise<ResponseData<R>> {
     const isFormDataOrURLSearchParams = body instanceof FormData || body instanceof URLSearchParams;
 
     const fetchOptions: FetchOptions = {
@@ -86,38 +101,43 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
         ...headers,
         ...options?.headers,
       },
-      body: isFormDataOrURLSearchParams ? body : body ? JSON.stringify(body) : null,
+      body: isFormDataOrURLSearchParams ? body : JSON.stringify(body),
     };
 
-    return fetchFn(url, fetchOptions);
-  };
+    return $fetchFn<R>(url, fetchOptions);
+  }
 
-  const get = <R>(args: HttpArgs, options?: FetchOptions): Promise<ResponseData<R>> =>
-    request<unknown, R>({
+  function get<R>(args: HttpArgs, options?: FetchOptions): Promise<ResponseData<R>> {
+    return $request<unknown, R>({
       ...args,
       method: 'GET',
       options,
     });
+  }
 
-  const post = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
-    request<T, R>({
+  function post<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
+    return $request<T, R>({
       ...args,
       method: 'POST',
       options,
     });
+  }
 
-  const patch = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
-    request<T, R>({
+  function patch<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
+    return $request<T, R>({
       ...args,
       method: 'PATCH',
       options,
     });
+  }
 
-  const put = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
-    request<T, R>({ ...args, method: 'PUT', options });
+  function put<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
+    return $request<T, R>({ ...args, method: 'PUT', options });
+  }
 
-  const del = <T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> =>
-    request<T, R>({ ...args, method: 'DELETE', options });
+  function del<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
+    return $request<T, R>({ ...args, method: 'DELETE', options });
+  }
 
   return {
     setHeaders,
@@ -128,8 +148,8 @@ const ServerChain = (serverChainArgs: ServerChainOptions): ServerChainType => {
     post,
     patch,
     put,
-    del,
+    delete: del,
   };
 };
 
-export default ServerChain;
+export default Chain;

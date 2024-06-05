@@ -1,3 +1,3 @@
-import ServerChain from './core';
+import Chain from './core';
 export * from './types';
-export default ServerChain;
+export default Chain;
