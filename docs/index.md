@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: '🔗 chain'
+  name: '🔗 Query Fetch'
   text: 'Extension Library for Fetch API'
   tagline: Lightweight and Easy-to-Use Fetch API Extension Library.
   actions:
@@ -15,13 +15,13 @@ hero:
       link: https://github.com/gwansikk/chain
 
 features:
-  - icon: ✨
-    title: Simple like Magic
-    details:
   - icon: ⚡️
     title: Lightweight
-    details:
+    details: 작고 가벼운 라이브러리입니다. 필요한 기능만 제공합니다.
+  - icon: ✨
+    title: Zero Dependency
+    details: 단순히 Fetch API를 확장한 것입니다. 그게 전부입니다.
   - icon: 📦
     title: Easy to Use
-    details:
+    details: 필요한 기능이 준비되어 있습니다. 사용법도 간단합니다.
 ---
