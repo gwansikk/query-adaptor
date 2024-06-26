@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeEach, expectTypeOf } from 'vitest';
 import type { ChainType } from './types';
-import Chain from './core';
+import { chain } from './core';
 
 describe('requests', () => {
-  let chain: ChainType;
+  let server: ChainType;
 
   beforeEach(() => {
     // Chain 인스턴스 생성 및 interceptors 설정
-    chain = Chain({
+    server = chain({
       key: 'GET',
       baseURL: 'https://jsonplaceholder.typicode.com',
       interceptors: {
@@ -40,7 +40,7 @@ describe('requests', () => {
       body: string;
     };
 
-    const getData = await chain.get<Request>({ url: 'posts/1' });
+    const getData = await server.get<Request>({ url: 'posts/1' });
 
     expectTypeOf(getData).toEqualTypeOf<Request>();
     expect(getData).toEqual({
@@ -65,7 +65,7 @@ describe('requests', () => {
       userId: number;
     };
 
-    const postData = await chain.post<Request, Response>({
+    const postData = await server.post<Request, Response>({
       url: 'posts',
       body: {
         title: 'foo',
@@ -95,7 +95,7 @@ describe('requests', () => {
       userId: number;
     };
 
-    const patchData = await chain.patch<Request, Response>({
+    const patchData = await server.patch<Request, Response>({
       url: 'posts/1',
       body: {
         title: 'foo',
@@ -119,7 +119,7 @@ describe('requests', () => {
       userId: number;
     };
 
-    const putData = await chain.put({
+    const putData = await server.put({
       url: 'posts/1',
       body: {
         id: 1,
@@ -139,7 +139,7 @@ describe('requests', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    const deleteData = await chain.delete({ url: 'posts/1' });
+    const deleteData = await server.delete({ url: 'posts/1' });
 
     expectTypeOf(deleteData).toEqualTypeOf<unknown>();
     expect(deleteData).toEqual({});

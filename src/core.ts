@@ -10,7 +10,7 @@ import type {
 } from './types';
 import { createBaseURL, formatPath } from './utils';
 
-const Chain = (chainArgs: ChainOptions): ChainType => {
+export const chain = (chainArgs: ChainOptions): ChainType => {
   const $key = chainArgs.key;
   const $baseURL = createBaseURL($key, chainArgs.baseURL);
   const $options = chainArgs.options ?? {};
@@ -151,5 +151,3 @@ const Chain = (chainArgs: ChainOptions): ChainType => {
     delete: del,
   };
 };
-
-export default Chain;
