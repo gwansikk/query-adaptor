@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>🔗 Chain</h1>
+<h1>🔗 Query Fetch</h1>
 <p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
 [![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
@@ -38,7 +38,7 @@ const server = ServerChain({
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
-server.get({ url: 'posts/1' }).then(data => console.log(data));
+server.get({ url: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ## Interceptor
@@ -48,7 +48,7 @@ const server = ServerChain({
   key: 'INTERCEPTOR',
   baseURL: 'https://jsonplaceholder.typicode.com',
   interceptors: {
-    request: request => {
+    request: (request) => {
       console.log('** request interceptor **');
       // You need to modify the request and return the modified request.
       // For example, you can add a specific header to the request or modify the URL.
@@ -58,12 +58,12 @@ const server = ServerChain({
       };
       return request;
     },
-    response: response => {
+    response: (response) => {
       console.log('** response interceptor **');
       // You need to modify the response and return the modified response.
       return response;
     },
-    error: response => {
+    error: (response) => {
       console.log('** error interceptor **');
       // You need to modify the error response and return the modified response.
       return response;
@@ -72,19 +72,8 @@ const server = ServerChain({
 });
 ```
 
-# Roadmap
-
-The list below is a roadmap to get to version 1.0.
-
-- [x] Automatic JSON Conversion
-- [x] Instance Creation
-- [x] Global Settings
-- [x] Request and Response Interceptors
-- [ ] Error Status Handling
-- [ ] Request Cancellation
-- [ ] Progress Bar/Loading Indicator
-
 ## Contributing
 
-Information describing how to contribute can be found in the file.  
+Information describing how to contribute can be found in the file.
+
 [CONTRIBUTING.md](./CONTRIBUTING.md)
