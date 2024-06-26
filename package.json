@@ -15,6 +15,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "clean": "rimraf dist",
+    "type-check": "tsc --noEmit --skipLibCheck ",
     "docs:dev": "pnpm --filter docs dev",
     "docs:build": "pnpm --filter docs build"
   },
