@@ -107,7 +107,7 @@ Here is the roadmap for the official release (v1.0.0):
 
 We welcome contribution from everyone in the community. Read below for detailed contribution guide.
 
-[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTREIBUTING.md)
 
 ## License
 
