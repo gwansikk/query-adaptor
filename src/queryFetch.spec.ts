@@ -1,34 +1,14 @@
 import { describe, it, expect, beforeEach, expectTypeOf } from 'vitest';
-import type { ChainType } from './types';
-import { chain } from './core';
+import type { QueryFetch } from './types';
+import { createQueryFetch } from './queryFetch';
 
 describe('requests', () => {
-  let server: ChainType;
+  let queryFetch: QueryFetch;
 
   beforeEach(() => {
-    // Chain 인스턴스 생성 및 interceptors 설정
-    server = chain({
+    queryFetch = createQueryFetch({
       key: 'GET',
       baseURL: 'https://jsonplaceholder.typicode.com',
-      interceptors: {
-        request: (request) => {
-          // 요청을 수정하고 수정된 요청을 반환해야 합니다.
-          // 예를 들어, 요청에 특정 헤더를 추가하거나 URL을 수정할 수 있습니다.
-          request.headers = {
-            ...request.headers,
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          };
-          return request;
-        },
-        response: (response) => {
-          // 응답을 수정하고 수정된 응답을 반환해야 합니다.
-          return response;
-        },
-        error: (response) => {
-          // 에러 응답을 수정하고 수정된 응답을 반환해야 합니다.
-          return response;
-        },
-      },
     });
   });
 
@@ -40,7 +20,7 @@ describe('requests', () => {
       body: string;
     };
 
-    const getData = await server.get<Request>({ url: 'posts/1' });
+    const getData = await queryFetch.get<Request>({ url: 'posts/1' });
 
     expectTypeOf(getData).toEqualTypeOf<Request>();
     expect(getData).toEqual({
@@ -65,7 +45,7 @@ describe('requests', () => {
       userId: number;
     };
 
-    const postData = await server.post<Request, Response>({
+    const postData = await queryFetch.post<Request, Response>({
       url: 'posts',
       body: {
         title: 'foo',
@@ -95,7 +75,7 @@ describe('requests', () => {
       userId: number;
     };
 
-    const patchData = await server.patch<Request, Response>({
+    const patchData = await queryFetch.patch<Request, Response>({
       url: 'posts/1',
       body: {
         title: 'foo',
@@ -119,7 +99,7 @@ describe('requests', () => {
       userId: number;
     };
 
-    const putData = await server.put({
+    const putData = await queryFetch.put({
       url: 'posts/1',
       body: {
         id: 1,
@@ -139,7 +119,7 @@ describe('requests', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    const deleteData = await server.delete({ url: 'posts/1' });
+    const deleteData = await queryFetch.delete({ url: 'posts/1' });
 
     expectTypeOf(deleteData).toEqualTypeOf<unknown>();
     expect(deleteData).toEqual({});

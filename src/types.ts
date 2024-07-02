@@ -1,7 +1,7 @@
-type MethodType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export interface FetchOptions extends Omit<RequestInit, 'method'> {
-  method?: MethodType;
+  method?: Method;
 }
 
 export interface HttpArgs {
@@ -16,14 +16,14 @@ export interface HttpBodyArgs<T = { [key: string]: unknown }> {
 }
 
 export interface HttpBodyArgsWithMethod<T> extends HttpBodyArgs<T> {
-  method: MethodType;
+  method: Method;
 }
 
 export type ResponseData<R = { [key: string]: unknown }> = R;
 
 export type Interceptor<T> = (fetchOptions: T, method?: string) => T | Promise<T>;
 
-export interface ChainOptions {
+export interface QueryFetchOptions {
   /**
    * The API key to use for instance.
    */
@@ -60,10 +60,10 @@ export interface ChainOptions {
 }
 
 /**
- * Represents the ChainType interface.
- * This interface defines the methods and properties available in the ChainType.
+ * Represents the QueryFetchType interface.
+ * This interface defines the methods and properties available in the QueryFetchType.
  */
-export interface ChainType {
+export interface QueryFetch {
   /**
    * Sets the headers for instance.
    */

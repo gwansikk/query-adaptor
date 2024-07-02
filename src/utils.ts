@@ -10,7 +10,7 @@ export function createBaseURL(key: string, url: string): string {
     throw new Error('Base URL is not set: ' + key);
   }
 
-  const match = url.match(/^(https?:\/\/)?(.*)$/);
+  const match = RegExp(/^(https?:\/\/)?(.*)$/).exec(url);
   const protocol = match?.[1] ?? 'https://';
   const baseUrl = formatPath(match?.[2] ?? '');
 

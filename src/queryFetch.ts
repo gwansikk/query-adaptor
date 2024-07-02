@@ -5,49 +5,34 @@ import type {
   HttpBodyArgsWithMethod,
   Interceptor,
   ResponseData,
-  ChainOptions,
-  ChainType,
+  QueryFetchOptions,
+  QueryFetch,
 } from './types';
 import { createBaseURL, formatPath } from './utils';
 
-export const chain = (chainArgs: ChainOptions): ChainType => {
-  const $key = chainArgs.key;
-  const $baseURL = createBaseURL($key, chainArgs.baseURL);
-  const $options = chainArgs.options ?? {};
-  const $interceptors = chainArgs.interceptors ?? {};
-  let headers = chainArgs.headers ?? {};
+export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFetch {
+  const $key = queryFetchOptions.key;
+  const $baseURL = createBaseURL($key, queryFetchOptions.baseURL);
+  const $options = queryFetchOptions.options ?? {};
+  const $interceptors = queryFetchOptions.interceptors ?? {};
+  let headers = queryFetchOptions.headers ?? {};
 
-  /**
-   * Sets the headers for instance.
-   */
   function setHeaders(newHeaders: HeadersInit) {
     headers = { ...headers, ...newHeaders };
   }
 
-  /**
-   * Sets the request interceptor for instance.
-   */
   function setRequestInterceptor(interceptor: Interceptor<FetchOptions>) {
     $interceptors.request = interceptor;
   }
 
-  /**
-   * Sets the response interceptor for instance.
-   */
   function setResponseInterceptor(interceptor: Interceptor<Response>) {
     $interceptors.response = interceptor;
   }
 
-  /**
-   * Sets the error interceptor for instance.
-   */
   function setErrorInterceptor(interceptor: Interceptor<Response>) {
     $interceptors.error = interceptor;
   }
 
-  /**
-   * Fetches data from the given URL using the given fetch options.
-   */
   async function $fetchFn<R>(url: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
     fetchOptions.headers = { ...headers, ...fetchOptions.headers };
     url = formatPath(url);
@@ -82,9 +67,6 @@ export const chain = (chainArgs: ChainOptions): ChainType => {
     return await response.json();
   }
 
-  /**
-   * Sends a request to the given URL using the given method and body.
-   */
   async function $request<T, R>({
     method,
     url,
@@ -150,4 +132,4 @@ export const chain = (chainArgs: ChainOptions): ChainType => {
     put,
     delete: del,
   };
-};
+}
