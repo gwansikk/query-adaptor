@@ -3,37 +3,54 @@
 <h1>🔗 Query Fetch</h1>
 <p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
-[![npm version](https://img.shields.io/npm/v/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
-[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/server-chain)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/119ff7105f9c4e47bd57e43606850e59)](https://app.codacy.com/gh/gwansikk/server-chain/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
 
-[English](./README.md)
+[English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
 &nbsp;&nbsp;•&nbsp;&nbsp;
-[한국어](./README-ko_kr.md)
+[한국어](https://github.com/gwansikk/query-fetch/blob/main/README-ko_kr.md)
 
 </div>
 
+## What is Query Fetch?
+
+Handling Promise objects can be quite challenging. When using Promises for asynchronous processing, complex structures can arise, and error handling can become tricky. This is especially true when processing multiple asynchronous requests sequentially or in parallel, which can degrade code readability and maintainability.
+
+Additionally, the Fetch API often lacks necessary features or requires manual implementation. You may need to handle tasks such as retrying failed requests, refreshing authentication tokens, logging requests and responses, and canceling requests. Repeating the same settings for each request can also be tedious.
+
+To address these issues, Query Fetch was created. Reduce the burden of network communication and focus on your core logic!
+
+## Features
+
+- **Instance Management**: Query Fetch allows you to create multiple instances, each with different settings. This makes it easy to manage integrations with various API endpoints or services.
+- **Request and Response Logging**: Logs all requests and responses for easier debugging and monitoring.
+- **Automatic Retries**: Automatically retries requests in case of network errors or server issues.
+- **Request Cancellation**: Provides the ability to cancel unnecessary requests.
+- **Token Management**: Automatically refreshes authentication tokens when they expire and retries the request.
+- **Type Safe**: Fully supports TypeScript, ensuring accurate type inference and minimizing unnecessary types.
+
 ## Installation
 
-- NPM
+Query Fetch is available on npm. You can install it using the following commands.
 
 ```bash
-npm i @gwansikk/server-chain
+npm i @gwansikk/query-fetch
 ```
-
-- Yarn
 
 ```bash
-yarn add @gwansikk/server-chain
+yarn add @gwansikk/query-fetch
 ```
 
-# Usage
+## Usage
 
-## Instance
+> [!IMPORTANT]\
+> Query Fetch is currently in development. The provided API is subject to change.
+
+### Instance
 
 ```js
-const server = ServerChain({
+const queryFetch = createQueryFetch({
   key: 'INSTANCE',
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
@@ -41,17 +58,17 @@ const server = ServerChain({
 server.get({ url: 'posts/1' }).then((data) => console.log(data));
 ```
 
-## Interceptor
+### Interceptor
 
 ```js
-const server = ServerChain({
+const queryFetch = createQueryFetch({
   key: 'INTERCEPTOR',
   baseURL: 'https://jsonplaceholder.typicode.com',
   interceptors: {
     request: (request) => {
       console.log('** request interceptor **');
-      // You need to modify the request and return the modified request.
-      // For example, you can add a specific header to the request or modify the URL.
+      // Modify and return the request.
+      // For example, you can add specific headers or modify the URL.
       request.headers = {
         ...request.headers,
         Authorization: 'Bearer YOUR_ACCESS_TOKEN',
@@ -60,20 +77,40 @@ const server = ServerChain({
     },
     response: (response) => {
       console.log('** response interceptor **');
-      // You need to modify the response and return the modified response.
+      // Modify and return the response.
       return response;
     },
     error: (response) => {
       console.log('** error interceptor **');
-      // You need to modify the error response and return the modified response.
+      // Modify and return the error response.
       return response;
     },
   },
 });
 ```
 
+## Roadmap
+
+Here is the roadmap for the official release (v1.0.0):
+
+- [x] Automatic JSON conversion
+- [x] Instance creation
+- [x] Request and response interceptors
+- [ ] Automatic retries
+- [ ] Error status handling
+- [ ] Request cancellation
+- [ ] Token management
+- [ ] Request and response logging
+- [ ] Type safe support
+
 ## Contributing
 
-Information describing how to contribute can be found in the file.
+We welcome contribution from everyone in the community. Read below for detailed contribution guide.
 
-[CONTRIBUTING.md](./CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTRIBUTING.md)
+
+## License
+
+For more details, please refer to the [LICENSE](https://github.com/gwansikk/query-fetch/blob/main/LICENSE).
+
+MIT © [gwansikk](https://github.com/gwansikk)
