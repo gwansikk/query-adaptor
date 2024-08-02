@@ -3,9 +3,9 @@
 <h1>🔗 Query Fetch</h1>
 <p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
-[![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
 
 [English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
 &nbsp;&nbsp;•&nbsp;&nbsp;
@@ -15,11 +15,11 @@
 
 ## What is Query Fetch?
 
-Handling Promise objects can be quite challenging. When using Promises for asynchronous processing, complex structures can arise, and error handling can become tricky. This is especially true when processing multiple asynchronous requests sequentially or in parallel, which can degrade code readability and maintainability.
+The Fetch API often lacks necessary features, requiring direct implementation. You have to handle retries on failure, token renewal, request and response logging, request cancellation, and more on your own. Additionally, you often need to repeat the same configurations for every request.
 
-Additionally, the Fetch API often lacks necessary features or requires manual implementation. You may need to handle tasks such as retrying failed requests, refreshing authentication tokens, logging requests and responses, and canceling requests. Repeating the same settings for each request can also be tedious.
+Moreover, dealing with Promise objects can be quite challenging. Using Promises for asynchronous processing can lead to complex structures and difficult error handling. Managing multiple asynchronous requests sequentially or in parallel can reduce code readability and maintainability.
 
-To address these issues, Query Fetch was created. Reduce the burden of network communication and focus on your core logic!
+To address these issues, Query Fetch was created. It alleviates the burden of network communication, allowing you to focus on your core logic!
 
 ## Features
 
