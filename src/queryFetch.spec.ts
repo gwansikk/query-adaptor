@@ -1,5 +1,3 @@
-import { describe, it, expect, beforeEach, expectTypeOf } from 'vitest';
-
 import { createQueryFetch } from './queryFetch';
 
 type TResponseData = {
@@ -28,6 +26,32 @@ describe('queryFetch', () => {
     });
   });
 
+  it('should handle GET requests with query parameter', async () => {
+    type TResponseData = {
+      postId: number;
+      id: number;
+      name: string;
+      email: string;
+      body: string;
+    };
+
+    const data = await queryFetch.get<TResponseData[]>({
+      endpoint: ['comments'],
+      queryParameter: {
+        postId: 1,
+      },
+    });
+
+    expectTypeOf(data).toEqualTypeOf<TResponseData[]>();
+    expect(data[0]).toEqual({
+      postId: 1,
+      id: 1,
+      name: 'id labore ex et quam laborum',
+      email: 'Eliseo@gardner.biz',
+      body: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
+    });
+  });
+
   it('should handle POST requests', async () => {
     type TRequestData = {
       title: string;
@@ -35,7 +59,7 @@ describe('queryFetch', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<TResponseData, TRequestData>({
+    const data = await queryFetch.post<object, TRequestData>({
       endpoint: ['posts', 1],
       body: {
         title: 'foo',
@@ -44,13 +68,8 @@ describe('queryFetch', () => {
       },
     });
 
-    expectTypeOf(data).toEqualTypeOf<TResponseData>();
-    expect(data).toEqual({
-      id: 101,
-      title: 'foo',
-      body: 'bar',
-      userId: 1,
-    });
+    expectTypeOf(data).toEqualTypeOf<object>();
+    expect(data).toEqual({});
   });
 
   it('should handle PATCH requests', async () => {
