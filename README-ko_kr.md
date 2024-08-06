@@ -4,7 +4,7 @@
 <p><b>사용하기 쉽고 가벼운 Fetch API용 확장 라이브러리입니다.</b></p>
 
 [![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
 
 [English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
@@ -19,7 +19,7 @@ Fetch API는 필요한 기능을 제공하지 않거나, 직접 구현해야 하
 
 더하여 Promise 객체를 잘 다루기는 정말 어려워요. 비동기 처리를 위해 Promise를 사용하다 보면, 복잡한 구조가 생기거나 에러 처리가 까다로워질 수 있어요. 특히 여러 개의 비동기 요청을 순차적으로 처리하거나 병렬로 처리하는 과정에서 코드의 가독성과 유지보수성이 떨어죠.
 
-이러한 문제를 해결하기 위해 Query Fetch가 탄생했습니다. 네트워크 통신에 대한 부담을 덜고, 핵심 로직에 집중하세요!
+이러한 문제를 해결하기 위해 Query Fetch가 만들어졌어요. 네트워크 통신에 대한 부담을 덜고, 핵심 로직에 집중하세요!
 
 ## 기능
 
@@ -54,18 +54,16 @@ yarn add @gwansikk/query-fetch
 
 ```js
 const queryFetch = createQueryFetch({
-  key: 'INSTANCE',
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
-server.get({ url: 'posts/1' }).then((data) => console.log(data));
+server.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ### Interceptor
 
 ```js
 const queryFetch = createQueryFetch({
-  key: 'INTERCEPTOR',
   baseURL: 'https://jsonplaceholder.typicode.com',
   interceptors: {
     request: (request) => {
@@ -105,7 +103,7 @@ function postsFetchOptions(id: number) {
   });
 }
 
-queryFetch.get<FetchResponse>(postsFetchOptions(1)).then((data) => console.log(data));
+queryFetch.get(postsFetchOptions(1)).then((data) => console.log(data));
 ```
 
 ## Roadmap
@@ -120,7 +118,6 @@ queryFetch.get<FetchResponse>(postsFetchOptions(1)).then((data) => console.log(d
 - [ ] 오류 상태 처리
 - [ ] 요청 취소
 - [ ] 인증 토큰 관리
-- [ ] 요청 및 응답 로깅
 
 ## 기여하기
 

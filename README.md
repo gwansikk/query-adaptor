@@ -4,7 +4,7 @@
 <p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
 [![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/server-chain?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
 
 [English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
@@ -57,7 +57,7 @@ const queryFetch = createQueryFetch({
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
-server.get({ url: 'posts/1' }).then((data) => console.log(data));
+server.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ### Interceptor
@@ -105,7 +105,7 @@ function postsFetchOptions(id: number) {
   });
 }
 
-queryFetch.get<FetchResponse>(postsFetchOptions(1)).then((data) => console.log(data));
+queryFetch.get(postsFetchOptions(1)).then((data) => console.log(data));
 ```
 
 ## Roadmap
@@ -120,7 +120,6 @@ Here is the roadmap for the official release (v1.0.0):
 - [ ] Error status handling
 - [ ] Request cancellation
 - [ ] Token management
-- [ ] Request and response logging
 
 ## Contributing
 
