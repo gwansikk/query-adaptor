@@ -2,13 +2,15 @@ export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type Endpoint = Array<string | number>;
 
+export type QueryParameter = Record<string, unknown>;
+
 export interface FetchOptions extends Omit<RequestInit, 'method'> {
   method?: HTTPMethod;
 }
 
 export interface FetchArgs<T = Record<string, unknown>> {
   endpoint: Endpoint;
-  queryParameter?: Record<string, unknown>;
+  queryParameter?: QueryParameter;
   options?: FetchOptions;
   body?: T;
 }
@@ -54,8 +56,8 @@ export interface QueryFetchOptions {
 }
 
 /**
- * Represents the QueryFetchType interface.
- * This interface defines the methods and properties available in the QueryFetchType.
+ * Represents the QueryFetch interface.
+ * This interface defines the methods and properties available in the QueryFetch.
  */
 export interface QueryFetch {
   /**

@@ -1,3 +1,5 @@
+import type { QueryParameter } from './types';
+
 /**
  * Creates a base URL by combining a key and a URL.
  * @param url - The URL to be combined with the key.
@@ -29,4 +31,12 @@ export function formatPath(path: string): string {
 
 export function isContentTypeJson<T>(body: T): boolean {
   return !(body instanceof FormData || body instanceof URLSearchParams);
+}
+
+export function toURLSearchParams(obj: QueryParameter) {
+  const params = new URLSearchParams();
+
+  Object.entries(obj).forEach(([key, value]) => params.append(key, value as string));
+
+  return params;
 }

@@ -115,7 +115,7 @@ Here is the roadmap for the official release (v1.0.0):
 - [x] Automatic JSON conversion
 - [x] Instance creation
 - [x] Request and response interceptors
-- [ ] Query Parameter
+- [x] Query Parameter
 - [ ] Automatic retries
 - [ ] Error status handling
 - [ ] Request cancellation

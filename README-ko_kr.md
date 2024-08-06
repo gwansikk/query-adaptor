@@ -115,7 +115,7 @@ queryFetch.get(postsFetchOptions(1)).then((data) => console.log(data));
 - [x] 자동 JSON 변환
 - [x] 인스턴스 생성
 - [x] 요청 및 응답 인터셉터
-- [ ] 쿼리 파라미터
+- [x] 쿼리 파라미터
 - [ ] 자동 재시도
 - [ ] 오류 상태 처리
 - [ ] 요청 취소

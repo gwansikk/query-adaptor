@@ -6,9 +6,8 @@ import type {
   ResponseData,
   QueryFetchOptions,
   QueryFetch,
-  Endpoint,
 } from './types';
-import { createBaseURL, formatPath, isContentTypeJson } from './utils';
+import { createBaseURL, formatPath, isContentTypeJson, toURLSearchParams } from './utils';
 
 export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFetch {
   const baseURL = createBaseURL(queryFetchOptions.baseURL);
@@ -32,18 +31,14 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
     interceptors.error = interceptor;
   }
 
-  async function fetchFn<R>(
-    endpoint: Endpoint,
-    fetchOptions: FetchOptions
-  ): Promise<ResponseData<R>> {
+  async function fetchFn<R>(parh: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
     fetchOptions.headers = { ...headers, ...fetchOptions.headers };
-    const url = formatPath(endpoint.join('/'));
 
     if (interceptors.request) {
       fetchOptions = await Promise.resolve(interceptors.request(fetchOptions, fetchOptions.method));
     }
 
-    const response = await fetch(`${baseURL}/${url}`, {
+    const response = await fetch([baseURL, parh].join('/'), {
       ...options,
       ...fetchOptions,
     });
@@ -70,9 +65,11 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
   async function request<R, D>({
     method,
     endpoint,
+    queryParameter,
     body,
     options,
   }: HttpArgsWithHTTPMethod<D>): Promise<ResponseData<R>> {
+    let path = formatPath(endpoint.join('/'));
     const isJson = isContentTypeJson(body);
 
     const fetchOptions: FetchOptions = {
@@ -86,7 +83,11 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
       body: isJson ? JSON.stringify(body) : (body as BodyInit),
     };
 
-    return fetchFn<R>(endpoint, fetchOptions);
+    if (queryParameter) {
+      path += `?${toURLSearchParams(queryParameter)}`;
+    }
+
+    return fetchFn<R>(path, fetchOptions);
   }
 
   function get<R>(args: FetchArgs): Promise<ResponseData<R>> {
