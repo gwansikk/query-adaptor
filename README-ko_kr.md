@@ -17,7 +17,7 @@
 
 Fetch API는 필요한 기능을 제공하지 않거나, 직접 구현해야 하는 경우가 많아요. 실패 시 재요청이나 인증 토큰 갱신, 요청 및 응답 로깅, 요청 취소 등을 직접 구현해야해요. 또한, 요청을 보낼 때마다 같은 설정을 반복해야 하는 경우가 많아요.
 
-더하여 Promise 객체를 잘 다루기는 정말 어려워요. 비동기 처리를 위해 Promise를 사용하다 보면, 복잡한 구조가 생기거나 에러 처리가 까다로워질 수 있어요. 특히 여러 개의 비동기 요청을 순차적으로 처리하거나 병렬로 처리하는 과정에서 코드의 가독성과 유지보수성이 떨어죠.
+더하여 Promise 객체를 잘 다루기는 정말 어려워요. 비동기 처리를 위해 Promise를 사용하다 보면, 복잡한 구조가 생기거나 에러 처리가 까다로워질 수 있어요. 특히 여러 개의 비동기 요청을 순차적으로 처리하거나 병렬로 처리하는 과정에서 코드의 가독성과 유지보수성이 떨어지죠.
 
 이러한 문제를 해결하기 위해 Query Fetch가 만들어졌어요. 네트워크 통신에 대한 부담을 덜고, 핵심 로직에 집중하세요!
 
@@ -57,7 +57,7 @@ const queryFetch = createQueryFetch({
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
-server.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
+queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ### Interceptor
@@ -88,6 +88,8 @@ const queryFetch = createQueryFetch({
     },
   },
 });
+
+queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ### FetchOptions

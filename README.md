@@ -89,7 +89,7 @@ const queryFetch = createQueryFetch({
   },
 });
 
-server.get({ url: 'posts/1' }).then((data) => console.log(data));
+queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ### FetchOptions
