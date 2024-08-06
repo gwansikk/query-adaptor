@@ -10,56 +10,58 @@ import type {
 import { createBaseURL, formatPath, isContentTypeJson, toURLSearchParams } from './utils';
 
 export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFetch {
-  const baseURL = createBaseURL(queryFetchOptions.baseURL);
-  const options = queryFetchOptions.options ?? {};
-  const interceptors = queryFetchOptions.interceptors ?? {};
-  let headers = queryFetchOptions.headers ?? {};
+  const _baseURL = createBaseURL(queryFetchOptions.baseURL);
+  const _options = queryFetchOptions.options ?? {};
+  const _interceptors = queryFetchOptions.interceptors ?? {};
+  let _headers = queryFetchOptions.headers ?? {};
 
-  function setHeaders(newHeaders: HeadersInit) {
-    headers = { ...headers, ...newHeaders };
-  }
+  async function _fetch<R>(path: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
+    fetchOptions.headers = { ..._headers, ...fetchOptions.headers };
 
-  function setRequestInterceptor(interceptor: Interceptor<FetchOptions>) {
-    interceptors.request = interceptor;
-  }
-
-  function setResponseInterceptor(interceptor: Interceptor) {
-    interceptors.response = interceptor;
-  }
-
-  function setErrorInterceptor(interceptor: Interceptor) {
-    interceptors.error = interceptor;
-  }
-
-  async function fetchFn<R>(parh: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
-    fetchOptions.headers = { ...headers, ...fetchOptions.headers };
-
-    if (interceptors.request) {
-      fetchOptions = await Promise.resolve(interceptors.request(fetchOptions, fetchOptions.method));
+    if (_interceptors.request) {
+      fetchOptions = await Promise.resolve(
+        _interceptors.request(fetchOptions, fetchOptions.method)
+      );
     }
 
-    const response = await fetch([baseURL, parh].join('/'), {
-      ...options,
+    const response = await fetch([_baseURL, path].join('/'), {
+      ..._options,
       ...fetchOptions,
     });
 
     if (response.status >= 400) {
-      if (interceptors.error) {
+      if (_interceptors.error) {
         const errorResponse = await Promise.resolve(
-          interceptors.error(response, fetchOptions.method)
+          _interceptors.error(response, fetchOptions.method)
         );
         return await errorResponse.json();
       }
     }
 
-    if (interceptors.response) {
+    if (_interceptors.response) {
       const modifiedResponse = await Promise.resolve(
-        interceptors.response(response, fetchOptions.method)
+        _interceptors.response(response, fetchOptions.method)
       );
       return await modifiedResponse.json();
     }
 
     return await response.json();
+  }
+
+  function setHeaders(newHeaders: HeadersInit) {
+    _headers = { ..._headers, ...newHeaders };
+  }
+
+  function setRequestInterceptor(interceptor: Interceptor<FetchOptions>) {
+    _interceptors.request = interceptor;
+  }
+
+  function setResponseInterceptor(interceptor: Interceptor) {
+    _interceptors.response = interceptor;
+  }
+
+  function setErrorInterceptor(interceptor: Interceptor) {
+    _interceptors.error = interceptor;
   }
 
   async function request<R, D>({
@@ -76,8 +78,8 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
       ...options,
       method,
       headers: {
-        ...(isJson ? { 'Content-Type': 'application/json' } : {}),
-        ...headers,
+        ...{ 'Content-Type': isJson ? 'application/json' : '' },
+        ..._headers,
         ...options?.headers,
       },
       body: isJson ? JSON.stringify(body) : (body as BodyInit),
@@ -87,7 +89,7 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
       path += `?${toURLSearchParams(queryParameter)}`;
     }
 
-    return fetchFn<R>(path, fetchOptions);
+    return _fetch<R>(path, fetchOptions);
   }
 
   function get<R>(args: FetchArgs): Promise<ResponseData<R>> {
