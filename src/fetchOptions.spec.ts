@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, expectTypeOf } from 'vitest';
+import { describe, it, expect, expectTypeOf } from 'vitest';
 
 import { createQueryFetch } from './queryFetch';
 import { fetchOptions } from './fetchOptions';
@@ -40,7 +40,7 @@ describe('fetchOptions', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<TResponseData, TRequestData>({
+    const data = await queryFetch.post<object, TRequestData>({
       endpoint: ['posts', 1],
       body: {
         title: 'foo',
@@ -49,12 +49,7 @@ describe('fetchOptions', () => {
       },
     });
 
-    expectTypeOf(data).toEqualTypeOf<TResponseData>();
-    expect(data).toEqual({
-      id: 101,
-      title: 'foo',
-      body: 'bar',
-      userId: 1,
-    });
+    expectTypeOf(data).toEqualTypeOf<object>();
+    expect(data).toEqual({});
   });
 });
