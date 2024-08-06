@@ -1,6 +1,6 @@
 {
   "name": "@gwansikk/query-fetch",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Lightweight and Easy-to-Use Fetch API Extension Library",
   "keywords": [
     "fetch",
