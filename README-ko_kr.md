@@ -24,7 +24,6 @@ Fetch API는 필요한 기능을 제공하지 않거나, 직접 구현해야 하
 ## 기능
 
 - **인스턴스 기능**: Query Fetch는 다수의 인스턴스를 생성하여 사용할 수 있어요. 이를 통해 각각의 인스턴스마다 다른 설정을 적용할 수 있으며, 다양한 API 엔드포인트나 서비스와의 통합을 쉽게 관리할 수 있어요.
-- **요청 및 응답 로깅**: 모든 요청과 응답을 로깅하여 디버깅과 모니터링을 제공해요.
 - **자동 재시도**: 네트워크 오류나 서버 문제로 인해 요청이 실패했을 때, 자동으로 재시도할 수 있는 기능을 제공해요.
 - **요청 취소**: 사용자가 필요하지 않은 요청을 취소할 수 있는 기능을 제공해요.
 - **인증 토큰 관리**: 인증 토큰이 만료되었을 때 자동으로 갱신하여 요청을 재시도 할 수 있어요.
@@ -36,6 +35,10 @@ Query Fetch는 npm에 배포되어 있습니다. 아래 명령어를 통해 설�
 
 ```bash
 npm i @gwansikk/query-fetch
+```
+
+```bash
+pnpm add @gwansikk/query-fetch
 ```
 
 ```bash
@@ -89,6 +92,22 @@ const queryFetch = createQueryFetch({
 });
 ```
 
+### FetchOptions
+
+```typescript
+const queryFetch = createQueryFetch({
+  baseURL: 'https://jsonplaceholder.typicode.com',
+});
+
+function postsFetchOptions(id: number) {
+  return fetchOptions({
+    endpoint: ['post', id],
+  });
+}
+
+queryFetch.get<FetchResponse>(postsFetchOptions(1)).then((data) => console.log(data));
+```
+
 ## Roadmap
 
 정식 출시(v1.0.0)를 위한 로드맵입니다.
@@ -96,12 +115,12 @@ const queryFetch = createQueryFetch({
 - [x] 자동 JSON 변환
 - [x] 인스턴스 생성
 - [x] 요청 및 응답 인터셉터
+- [ ] 쿼리 파라미터
 - [ ] 자동 재시도
 - [ ] 오류 상태 처리
 - [ ] 요청 취소
 - [ ] 인증 토큰 관리
 - [ ] 요청 및 응답 로깅
-- [ ] 타입 세이프 지원
 
 ## 기여하기
 

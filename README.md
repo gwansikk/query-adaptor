@@ -24,7 +24,6 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 ## Features
 
 - **Instance Management**: Query Fetch allows you to create multiple instances, each with different settings. This makes it easy to manage integrations with various API endpoints or services.
-- **Request and Response Logging**: Logs all requests and responses for easier debugging and monitoring.
 - **Automatic Retries**: Automatically retries requests in case of network errors or server issues.
 - **Request Cancellation**: Provides the ability to cancel unnecessary requests.
 - **Token Management**: Automatically refreshes authentication tokens when they expire and retries the request.
@@ -39,6 +38,10 @@ npm i @gwansikk/query-fetch
 ```
 
 ```bash
+pnpm add @gwansikk/query-fetch
+```
+
+```bash
 yarn add @gwansikk/query-fetch
 ```
 
@@ -49,9 +52,8 @@ yarn add @gwansikk/query-fetch
 
 ### Instance
 
-```js
+```typescript
 const queryFetch = createQueryFetch({
-  key: 'INSTANCE',
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
@@ -60,9 +62,8 @@ server.get({ url: 'posts/1' }).then((data) => console.log(data));
 
 ### Interceptor
 
-```js
+```typescript
 const queryFetch = createQueryFetch({
-  key: 'INTERCEPTOR',
   baseURL: 'https://jsonplaceholder.typicode.com',
   interceptors: {
     request: (request) => {
@@ -87,6 +88,24 @@ const queryFetch = createQueryFetch({
     },
   },
 });
+
+server.get({ url: 'posts/1' }).then((data) => console.log(data));
+```
+
+### FetchOptions
+
+```typescript
+const queryFetch = createQueryFetch({
+  baseURL: 'https://jsonplaceholder.typicode.com',
+});
+
+function postsFetchOptions(id: number) {
+  return fetchOptions({
+    endpoint: ['post', id],
+  });
+}
+
+queryFetch.get<FetchResponse>(postsFetchOptions(1)).then((data) => console.log(data));
 ```
 
 ## Roadmap
@@ -96,12 +115,12 @@ Here is the roadmap for the official release (v1.0.0):
 - [x] Automatic JSON conversion
 - [x] Instance creation
 - [x] Request and response interceptors
+- [ ] Query Parameter
 - [ ] Automatic retries
 - [ ] Error status handling
 - [ ] Request cancellation
 - [ ] Token management
 - [ ] Request and response logging
-- [ ] Type safe support
 
 ## Contributing
 
