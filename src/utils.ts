@@ -26,3 +26,7 @@ export function createBaseURL(url: string): string {
 export function formatPath(path: string): string {
   return path.replace(/^\//, '').replace(/\/+/g, '/').replace(/\/$/, '');
 }
+
+export function isContentTypeJson<T>(body: T): boolean {
+  return !(body instanceof FormData || body instanceof URLSearchParams);
+}
