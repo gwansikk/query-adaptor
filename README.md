@@ -110,7 +110,7 @@ queryFetch.get(postsFetchOptions(1)).then((data) => console.log(data));
 
 ## Roadmap
 
-Here is the roadmap for the official release (v1.0.0):
+Here is the roadmap for the official release (v1.0.0).
 
 - [x] Automatic JSON conversion
 - [x] Instance creation
