@@ -1,27 +1,25 @@
-type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+export type Endpoint = Array<string | number>;
 
 export interface FetchOptions extends Omit<RequestInit, 'method'> {
-  method?: Method;
+  method?: HTTPMethod;
 }
 
-export interface HttpArgs {
-  url: string;
+export interface FetchArgs<T = Record<string, unknown>> {
+  endpoint: Endpoint;
+  queryParameter?: Record<string, unknown>;
   options?: FetchOptions;
-}
-
-export interface HttpBodyArgs<T = { [key: string]: unknown }> {
-  url: string;
   body?: T;
-  options?: FetchOptions;
 }
 
-export interface HttpBodyArgsWithMethod<T> extends HttpBodyArgs<T> {
-  method: Method;
+export interface HttpArgsWithHTTPMethod<T> extends FetchArgs<T> {
+  method: HTTPMethod;
 }
 
-export type ResponseData<R = { [key: string]: unknown }> = R;
+export type ResponseData<R = Record<string, unknown>> = R;
 
-export type Interceptor<T> = (fetchOptions: T, method?: string) => T | Promise<T>;
+export type Interceptor<T = Response> = (fetchOptions: T, method?: string) => T | Promise<T>;
 
 export interface QueryFetchOptions {
   /**
@@ -47,11 +45,11 @@ export interface QueryFetchOptions {
     /**
      * The response interceptor to use for instance.
      */
-    response?: Interceptor<Response>;
+    response?: Interceptor;
     /**
      * The error interceptor to use for instance.
      */
-    error?: Interceptor<Response>;
+    error?: Interceptor;
   };
 }
 
@@ -79,21 +77,21 @@ export interface QueryFetch {
   /**
    * Sends a GET request to the specified URL.
    */
-  get: <R>(args: HttpArgs) => Promise<ResponseData<R>>;
+  get: <R>(args: FetchArgs) => Promise<ResponseData<R>>;
   /**
    * Sends a POST request to the specified URL.
    */
-  post: <T, R extends T>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  post: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
   /**
    * Sends a PATCH request to the specified URL.
    */
-  patch: <T, R extends T>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  patch: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
   /**
    * Sends a PUT request to the specified URL.
    */
-  put: <T, R extends T>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  put: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
   /**
    * Sends a DELETE request to the specified URL.
    */
-  delete: <T, R extends T>(args: HttpBodyArgs<T>) => Promise<ResponseData<R>>;
+  delete: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
 }

@@ -1,29 +1,26 @@
 import { describe, it, expect, beforeEach, expectTypeOf } from 'vitest';
-import type { QueryFetch } from './types';
+
 import { createQueryFetch } from './queryFetch';
 
-describe('requests', () => {
-  let queryFetch: QueryFetch;
+type TResponseData = {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+};
 
-  beforeEach(() => {
-    queryFetch = createQueryFetch({
-      key: 'GET',
-      baseURL: 'https://jsonplaceholder.typicode.com',
-    });
-  });
+const queryFetch = createQueryFetch({
+  baseURL: 'https://jsonplaceholder.typicode.com',
+});
 
+describe('queryFetch', () => {
   it('should handle GET requests', async () => {
-    type Request = {
-      userId: number;
-      id: number;
-      title: string;
-      body: string;
-    };
+    const data = await queryFetch.get<TResponseData>({
+      endpoint: ['posts', 1],
+    });
 
-    const getData = await queryFetch.get<Request>({ url: 'posts/1' });
-
-    expectTypeOf(getData).toEqualTypeOf<Request>();
-    expect(getData).toEqual({
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expect(data).toEqual({
       userId: 1,
       id: 1,
       title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
@@ -32,21 +29,14 @@ describe('requests', () => {
   });
 
   it('should handle POST requests', async () => {
-    type Request = {
+    type TRequestData = {
       title: string;
       body: string;
       userId: number;
     };
 
-    type Response = {
-      id: number;
-      title: string;
-      body: string;
-      userId: number;
-    };
-
-    const postData = await queryFetch.post<Request, Response>({
-      url: 'posts',
+    const data = await queryFetch.post<TResponseData, TRequestData>({
+      endpoint: ['posts', 1],
       body: {
         title: 'foo',
         body: 'bar',
@@ -54,8 +44,8 @@ describe('requests', () => {
       },
     });
 
-    expectTypeOf(postData).toEqualTypeOf<Response>();
-    expect(postData).toEqual({
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expect(data).toEqual({
       id: 101,
       title: 'foo',
       body: 'bar',
@@ -64,26 +54,15 @@ describe('requests', () => {
   });
 
   it('should handle PATCH requests', async () => {
-    type Request = {
-      title: string;
-    };
-
-    type Response = {
-      id: number;
-      title: string;
-      body: string;
-      userId: number;
-    };
-
-    const patchData = await queryFetch.patch<Request, Response>({
-      url: 'posts/1',
+    const data = await queryFetch.patch<TResponseData>({
+      endpoint: ['posts', 1],
       body: {
         title: 'foo',
       },
     });
 
-    expectTypeOf(patchData).toEqualTypeOf<Response>();
-    expect(patchData).toEqual({
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expect(data).toEqual({
       id: 1,
       title: 'foo',
       body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
@@ -92,15 +71,8 @@ describe('requests', () => {
   });
 
   it('should handle PUT requests', async () => {
-    type Request = {
-      id: number;
-      title: string;
-      body: string;
-      userId: number;
-    };
-
-    const putData = await queryFetch.put({
-      url: 'posts/1',
+    const data = await queryFetch.put<TResponseData>({
+      endpoint: ['posts', 1],
       body: {
         id: 1,
         title: 'foo',
@@ -109,8 +81,8 @@ describe('requests', () => {
       },
     });
 
-    expectTypeOf(putData).toEqualTypeOf<Request>();
-    expect(putData).toEqual({
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expect(data).toEqual({
       id: 1,
       title: 'foo',
       body: 'bar',
@@ -119,9 +91,9 @@ describe('requests', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    const deleteData = await queryFetch.delete({ url: 'posts/1' });
+    const data = await queryFetch.delete({ endpoint: ['post', 1] });
 
-    expectTypeOf(deleteData).toEqualTypeOf<unknown>();
-    expect(deleteData).toEqual({});
+    expectTypeOf(data).toEqualTypeOf<unknown>();
+    expect(data).toEqual({});
   });
 });

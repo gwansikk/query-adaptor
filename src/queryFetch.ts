@@ -1,20 +1,19 @@
 import type {
   FetchOptions,
-  HttpArgs,
-  HttpBodyArgs,
-  HttpBodyArgsWithMethod,
+  FetchArgs,
+  HttpArgsWithHTTPMethod,
   Interceptor,
   ResponseData,
   QueryFetchOptions,
   QueryFetch,
+  Endpoint,
 } from './types';
-import { createBaseURL, formatPath } from './utils';
+import { createBaseURL, formatPath, isContentTypeJson } from './utils';
 
 export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFetch {
-  const $key = queryFetchOptions.key;
-  const $baseURL = createBaseURL($key, queryFetchOptions.baseURL);
-  const $options = queryFetchOptions.options ?? {};
-  const $interceptors = queryFetchOptions.interceptors ?? {};
+  const baseURL = createBaseURL(queryFetchOptions.baseURL);
+  const options = queryFetchOptions.options ?? {};
+  const interceptors = queryFetchOptions.interceptors ?? {};
   let headers = queryFetchOptions.headers ?? {};
 
   function setHeaders(newHeaders: HeadersInit) {
@@ -22,44 +21,45 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
   }
 
   function setRequestInterceptor(interceptor: Interceptor<FetchOptions>) {
-    $interceptors.request = interceptor;
+    interceptors.request = interceptor;
   }
 
-  function setResponseInterceptor(interceptor: Interceptor<Response>) {
-    $interceptors.response = interceptor;
+  function setResponseInterceptor(interceptor: Interceptor) {
+    interceptors.response = interceptor;
   }
 
-  function setErrorInterceptor(interceptor: Interceptor<Response>) {
-    $interceptors.error = interceptor;
+  function setErrorInterceptor(interceptor: Interceptor) {
+    interceptors.error = interceptor;
   }
 
-  async function $fetchFn<R>(url: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
+  async function fetchFn<R>(
+    endpoint: Endpoint,
+    fetchOptions: FetchOptions
+  ): Promise<ResponseData<R>> {
     fetchOptions.headers = { ...headers, ...fetchOptions.headers };
-    url = formatPath(url);
+    const url = formatPath(endpoint.join('/'));
 
-    if ($interceptors.request) {
-      fetchOptions = await Promise.resolve(
-        $interceptors.request(fetchOptions, fetchOptions.method)
-      );
+    if (interceptors.request) {
+      fetchOptions = await Promise.resolve(interceptors.request(fetchOptions, fetchOptions.method));
     }
 
-    const response = await fetch(`${$baseURL}/${url}`, {
-      ...$options,
+    const response = await fetch(`${baseURL}/${url}`, {
+      ...options,
       ...fetchOptions,
     });
 
     if (response.status >= 400) {
-      if ($interceptors.error) {
+      if (interceptors.error) {
         const errorResponse = await Promise.resolve(
-          $interceptors.error(response, fetchOptions.method)
+          interceptors.error(response, fetchOptions.method)
         );
         return await errorResponse.json();
       }
     }
 
-    if ($interceptors.response) {
+    if (interceptors.response) {
       const modifiedResponse = await Promise.resolve(
-        $interceptors.response(response, fetchOptions.method)
+        interceptors.response(response, fetchOptions.method)
       );
       return await modifiedResponse.json();
     }
@@ -67,58 +67,56 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
     return await response.json();
   }
 
-  async function $request<T, R>({
+  async function request<R, D>({
     method,
-    url,
+    endpoint,
     body,
     options,
-  }: HttpBodyArgsWithMethod<T>): Promise<ResponseData<R>> {
-    const isFormDataOrURLSearchParams = body instanceof FormData || body instanceof URLSearchParams;
+  }: HttpArgsWithHTTPMethod<D>): Promise<ResponseData<R>> {
+    const isJson = isContentTypeJson(body);
 
     const fetchOptions: FetchOptions = {
       ...options,
       method,
       headers: {
-        ...(isFormDataOrURLSearchParams ? {} : { 'Content-Type': 'application/json' }),
+        ...(isJson ? { 'Content-Type': 'application/json' } : {}),
         ...headers,
         ...options?.headers,
       },
-      body: isFormDataOrURLSearchParams ? body : JSON.stringify(body),
+      body: isJson ? JSON.stringify(body) : (body as BodyInit),
     };
 
-    return $fetchFn<R>(url, fetchOptions);
+    return fetchFn<R>(endpoint, fetchOptions);
   }
 
-  function get<R>(args: HttpArgs, options?: FetchOptions): Promise<ResponseData<R>> {
-    return $request<unknown, R>({
+  function get<R>(args: FetchArgs): Promise<ResponseData<R>> {
+    return request<R, never>({
       ...args,
       method: 'GET',
-      options,
+      body: undefined,
     });
   }
 
-  function post<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
-    return $request<T, R>({
+  function post<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
+    return request<R, D>({
       ...args,
       method: 'POST',
-      options,
     });
   }
 
-  function patch<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
-    return $request<T, R>({
+  function patch<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
+    return request<R, D>({
       ...args,
       method: 'PATCH',
-      options,
     });
   }
 
-  function put<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
-    return $request<T, R>({ ...args, method: 'PUT', options });
+  function put<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
+    return request<R, D>({ ...args, method: 'PUT' });
   }
 
-  function del<T, R>(args: HttpBodyArgs<T>, options?: FetchOptions): Promise<ResponseData<R>> {
-    return $request<T, R>({ ...args, method: 'DELETE', options });
+  function del<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
+    return request<R, D>({ ...args, method: 'DELETE' });
   }
 
   return {
