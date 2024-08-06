@@ -57,7 +57,7 @@ const queryFetch = createQueryFetch({
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
-server.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
+queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 ```
 
 ### Interceptor

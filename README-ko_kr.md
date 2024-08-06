@@ -52,7 +52,7 @@ yarn add @gwansikk/query-fetch
 
 ### Instance
 
-```js
+```typescript
 const queryFetch = createQueryFetch({
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
@@ -62,7 +62,7 @@ queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
 
 ### Interceptor
 
-```js
+```typescript
 const queryFetch = createQueryFetch({
   baseURL: 'https://jsonplaceholder.typicode.com',
   interceptors: {
