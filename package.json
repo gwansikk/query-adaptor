@@ -1,7 +1,20 @@
 {
   "name": "@gwansikk/query-fetch",
   "version": "0.6.1",
-  "description": "The Query Fetch is a simple and lightweight HTTP Request library.",
+  "description": "Lightweight and Easy-to-Use Fetch API Extension Library",
+  "keywords": [
+    "fetch",
+    "http",
+    "request"
+  ],
+  "homepage": "https://github.com/gwansikk/server-chain",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwansikk/server-chain.git"
+  },
+  "license": "MIT",
+  "author": "GwanSik Kim <Seorit98@gmail.com",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -18,16 +31,6 @@
     "docs:dev": "pnpm --filter docs dev",
     "docs:build": "pnpm --filter docs build"
   },
-  "homepage": "https://github.com/gwansikk/server-chain",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gwansikk/server-chain.git"
-  },
-  "author": "gwansikk",
-  "license": "MIT",
-  "workspaces": [
-    "docs"
-  ],
   "devDependencies": {
     "@types/eslint": "^8",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
@@ -40,9 +43,7 @@
     "typescript": "^5.3.3",
     "vitest": "^2.0.5"
   },
-  "keywords": [
-    "fetch",
-    "http",
-    "request"
-  ]
+  "publishConfig": {
+    "access": "public"
+  }
 }
