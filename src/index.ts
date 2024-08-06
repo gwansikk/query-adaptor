@@ -1,2 +1,3 @@
-export * from './queryFetch';
-export * from './types';
+export { createQueryFetch } from './queryFetch';
+export { fetchOptions } from './fetchOptions';
+export { FetchOptions } from './types';
