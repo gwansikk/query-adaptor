@@ -25,10 +25,6 @@ export type Interceptor<T> = (fetchOptions: T, method?: string) => T | Promise<T
 
 export interface QueryFetchOptions {
   /**
-   * The API key to use for instance.
-   */
-  key: string;
-  /**
    * The base URL to use for instance.
    */
   baseURL: string;

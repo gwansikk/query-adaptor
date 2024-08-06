@@ -1,13 +1,12 @@
 /**
  * Creates a base URL by combining a key and a URL.
- * @param key - The key used to identify the base URL.
  * @param url - The URL to be combined with the key.
  * @returns The combined base URL.
  * @throws {Error} If the URL is not provided.
  */
-export function createBaseURL(key: string, url: string): string {
+export function createBaseURL(url: string): string {
   if (!url) {
-    throw new Error('Base URL is not set: ' + key);
+    throw new Error('The instance does not have a BaseURL set.');
   }
 
   const match = RegExp(/^(https?:\/\/)?(.*)$/).exec(url);
