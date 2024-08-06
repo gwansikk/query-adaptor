@@ -9,7 +9,8 @@
     "esModuleInterop": true,
     "strict": true,
     "sourceMap": true,
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "types": ["vitest/globals"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
