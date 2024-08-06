@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     include: ['src/*.spec.ts?(x)'],
     coverage: {
-      provider: 'v8',
+      provider: 'istanbul',
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './coverage',
     },
