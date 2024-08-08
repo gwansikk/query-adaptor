@@ -57,7 +57,7 @@ const queryFetch = createQueryFetch({
   baseURL: 'https://jsonplaceholder.typicode.com',
 });
 
-queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
+queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
 ```
 
 ### Interceptor
@@ -89,23 +89,7 @@ const queryFetch = createQueryFetch({
   },
 });
 
-queryFetch.get({ endpoint: 'posts/1' }).then((data) => console.log(data));
-```
-
-### FetchOptions
-
-```typescript
-const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-});
-
-function postsFetchOptions(id: number) {
-  return fetchOptions({
-    endpoint: ['post', id],
-  });
-}
-
-queryFetch.get(postsFetchOptions(1)).then((data) => console.log(data));
+queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
 ```
 
 ## Roadmap
