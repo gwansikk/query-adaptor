@@ -1,27 +1,34 @@
-export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type THTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-export type Endpoint = Array<string | number>;
+export type TEndpoint = Array<string | number>;
 
-export type QueryParameter = Record<string, unknown>;
+export type TQueryParameter = Record<string, unknown>;
+
+export type TDefaultBodyData = Record<string, unknown>;
+
+export type TDefaultData = Record<string, unknown>;
 
 export interface FetchOptions extends Omit<RequestInit, 'method'> {
-  method?: HTTPMethod;
+  method?: THTTPMethod;
 }
 
-export interface FetchArgs<T = Record<string, unknown>> {
-  endpoint: Endpoint;
-  queryParameter?: QueryParameter;
+export interface FetchArgs<TBodyData = TDefaultBodyData> {
+  endpoint: TEndpoint;
+  queryParameter?: TQueryParameter;
   options?: FetchOptions;
-  body?: T;
+  body?: TBodyData;
 }
 
-export interface HttpArgsWithHTTPMethod<T> extends FetchArgs<T> {
-  method: HTTPMethod;
+export interface HttpArgsWithHTTPMethod<TBodyData> extends FetchArgs<TBodyData> {
+  method: THTTPMethod;
 }
 
-export type ResponseData<R = Record<string, unknown>> = R;
+export type TResponseData<TData = TDefaultData> = TData;
 
-export type Interceptor<T = Response> = (fetchOptions: T, method?: string) => T | Promise<T>;
+export type TInterceptor<TResponse = Response> = (
+  fetchOptions: TResponse,
+  method?: string
+) => TResponse | Promise<TResponse>;
 
 export interface QueryFetchOptions {
   /**
@@ -43,15 +50,15 @@ export interface QueryFetchOptions {
     /**
      * The request interceptor to use for instance.
      */
-    request?: Interceptor<FetchOptions>;
+    request?: TInterceptor<FetchOptions>;
     /**
      * The response interceptor to use for instance.
      */
-    response?: Interceptor;
+    response?: TInterceptor;
     /**
      * The error interceptor to use for instance.
      */
-    error?: Interceptor;
+    error?: TInterceptor;
   };
 }
 
@@ -67,33 +74,33 @@ export interface QueryFetch {
   /**
    * Sets the request interceptor for instance.
    */
-  setRequestInterceptor: (interceptor: Interceptor<FetchOptions>) => void;
+  setRequestInterceptor: (interceptor: TInterceptor<FetchOptions>) => void;
   /**
    * Sets the response interceptor for instance.
    */
-  setResponseInterceptor: (interceptor: Interceptor<Response>) => void;
+  setResponseInterceptor: (interceptor: TInterceptor<Response>) => void;
   /**
    * Sets the error interceptor for instance.
    */
-  setErrorInterceptor: (interceptor: Interceptor<Response>) => void;
+  setErrorInterceptor: (interceptor: TInterceptor<Response>) => void;
   /**
-   * Sends a GET request to the specified URL.
+   * Sends a GET request to the endpoint.
    */
-  get: <R>(args: FetchArgs) => Promise<ResponseData<R>>;
+  get: <TData>(args: FetchArgs<TData>) => Promise<TResponseData<TData>>;
   /**
-   * Sends a POST request to the specified URL.
+   * Sends a POST request to the endpoint.
    */
-  post: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
+  post: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
   /**
-   * Sends a PATCH request to the specified URL.
+   * Sends a PATCH request to the endpoint.
    */
-  patch: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
+  patch: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
   /**
-   * Sends a PUT request to the specified URL.
+   * Sends a PUT request to the endpoint.
    */
-  put: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
+  put: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
   /**
-   * Sends a DELETE request to the specified URL.
+   * Sends a DELETE request to the endpoint.
    */
-  delete: <R, D = unknown>(args: FetchArgs<D>) => Promise<ResponseData<R>>;
+  delete: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
 }

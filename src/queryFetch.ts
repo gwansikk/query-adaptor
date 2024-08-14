@@ -2,8 +2,8 @@ import type {
   FetchOptions,
   FetchArgs,
   HttpArgsWithHTTPMethod,
-  Interceptor,
-  ResponseData,
+  TInterceptor,
+  TResponseData,
   QueryFetchOptions,
   QueryFetch,
 } from './types';
@@ -15,7 +15,10 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
   const _interceptors = queryFetchOptions.interceptors ?? {};
   let _headers = queryFetchOptions.headers ?? {};
 
-  async function _fetch<R>(path: string, fetchOptions: FetchOptions): Promise<ResponseData<R>> {
+  async function _fetch<TData>(
+    path: string,
+    fetchOptions: FetchOptions
+  ): Promise<TResponseData<TData>> {
     fetchOptions.headers = { ..._headers, ...fetchOptions.headers };
 
     if (_interceptors.request) {
@@ -52,25 +55,25 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
     _headers = { ..._headers, ...newHeaders };
   }
 
-  function setRequestInterceptor(interceptor: Interceptor<FetchOptions>) {
+  function setRequestInterceptor(interceptor: TInterceptor<FetchOptions>) {
     _interceptors.request = interceptor;
   }
 
-  function setResponseInterceptor(interceptor: Interceptor) {
+  function setResponseInterceptor(interceptor: TInterceptor) {
     _interceptors.response = interceptor;
   }
 
-  function setErrorInterceptor(interceptor: Interceptor) {
+  function setErrorInterceptor(interceptor: TInterceptor) {
     _interceptors.error = interceptor;
   }
 
-  async function request<R, D>({
+  async function request<TData, TBodyData>({
     method,
     endpoint,
     queryParameter,
     body,
     options,
-  }: HttpArgsWithHTTPMethod<D>): Promise<ResponseData<R>> {
+  }: HttpArgsWithHTTPMethod<TBodyData>): Promise<TResponseData<TData>> {
     let path = formatPath(endpoint.join('/'));
     const isJson = isContentTypeJson(body);
 
@@ -89,37 +92,36 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
       path += `?${toURLSearchParams(queryParameter)}`;
     }
 
-    return _fetch<R>(path, fetchOptions);
+    return _fetch<TData>(path, fetchOptions);
   }
 
-  function get<R>(args: FetchArgs): Promise<ResponseData<R>> {
-    return request<R, never>({
+  function get<TData, TBodyData>(args: FetchArgs<TBodyData>): Promise<TResponseData<TData>> {
+    return request<TData, TBodyData>({
       ...args,
       method: 'GET',
-      body: undefined,
     });
   }
 
-  function post<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
-    return request<R, D>({
+  function post<TData, TBodyData>(args: FetchArgs<TBodyData>): Promise<TResponseData<TData>> {
+    return request<TData, TBodyData>({
       ...args,
       method: 'POST',
     });
   }
 
-  function patch<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
-    return request<R, D>({
+  function patch<TData, TBodyData>(args: FetchArgs<TBodyData>): Promise<TResponseData<TData>> {
+    return request<TData, TBodyData>({
       ...args,
       method: 'PATCH',
     });
   }
 
-  function put<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
-    return request<R, D>({ ...args, method: 'PUT' });
+  function put<TData, TBodyData>(args: FetchArgs<TBodyData>): Promise<TResponseData<TData>> {
+    return request<TData, TBodyData>({ ...args, method: 'PUT' });
   }
 
-  function del<R, D>(args: FetchArgs<D>): Promise<ResponseData<R>> {
-    return request<R, D>({ ...args, method: 'DELETE' });
+  function del<TData, TBodyData>(args: FetchArgs<TBodyData>): Promise<TResponseData<TData>> {
+    return request<TData, TBodyData>({ ...args, method: 'DELETE' });
   }
 
   return {

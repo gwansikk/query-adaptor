@@ -15,6 +15,7 @@ describe('queryFetch', () => {
   it('should handle GET requests', async () => {
     const data = await queryFetch.get<TResponseData>({
       endpoint: ['posts', 1],
+      body: undefined,
     });
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
@@ -73,7 +74,11 @@ describe('queryFetch', () => {
   });
 
   it('should handle PATCH requests', async () => {
-    const data = await queryFetch.patch<TResponseData>({
+    type TRequestData = {
+      title: string;
+    };
+
+    const data = await queryFetch.patch<TResponseData, TRequestData>({
       endpoint: ['posts', 1],
       body: {
         title: 'foo',
