@@ -15,14 +15,14 @@ const queryFetch = createQueryFetch({
 });
 
 function postsFetchOptions(id: number) {
-  return fetchOptions({
+  return fetchOptions<TResponseData>({
     endpoint: ['posts', id],
   });
 }
 
 describe('fetchOptions', () => {
   it('should handle GET requests', async () => {
-    const data = await queryFetch.get<TResponseData>(postsFetchOptions(1));
+    const data = await queryFetch.get(postsFetchOptions(1));
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({
@@ -40,8 +40,8 @@ describe('fetchOptions', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<object, TRequestData>({
-      endpoint: ['posts', 1],
+    const data = await queryFetch.post<TResponseData, TRequestData>({
+      ...postsFetchOptions(1),
       body: {
         title: 'foo',
         body: 'bar',
@@ -49,7 +49,26 @@ describe('fetchOptions', () => {
       },
     });
 
-    expectTypeOf(data).toEqualTypeOf<object>();
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({});
+  });
+
+  it('should construct key correctly for a complex endpoint', () => {
+    const options = fetchOptions({
+      endpoint: ['users', 'login'],
+    });
+
+    expectTypeOf(options).toHaveProperty('key');
+    expect(options.key).toEqual(['users', 'login']);
+  });
+
+  it('should construct key correctly for a complex endpoint with queryParameter', () => {
+    const options = fetchOptions({
+      endpoint: ['users', 'posts'],
+      queryParameter: { postId: 1, filter: 'latest' },
+    });
+
+    expectTypeOf(options).toHaveProperty('key');
+    expect(options.key).toEqual(['users', 'posts', { postId: 1, filter: 'latest' }]);
   });
 });
