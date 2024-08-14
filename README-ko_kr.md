@@ -92,9 +92,9 @@ const queryFetch = createQueryFetch({
 queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
 ```
 
-## Roadmap
+## 로드맵
 
-정식 출시(v1.0.0)를 위한 로드맵입니다.
+정식 출시(v1.0.0)를 위한 로드맵이에요.
 
 - [x] 자동 JSON 변환
 - [x] 인스턴스 생성
@@ -110,6 +110,10 @@ queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
 [CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTREIBUTING.md)
+
+### 기여자
+
+[![contributors](https://contrib.rocks/image?repo=gwansikk/query-fetch)](https://github.com/gwansikk/query-fetch/contributors)
 
 ## 라이선스
 
