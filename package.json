@@ -1,13 +1,9 @@
 {
-  "name": "@gwansikk/query-fetch",
-  "version": "0.7.3",
-  "description": "Lightweight and Easy-to-Use Fetch API Extension Library",
-  "keywords": [
-    "fetch",
-    "http",
-    "request"
-  ],
+  "name": "query-fetch",
+  "private": true,
+  "packageManager": "pnpm@9.7.1",
   "homepage": "https://github.com/gwansikk/query-fetch",
+  "bugs": "https://github.com/gwansikk/query-fetch/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gwansikk/query-fetch.git"
@@ -15,35 +11,11 @@
   "license": "MIT",
   "author": "GwanSik Kim <Seorit98@gmail.com>",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "watch": "tsup --watch",
-    "build": "tsup",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "type-check": "tsc --noEmit --skipLibCheck ",
-    "docs:dev": "pnpm --filter docs dev",
-    "docs:build": "pnpm --filter docs build"
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "check-types": "turbo run check-types"
   },
   "devDependencies": {
     "@types/eslint": "^8",
@@ -52,12 +24,10 @@
     "@vitest/coverage-istanbul": "^2.0.5",
     "eslint": "^8.56.0",
     "prettier": "^3.1.1",
-    "tslib": "^2.6.2",
-    "tsup": "^8.1.0",
+    "tsup": "^8.2.4",
+    "turbo": "^2.0.14",
     "typescript": "^5.3.3",
+    "vite": "^5.4.1",
     "vitest": "^2.0.5"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

@@ -33,7 +33,7 @@ When requesting a new feature, please describe the necessity and expected benefi
 
 You can submit a PR directly. All commit messages and pull request titles should follow this format:
 
-```
+```plaintext
 <type>[optional package scope]: <description>
 
 [optional body]
