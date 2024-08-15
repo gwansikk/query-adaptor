@@ -1,14 +1,14 @@
-import type { FetchArgs, TDefaultBodyData, TQueryParameter } from './types';
+import type { FetchOptions, TDefaultBodyData, TQueryParameter } from './types';
 
 /**
  * @experimental This is experimental feature.
  */
-export function fetchOptions<TBodyData = TDefaultBodyData>(args: FetchArgs<TBodyData>) {
-  const key: (string | number | TQueryParameter)[] = [...args.endpoint];
+export function fetchOptions<TBodyData = TDefaultBodyData>(options: FetchOptions<TBodyData>) {
+  const key: (string | number | TQueryParameter)[] = [...options.endpoint];
 
-  if (args.queryParameter) {
-    key.push(args.queryParameter);
+  if (options.queryParameter) {
+    key.push(options.queryParameter);
   }
 
-  return { ...args, key } as const;
+  return { ...options, key } as const;
 }

@@ -8,18 +8,18 @@ export type TDefaultBodyData = Record<string, unknown>;
 
 export type TDefaultData = Record<string, unknown>;
 
-export interface FetchOptions extends Omit<RequestInit, 'method'> {
+export interface RequestOptions extends Omit<RequestInit, 'method'> {
   method?: THTTPMethod;
 }
 
-export interface FetchArgs<TBodyData = TDefaultBodyData> {
+export interface FetchOptions<TBodyData = TDefaultBodyData> {
   endpoint: TEndpoint;
   queryParameter?: TQueryParameter;
-  options?: FetchOptions;
+  options?: RequestOptions;
   body?: TBodyData;
 }
 
-export interface HttpArgsWithHTTPMethod<TBodyData> extends FetchArgs<TBodyData> {
+export interface FetchOptionsWithMethod<TBodyData> extends FetchOptions<TBodyData> {
   method: THTTPMethod;
 }
 
@@ -42,7 +42,7 @@ export interface QueryFetchOptions {
   /**
    * The options to use for instance.
    */
-  options?: FetchOptions;
+  options?: RequestOptions;
   /**
    * The interceptors to use for instance.
    */
@@ -50,7 +50,7 @@ export interface QueryFetchOptions {
     /**
      * The request interceptor to use for instance.
      */
-    request?: TInterceptor<FetchOptions>;
+    request?: TInterceptor<RequestOptions>;
     /**
      * The response interceptor to use for instance.
      */
@@ -74,7 +74,7 @@ export interface QueryFetch {
   /**
    * Sets the request interceptor for instance.
    */
-  setRequestInterceptor: (interceptor: TInterceptor<FetchOptions>) => void;
+  setRequestInterceptor: (interceptor: TInterceptor<RequestOptions>) => void;
   /**
    * Sets the response interceptor for instance.
    */
@@ -86,21 +86,29 @@ export interface QueryFetch {
   /**
    * Sends a GET request to the endpoint.
    */
-  get: <TData>(args: FetchArgs<TData>) => Promise<TResponseData<TData>>;
+  get: <TData>(options: FetchOptions<TData>) => Promise<TResponseData<TData>>;
   /**
    * Sends a POST request to the endpoint.
    */
-  post: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
+  post: <TData, TBodyData = TData>(
+    options: FetchOptions<TBodyData>
+  ) => Promise<TResponseData<TData>>;
   /**
    * Sends a PATCH request to the endpoint.
    */
-  patch: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
+  patch: <TData, TBodyData = TData>(
+    options: FetchOptions<TBodyData>
+  ) => Promise<TResponseData<TData>>;
   /**
    * Sends a PUT request to the endpoint.
    */
-  put: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
+  put: <TData, TBodyData = TData>(
+    options: FetchOptions<TBodyData>
+  ) => Promise<TResponseData<TData>>;
   /**
    * Sends a DELETE request to the endpoint.
    */
-  delete: <TData, TBodyData = TData>(args: FetchArgs<TBodyData>) => Promise<TResponseData<TData>>;
+  delete: <TData, TBodyData = TData>(
+    options: FetchOptions<TBodyData>
+  ) => Promise<TResponseData<TData>>;
 }
