@@ -3,9 +3,7 @@
 <h1>🔗 Query Fetch</h1>
 <p><b>사용하기 쉽고 가벼운 Fetch API용 확장 라이브러리입니다.</b></p>
 
-[![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
 
 [English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
@@ -30,81 +28,11 @@ Fetch API는 필요한 기능을 제공하지 않거나, 직접 구현해야 하
 - **인증 토큰 관리**: 인증 토큰이 만료되었을 때 자동으로 갱신하여 요청을 재시도 할 수 있어요.
 - **타입 세이프**: TypeScript를 100% 지원하며, 정확한 타입추론으로 불필요한 타입을 최소화 해요.
 
-## 설치
+## Packages
 
-Query Fetch는 npm에 배포되어 있습니다. 아래 명령어를 통해 설치할 수 있어요.
+### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core)
 
-```bash
-npm i @gwansikk/query-fetch
-```
-
-```bash
-pnpm add @gwansikk/query-fetch
-```
-
-```bash
-yarn add @gwansikk/query-fetch
-```
-
-## 사용 방법
-
-> [!IMPORTANT]\
-> Query Fetch는 현재 개발중인 패키지에요. 제공되는 API는 언제든지 변경될 수 있어요.
-
-### Instance
-
-```typescript
-const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-});
-
-queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
-```
-
-### Interceptor
-
-```typescript
-const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-  interceptors: {
-    request: (request) => {
-      console.log('** request interceptor **');
-      // 요청을 수정하고 수정된 요청을 반환해야 합니다.
-      // 예를 들어, 요청에 특정 헤더를 추가하거나 URL을 수정할 수 있습니다.
-      request.headers = {
-        ...request.headers,
-        Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-      };
-      return request;
-    },
-    response: (response) => {
-      console.log('** response interceptor **');
-      // 응답을 수정하고 수정된 응답을 반환해야 합니다.
-      return response;
-    },
-    error: (response) => {
-      console.log('** error interceptor **');
-      // 에러 응답을 수정하고 수정된 응답을 반환해야 합니다.
-      return response;
-    },
-  },
-});
-
-queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
-```
-
-## 로드맵
-
-정식 출시(v1.0.0)를 위한 로드맵이에요.
-
-- [x] 자동 JSON 변환
-- [x] 인스턴스 생성
-- [x] 요청 및 응답 인터셉터
-- [x] 쿼리 파라미터
-- [ ] 자동 재시도
-- [ ] 오류 상태 처리
-- [ ] 요청 취소
-- [ ] 인증 토큰 관리
+### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
 
 ## 기여하기
 

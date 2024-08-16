@@ -3,9 +3,7 @@
 <h1>🔗 Query Fetch</h1>
 <p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
-[![npm version](https://img.shields.io/npm/v/@gwansikk/query-fetch?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm downloads](https://img.shields.io/npm/dt/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/@gwansikk/query-fetch?color=000&labelColor=000)](https://www.npmjs.com/package/@gwansikk/query-fetch)
+![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
 
 [English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
@@ -28,83 +26,13 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 - **Automatic Retries**: Automatically retries requests in case of network errors or server issues.
 - **Request Cancellation**: Provides the ability to cancel unnecessary requests.
 - **Token Management**: Automatically refreshes authentication tokens when they expire and retries the request.
-- **Type Safe**: Fully supports TypeScript, ensuring accurate type inference and minimizing unnecessary types.
+- **Type Safe**: Fully supports TypeScript, ensuring accurate type inference and minimizing unnecessary types.f
 
-## Installation
+## Packages
 
-Query Fetch is available on npm. You can install it using the following commands.
+### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core)
 
-```bash
-npm i @gwansikk/query-fetch
-```
-
-```bash
-pnpm add @gwansikk/query-fetch
-```
-
-```bash
-yarn add @gwansikk/query-fetch
-```
-
-## Usage
-
-> [!IMPORTANT]\
-> Query Fetch is currently in development. The provided API is subject to change.
-
-### Instance
-
-```typescript
-const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-});
-
-queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
-```
-
-### Interceptor
-
-```typescript
-const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-  interceptors: {
-    request: (request) => {
-      console.log('** request interceptor **');
-      // Modify and return the request.
-      // For example, you can add specific headers or modify the URL.
-      request.headers = {
-        ...request.headers,
-        Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-      };
-      return request;
-    },
-    response: (response) => {
-      console.log('** response interceptor **');
-      // Modify and return the response.
-      return response;
-    },
-    error: (response) => {
-      console.log('** error interceptor **');
-      // Modify and return the error response.
-      return response;
-    },
-  },
-});
-
-queryFetch.get({ endpoint: ['posts', 1] }).then((data) => console.log(data));
-```
-
-## Roadmap
-
-Here is the roadmap for the official release (v1.0.0).
-
-- [x] Automatic JSON conversion
-- [x] Instance creation
-- [x] Request and response interceptors
-- [x] Query Parameter
-- [ ] Automatic retries
-- [ ] Error status handling
-- [ ] Request cancellation
-- [ ] Token management
+### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
 
 ## Contributing
 
@@ -118,6 +46,6 @@ We welcome contribution from everyone in the community. Read below for detailed 
 
 ## License
 
-For more details, please refer to the [LICENSE](https://github.com/gwansikk/query-fetch/blob/main/LICENSE).
+See [LICENSE](https://github.com/gwansikk/query-fetch/blob/main/LICENSE) for more information.
 
 MIT © [gwansikk](https://github.com/gwansikk)

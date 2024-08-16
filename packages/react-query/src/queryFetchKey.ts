@@ -1,4 +1,4 @@
-import { fetchOptions } from '@gwansikk/query-fetch';
+import { fetchOptions } from '@query-fetch/core';
 
 /**
  * @experimental This is experimental feature.

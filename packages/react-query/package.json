@@ -1,6 +1,6 @@
 {
   "name": "@query-fetch/react-query",
-  "version": "0.7.3",
+  "version": "0.1.0",
   "description": "Lightweight and Easy-to-Use Fetch API Extension Library for @tanstack/react-query",
   "keywords": [
     "fetch",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {},
   "peerDependencies": {
-    "@gwansikk/query-fetch": "workspace:*",
+    "@query-fetch/core": "workspace:*",
     "@tanstack/react-query": "^5",
     "react": "^18"
   },
