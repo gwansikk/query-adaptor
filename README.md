@@ -26,7 +26,7 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 - **Automatic Retries**: Automatically retries requests in case of network errors or server issues.
 - **Request Cancellation**: Provides the ability to cancel unnecessary requests.
 - **Token Management**: Automatically refreshes authentication tokens when they expire and retries the request.
-- **Type Safe**: Fully supports TypeScript, ensuring accurate type inference and minimizing unnecessary types.f
+- **Type Safe**: Fully supports TypeScript, ensuring accurate type inference and minimizing unnecessary types.
 
 ## Packages
 
