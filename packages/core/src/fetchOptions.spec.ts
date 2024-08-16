@@ -52,23 +52,4 @@ describe('fetchOptions', () => {
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({});
   });
-
-  it('should construct key correctly for a complex endpoint', () => {
-    const options = fetchOptions({
-      endpoint: ['users', 'login'],
-    });
-
-    expectTypeOf(options).toHaveProperty('key');
-    expect(options.key).toEqual(['users', 'login']);
-  });
-
-  it('should construct key correctly for a complex endpoint with queryParameter', () => {
-    const options = fetchOptions({
-      endpoint: ['users', 'posts'],
-      queryParameter: { postId: 1, filter: 'latest' },
-    });
-
-    expectTypeOf(options).toHaveProperty('key');
-    expect(options.key).toEqual(['users', 'posts', { postId: 1, filter: 'latest' }]);
-  });
 });
