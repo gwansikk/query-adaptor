@@ -2,14 +2,14 @@ import { formatPath } from './formatPath';
 
 describe('formatPath', () => {
   it('should remove leading and trailing slashes', () => {
-    const path = '/path/to/resource/';
-    const result = formatPath(path);
+    const result = formatPath('/path/to/resource/');
+
     expect(result).toBe('path/to/resource');
   });
 
   it('should replace multiple consecutive slashes with a single slash', () => {
-    const path = '/path//to//resource';
-    const result = formatPath(path);
+    const result = formatPath('/path//to//resource');
+
     expect(result).toBe('path/to/resource');
   });
 });
