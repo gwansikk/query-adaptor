@@ -32,7 +32,20 @@ Fetch API는 필요한 기능을 제공하지 않거나, 직접 구현해야 하
 
 ### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core)
 
+> Query Fetch의 핵심 기능을 제공해요.
+
+- createQueryFetch
+- queryOptions
+
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
+
+> Query Fetch를 React Query와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
+
+- queryFetchKey
+
+## 공식 문서
+
+[공식 문서](https://offlegacy.org/)에 방문하시면 설치 방법, 사용 방법 등 더 자세한 정보를 확인할 수 있어요.
 
 ## 기여하기
 
