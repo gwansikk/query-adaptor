@@ -9,7 +9,8 @@ type TKey =
  * @experimental This is experimental feature.
  */
 export function queryFetchKey<TBodyData>(
-  options: Parameters<typeof fetchOptions<TBodyData>>[0]
+  options: Parameters<typeof fetchOptions<TBodyData>>[0],
+  additionalKey?: TKey
 ): TKey[] {
   const key: TKey[] = [...options.endpoint];
 
@@ -24,6 +25,10 @@ export function queryFetchKey<TBodyData>(
     if (Object.keys(filteredObject).length > 0) {
       key.push(filteredObject);
     }
+  }
+
+  if (additionalKey) {
+    key.push(additionalKey);
   }
 
   return key;

@@ -27,4 +27,10 @@ describe('queryFetchKey', () => {
 
     expect(key).toEqual(['posts', 1, { filter: 'latest' }]);
   });
+
+  it('should generate the correct key with additionalKey', async () => {
+    const key = queryFetchKey(postsFetchOptions(1), 'additionalKey');
+
+    expect(key).toEqual(['posts', 1, 'additionalKey']);
+  });
 });
