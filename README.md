@@ -3,7 +3,7 @@
 <h1>🔗 Query Fetch</h1>
 <p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
 
-![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)
+[![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)](https://github.com/gwansikk/query-fetch?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
 
 [English](https://github.com/gwansikk/query-fetch/blob/main/README.md)
@@ -30,14 +30,14 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 
 ## Packages
 
-### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) ![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Fcore?labelColor=black&color=black) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=black&labelColor=black)](https://www.npmjs.com/package/@query-fetch/core)
+### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Fcore?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/core)
 
 > Provides core features of Query Fetch.
 
 - createQueryFetch
 - queryOptions
 
-### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) ![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Fcore?labelColor=black&color=black) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://www.npmjs.com/package/@query-fetch/react-query)
+### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Freact-query?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/react-query)
 
 > Provides features to easily use Query Fetch with React Query.
 
