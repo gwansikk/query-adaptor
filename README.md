@@ -30,14 +30,14 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 
 ## Packages
 
-### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core)
+### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) ![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Fcore?labelColor=black&color=black) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=black&labelColor=black)](https://www.npmjs.com/package/@query-fetch/core)
 
 > Provides core features of Query Fetch.
 
 - createQueryFetch
 - queryOptions
 
-### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
+### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) ![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Fcore?labelColor=black&color=black) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://www.npmjs.com/package/@query-fetch/react-query)
 
 > Provides features to easily use Query Fetch with React Query.
 
