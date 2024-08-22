@@ -1,6 +1,6 @@
 export type THTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-export type TEndpoint = Array<string | number>;
+export type TEndpoint = Array<string | number> | string;
 
 export type TQueryParameter = Record<string, unknown>;
 

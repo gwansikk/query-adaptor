@@ -5,6 +5,10 @@
  * @param path - The path to be formatted.
  * @returns The formatted path.
  */
-export function formatPath(path: string): string {
+export function formatPath(path: Array<string | number> | string): string {
+  if (Array.isArray(path)) {
+    path = path.join('/');
+  }
+
   return path.replace(/^\//, '').replace(/\/+/g, '/').replace(/\/$/, '');
 }

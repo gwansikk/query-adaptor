@@ -61,7 +61,7 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
     body,
     options,
   }: FetchOptionsWithMethod<TBodyData>): Promise<TResponseData<TData>> {
-    let path = formatPath(endpoint.join('/'));
+    let path = formatPath(endpoint);
     const isJson = isContentTypeJson(body);
 
     const fetchOptions: RequestOptions = {
