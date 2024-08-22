@@ -1,7 +1,7 @@
 import { fetchOptions } from '@query-fetch/core';
 import type { ElementTypeof } from './types';
 
-type TKey =
+export type TKey =
   | ElementTypeof<Parameters<typeof fetchOptions>[0]['endpoint']>
   | Parameters<typeof fetchOptions>[0]['queryParameter'];
 
