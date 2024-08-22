@@ -6,6 +6,7 @@ import type {
   TResponseData,
   QueryFetchOptions,
   QueryFetch,
+  TRequestInterceptor,
 } from './types';
 import { createBaseURL, formatPath, isContentTypeJson, toURLSearchParams } from './utils';
 
@@ -28,9 +29,7 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
     fetchOptions.headers = { ..._headers, ...fetchOptions.headers };
 
     if (_interceptors.request) {
-      fetchOptions = await Promise.resolve(
-        _interceptors.request(fetchOptions, fetchOptions.method)
-      );
+      fetchOptions = await Promise.resolve(_interceptors.request(fetchOptions));
     }
 
     const response = await fetch([_baseURL, path].join('/'), {
@@ -40,16 +39,14 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
 
     if (response.status >= 400) {
       if (_interceptors.error) {
-        const errorResponse = await Promise.resolve(
-          _interceptors.error(response, fetchOptions.method)
-        );
+        const errorResponse = await Promise.resolve(_interceptors.error(response, fetchOptions));
         return await errorResponse.json();
       }
     }
 
     if (_interceptors.response) {
       const modifiedResponse = await Promise.resolve(
-        _interceptors.response(response, fetchOptions.method)
+        _interceptors.response(response, fetchOptions)
       );
       return await modifiedResponse.json();
     }
@@ -89,7 +86,7 @@ export function createQueryFetch(queryFetchOptions: QueryFetchOptions): QueryFet
     _headers = { ..._headers, ...newHeaders };
   }
 
-  function setRequestInterceptor(interceptor: TInterceptor<RequestOptions>) {
+  function setRequestInterceptor(interceptor: TRequestInterceptor) {
     _interceptors.request = interceptor;
   }
 

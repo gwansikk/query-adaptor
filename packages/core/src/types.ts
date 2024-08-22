@@ -25,10 +25,14 @@ export interface FetchOptionsWithMethod<TBodyData> extends FetchOptions<TBodyDat
 
 export type TResponseData<TData = TDefaultData> = TData;
 
-export type TInterceptor<TResponse = Response> = (
-  fetchOptions: TResponse,
-  method?: string
+export type TInterceptor<TResponse = Response, TRequest = RequestOptions> = (
+  response: TResponse,
+  request: TRequest
 ) => TResponse | Promise<TResponse>;
+
+export type TRequestInterceptor = (
+  TRequest: RequestOptions
+) => RequestOptions | Promise<RequestOptions>;
 
 export interface QueryFetchOptions {
   /**
@@ -50,7 +54,7 @@ export interface QueryFetchOptions {
     /**
      * The request interceptor to use for instance.
      */
-    request?: TInterceptor<RequestOptions>;
+    request?: TRequestInterceptor;
     /**
      * The response interceptor to use for instance.
      */
@@ -74,7 +78,7 @@ export interface QueryFetch {
   /**
    * Sets the request interceptor for instance.
    */
-  setRequestInterceptor: (interceptor: TInterceptor<RequestOptions>) => void;
+  setRequestInterceptor: (interceptor: TRequestInterceptor) => void;
   /**
    * Sets the response interceptor for instance.
    */
