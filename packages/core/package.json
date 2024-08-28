@@ -1,6 +1,6 @@
 {
   "name": "@query-fetch/core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Lightweight and Easy-to-Use Fetch API Extension Library",
   "keywords": [
     "fetch",
@@ -33,8 +33,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "tsup --watch",
