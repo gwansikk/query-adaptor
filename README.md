@@ -34,6 +34,7 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 
 > Provides core features of Query Fetch.
 
+- queryFetch
 - createQueryFetch
 - queryOptions
 

@@ -34,6 +34,7 @@ Fetch API는 필요한 기능을 제공하지 않거나, 직접 구현해야 하
 
 > Query Fetch의 핵심 기능을 제공해요.
 
+- queryFetch
 - createQueryFetch
 - queryOptions
 
