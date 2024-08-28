@@ -1,1 +1,2 @@
-export { type TKey, queryFetchKey } from './queryFetchKey';
+export { queryFetchKey } from './queryFetchKey';
+export type { TQueryFetchKey } from './queryFetchKey';
