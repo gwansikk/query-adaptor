@@ -66,7 +66,8 @@ export function createQueryFetch(
     request.headers = Object.assign(_headers, request.headers);
 
     if (_interceptors.request) {
-      request = await Promise.resolve(_interceptors.request(request));
+      const newRequest = await Promise.resolve(_interceptors.request(request));
+      request = Object.assign(request, newRequest);
     }
 
     const response = await fetch(`${_baseURL}/${path}`, Object.assign(_options, request));
