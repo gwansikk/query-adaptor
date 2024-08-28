@@ -1,6 +1,4 @@
-import { describe, it, expect, expectTypeOf } from 'vitest';
-
-import { createQueryFetch } from './queryFetch';
+import { createQueryFetch } from './createQueryFetch';
 import { fetchOptions } from './fetchOptions';
 
 type TResponseData = {
@@ -22,7 +20,7 @@ function postsFetchOptions(id: number) {
 
 describe('fetchOptions', () => {
   it('should handle GET requests', async () => {
-    const data = await queryFetch.get(postsFetchOptions(1));
+    const data = await queryFetch.get<TResponseData, TResponseData>(postsFetchOptions(1));
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({

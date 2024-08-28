@@ -1,10 +1,10 @@
-import type { FetchOptions, TDefaultBodyData } from './types';
+import type { TFetchOptions, TDefaultBodyData } from './types';
 
 /**
  * @experimental This is experimental feature.
  */
 export function fetchOptions<TBodyData = TDefaultBodyData>(
-  options: FetchOptions<TBodyData>
-): FetchOptions<TBodyData> {
+  options: TFetchOptions<TBodyData>
+): TFetchOptions<TBodyData> {
   return options;
 }

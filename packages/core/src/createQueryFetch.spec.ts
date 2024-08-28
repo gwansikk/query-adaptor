@@ -1,4 +1,4 @@
-import { queryFetch } from './queryFetch';
+import { createQueryFetch } from './createQueryFetch';
 
 type TResponseData = {
   id: number;
@@ -7,12 +7,14 @@ type TResponseData = {
   userId: number;
 };
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+const queryFetch = createQueryFetch({
+  baseURL: 'https://jsonplaceholder.typicode.com',
+});
 
 describe('createQueryFetch', () => {
   it('should handle GET requests', async () => {
     const data = await queryFetch.get<TResponseData>({
-      endpoint: [BASE_URL, 'posts', 1],
+      endpoint: ['posts', 1],
       body: undefined,
     });
 
@@ -35,7 +37,7 @@ describe('createQueryFetch', () => {
     };
 
     const data = await queryFetch.get<TResponseData[]>({
-      endpoint: [BASE_URL, 'comments'],
+      endpoint: ['comments'],
       queryParameter: {
         postId: 1,
       },
@@ -59,7 +61,7 @@ describe('createQueryFetch', () => {
     };
 
     const data = await queryFetch.post<object, TRequestData>({
-      endpoint: [BASE_URL, 'posts', 1],
+      endpoint: ['posts', 1],
       body: {
         title: 'foo',
         body: 'bar',
@@ -77,7 +79,7 @@ describe('createQueryFetch', () => {
     };
 
     const data = await queryFetch.patch<TResponseData, TRequestData>({
-      endpoint: [BASE_URL, 'posts', 1],
+      endpoint: ['posts', 1],
       body: {
         title: 'foo',
       },
@@ -94,7 +96,7 @@ describe('createQueryFetch', () => {
 
   it('should handle PUT requests', async () => {
     const data = await queryFetch.put<TResponseData>({
-      endpoint: [BASE_URL, 'posts', 1],
+      endpoint: ['posts', 1],
       body: {
         id: 1,
         title: 'foo',
@@ -113,9 +115,7 @@ describe('createQueryFetch', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    const data = await queryFetch.delete({
-      endpoint: [BASE_URL, 'post', 1],
-    });
+    const data = await queryFetch.delete({ endpoint: ['post', 1] });
 
     expectTypeOf(data).toEqualTypeOf<unknown>();
     expect(data).toEqual({});
