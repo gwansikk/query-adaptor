@@ -7,7 +7,7 @@ import type {
   TFetchOptions,
   TFetchOptionsWithMethod,
 } from './types';
-import { createBaseURL, formatPath } from './utils';
+import { createBaseURL } from './utils';
 
 export type CreateQueryFetchOptions = {
   baseURL: string;
@@ -61,27 +61,25 @@ export function createQueryFetch(
 
   async function _fetchFn<TData>(
     path: string,
-    fetchOptions: TRequestOptions
+    request: TRequestOptions
   ): Promise<TResponseData<TData>> {
-    fetchOptions.headers = Object.assign(_headers, fetchOptions.headers);
+    request.headers = Object.assign(_headers, request.headers);
 
     if (_interceptors.request) {
-      fetchOptions = await Promise.resolve(_interceptors.request(fetchOptions));
+      request = await Promise.resolve(_interceptors.request(request));
     }
 
-    const response = await fetch(formatPath(_baseURL, path), Object.assign(_options, fetchOptions));
+    const response = await fetch(`${_baseURL}/${path}`, Object.assign(_options, request));
 
     if (response.status >= 400) {
       if (_interceptors.error) {
-        const errorResponse = await Promise.resolve(_interceptors.error(response, fetchOptions));
+        const errorResponse = await Promise.resolve(_interceptors.error(response, request));
         return await errorResponse.json();
       }
     }
 
     if (_interceptors.response) {
-      const modifiedResponse = await Promise.resolve(
-        _interceptors.response(response, fetchOptions)
-      );
+      const modifiedResponse = await Promise.resolve(_interceptors.response(response, request));
       return await modifiedResponse.json();
     }
 
