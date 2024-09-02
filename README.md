@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔗 Query Fetch</h1>
-<p><b>Powerful and Easy-to-Use Fetch API Extension Library</b></p>
+<p><b>Powerful and flexible Fetch API Extension Library</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)](https://github.com/gwansikk/query-fetch?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
