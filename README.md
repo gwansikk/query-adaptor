@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔗 Query Fetch</h1>
-<p><b>Lightweight and Easy-to-Use Fetch API Extension Library.</b></p>
+<p><b>Powerful and Easy-to-Use Fetch API Extension Library</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)](https://github.com/gwansikk/query-fetch?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
@@ -14,19 +14,15 @@
 
 ## What is Query Fetch?
 
-The Fetch API often lacks necessary features, requiring direct implementation. You have to handle retries on failure, token renewal, request and response logging, request cancellation, and more on your own. Additionally, you often need to repeat the same configurations for every request.
+The traditional Fetch API provides only basic functionalities, which often requires developers to implement additional features themselves. For example, functionalities such as automatic retry on request failure, authentication token renewal, request and response logging, and request cancellation are not natively supported by the Fetch API. Therefore, these features had to be manually added by the developers. Additionally, there is the inconvenience of having to repeatedly write the same configuration.
 
-Moreover, dealing with Promise objects can be quite challenging. Using Promises for asynchronous processing can lead to complex structures and difficult error handling. Managing multiple asynchronous requests sequentially or in parallel can reduce code readability and maintainability.
-
-To address these issues, Query Fetch was created. It alleviates the burden of network communication, allowing you to focus on your core logic!
+To overcome these limitations, we developed Query Fetch. As the name suggests, it allows you to make network requests as easily as making a query, thereby reducing the complexity of network communication. By using a declarative approach, similar to querying, you can alleviate the burden of handling network communication and focus on your core logic!
 
 ## Features
 
-- **Instance Management**: Query Fetch allows you to create multiple instances, each with different settings. This makes it easy to manage integrations with various API endpoints or services.
-- **Automatic Retries**: Automatically retries requests in case of network errors or server issues.
-- **Request Cancellation**: Provides the ability to cancel unnecessary requests.
-- **Token Management**: Automatically refreshes authentication tokens when they expire and retries the request.
-- **Type Safe**: Fully supports TypeScript, ensuring accurate type inference and minimizing unnecessary types.
+- **Extension of the Fetch API**: Query Fetch offers more advanced features compared to the traditional Fetch API. With functionalities like Instance, Interceptor, and Effect, you can minimize complex configurations and implement flexible HTTP communication.
+- **Support for Various Environments**: Designed to be easily used in various environments, Query Fetch can function perfectly even in specialized Fetch API environments like Tauri by acting as a simple adapter.
+- **Strong Type Safety**: Query Fetch fully supports TypeScript, requiring only the necessary types with accurate type inference. This minimizes unnecessary types and strongly guarantees type safety.
 
 ## Packages
 
@@ -37,12 +33,18 @@ To address these issues, Query Fetch was created. It alleviates the burden of ne
 - queryFetch
 - createQueryFetch
 - queryOptions
+- migration utils for Axios, Fetch API
 
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Freact-query?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/react-query)
 
 > Provides features to easily use Query Fetch with React Query.
 
 - queryFetchKey
+- queryFetchFn
+
+### @query-fetch/tauri &middot; ![POC](https://img.shields.io/badge/POC-black)
+
+> Provides features to easily use Query Fetch with tauri.
 
 ## Official Documentation
 
