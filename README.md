@@ -21,7 +21,7 @@ To overcome these limitations, we developed Query Fetch. As the name suggests, i
 ## Features
 
 - **Extension of the Fetch API**: Query Fetch offers more advanced features compared to the traditional Fetch API. With functionalities like Instance, Interceptor, and Effect, you can minimize complex configurations and implement flexible HTTP communication.
-- **Support for Various Environments**: Designed to be easily used in various environments, Query Fetch can function perfectly even in specialized Fetch API environments like Tauri by acting as a simple adapter.
+- **Support for Various Environments**: Designed to be easily used in various environments, Query Fetch can function perfectly even in specialized Fetch API environments like Next.js, React Native, Tauri by acting as a simple adapter.
 - **Strong Type Safety**: Query Fetch fully supports TypeScript, requiring only the necessary types with accurate type inference. This minimizes unnecessary types and strongly guarantees type safety.
 
 ## Packages
@@ -41,6 +41,10 @@ To overcome these limitations, we developed Query Fetch. As the name suggests, i
 
 - queryFetchKey
 - queryFetchFn
+
+### @query-fetch/nextjs &middot; ![POC](https://img.shields.io/badge/POC-black)
+
+> Provides features to easily use Query Fetch with Next.js.
 
 ### @query-fetch/tauri &middot; ![POC](https://img.shields.io/badge/POC-black)
 

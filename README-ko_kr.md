@@ -21,7 +21,7 @@
 ## 기능
 
 - **Fetch API의 확장**: 기존의 Fetch API에서 더 풍부한 기능을 제공해요. Instance, Interceptor, Effect 등의 기능을 통해 복잡한 설정을 최소화하고 유연한 HTTP 통신을 구현할 수 있어요.
-- **다양한 환경 지원**: 다양한 환경에서 손쉽게 사용할 수 있도록 설계되었어요. Query Fetch를 단순히 어댑터처럼 활용하여, Tauri와 같이 특수한 Fetch API 환경에서도 완벽히 동작해요.
+- **다양한 환경 지원**: 다양한 환경에서 손쉽게 사용할 수 있도록 설계되었어요. Query Fetch를 단순히 어댑터처럼 활용하여, Next.js, React Native, Tauri와 같이 특수한 Fetch API 환경에서도 완벽히 동작해요.
 - **강력한 타입 세이프**: TypeScript를 100% 지원하며, 정확한 타입추론으로 필요한 타입만을 요구해요. 덕분에 불필요한 타입을 최소화하고 강력하게 타입 안정성을 보장해요.
 
 ## Packages
@@ -41,6 +41,10 @@
 
 - queryFetchKey
 - queryFetchFn
+
+### @query-fetch/nextjs &middot; ![POC](https://img.shields.io/badge/POC-black)
+
+> Query Fetch를 Next.js와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
 ### @query-fetch/tauri &middot; ![POC](https://img.shields.io/badge/POC-black)
 
