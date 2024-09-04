@@ -44,7 +44,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 ### @query-fetch/nextjs &middot; ![POC](https://img.shields.io/badge/POC-black)
 
-> Query Fetch를 Next.js와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
+> Query Fetch를 NEXT.js와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
 ### @query-fetch/react-native &middot; ![POC](https://img.shields.io/badge/POC-black)
 
@@ -52,7 +52,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 ### @query-fetch/tauri &middot; ![POC](https://img.shields.io/badge/POC-black)
 
-> Query Fetch를 tauri와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
+> Query Fetch를 Tauri와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
 ## 공식 문서
 
