@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔗 Query Fetch</h1>
-<p><b>Powerful and flexible Fetch API Extension Library</b></p>
+<p><b>Powerful and flexible Fetch API Adaptor Library</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)](https://github.com/gwansikk/query-fetch?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
@@ -14,15 +14,15 @@
 
 ## What is Query Fetch?
 
-The traditional Fetch API provides only basic functionalities, which often requires developers to implement additional features themselves. For example, functionalities such as automatic retry on request failure, authentication token renewal, request and response logging, and request cancellation are not natively supported by the Fetch API. Therefore, these features had to be manually added by the developers. Additionally, there is the inconvenience of having to repeatedly write the same configuration.
+Fetch API only provides basic functionality, often requiring developers to implement additional features themselves. For example, automatic retries on request failure, renewing authentication tokens, logging requests and responses, and canceling requests are not supported by the Fetch API and need to be manually added. Additionally, there's the hassle of repeatedly writing the same configurations.
 
-To overcome these limitations, we developed Query Fetch. As the name suggests, it allows you to make network requests as easily as making a query, thereby reducing the complexity of network communication. By using a declarative approach, similar to querying, you can alleviate the burden of handling network communication and focus on your core logic!
+To overcome these limitations, Query Fetch was developed. As the name suggests, it allows for simple, query-like usage that reduces the complexity of network communication logic. Use it declaratively, like making a simple query, to lessen the burden of handling network communication and focus on your core logic!
 
 ## Features
 
-- **Extension of the Fetch API**: Query Fetch offers more advanced features compared to the traditional Fetch API. With functionalities like Instance, Interceptor, and Effect, you can minimize complex configurations and implement flexible HTTP communication.
-- **Support for Various Environments**: Designed to be easily used in various environments, Query Fetch can function perfectly even in specialized Fetch API environments like Next.js, React Native, Tauri by acting as a simple adapter.
-- **Strong Type Safety**: Query Fetch fully supports TypeScript, requiring only the necessary types with accurate type inference. This minimizes unnecessary types and strongly guarantees type safety.
+- **Extension of Fetch API**: Provides richer functionality than Fetch API. With features like Instance, Interceptor, and Effect, it minimizes complex configurations and enables flexible HTTP communication.
+- **Support for Various Environments**: Designed for easy use in various environments. Query Fetch works seamlessly in specialized Fetch API environments like Next.js, React Native, and Tauri by simply being used as an adapter.
+- **Strong Type Safety**: Fully supports TypeScript and requires only the necessary types for precise type inference. This minimizes unnecessary types and ensures robust type safety.
 
 ## Packages
 
@@ -44,11 +44,15 @@ To overcome these limitations, we developed Query Fetch. As the name suggests, i
 
 ### @query-fetch/nextjs &middot; ![POC](https://img.shields.io/badge/POC-black)
 
-> Provides features to easily use Query Fetch with Next.js.
+> Provides features to easily use Query Fetch with NEXT.js.
+
+### @query-fetch/react-native &middot; ![POC](https://img.shields.io/badge/POC-black)
+
+> Provides features to easily use Query Fetch with React Native.
 
 ### @query-fetch/tauri &middot; ![POC](https://img.shields.io/badge/POC-black)
 
-> Provides features to easily use Query Fetch with tauri.
+> Provides features to easily use Query Fetch with Tauri.
 
 ## Official Documentation
 
