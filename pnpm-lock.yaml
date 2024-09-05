@@ -59,8 +59,8 @@ importers:
   docs:
     devDependencies:
       vitepress:
-        specifier: ^1.2.2
-        version: 1.3.2(@algolia/client-search@4.24.0)(@types/node@12.20.55)(postcss@8.4.41)(react@18.3.1)(search-insights@2.16.3)(typescript@5.5.4)
+        specifier: ^1.3.4
+        version: 1.3.4(@algolia/client-search@4.24.0)(@types/node@12.20.55)(postcss@8.4.41)(react@18.3.1)(search-insights@2.16.3)(typescript@5.5.4)
 
   packages/core: {}
 
@@ -1614,30 +1614,30 @@ packages:
         integrity: sha512-q0xCiLkuWWQLzVrecPb0RMsNWyxICOjPrcrwxTUEHb1fsnvni4dcuyG7RT/Ie7VPTvnjzIaWzRMUBsrqNj/hhw==,
       }
 
-  '@vueuse/core@10.11.1':
+  '@vueuse/core@11.0.3':
     resolution:
       {
-        integrity: sha512-guoy26JQktXPcz+0n3GukWIy/JDNKti9v6VEMu6kV2sYBsWuGiTU8OWdg+ADfUbHg3/3DlqySDe7JmdHrktiww==,
+        integrity: sha512-RENlh64+SYA9XMExmmH1a3TPqeIuJBNNB/63GT35MZI+zpru3oMRUA6cEFr9HmGqEgUisurwGwnIieF6qu3aXw==,
       }
 
-  '@vueuse/integrations@10.11.1':
+  '@vueuse/integrations@11.0.3':
     resolution:
       {
-        integrity: sha512-Y5hCGBguN+vuVYTZmdd/IMXLOdfS60zAmDmFYc4BKBcMUPZH1n4tdyDECCPjXm0bNT3ZRUy1xzTLGaUje8Xyaw==,
+        integrity: sha512-w6CDisaxs19S5Fd+NPPLFaA3GoX5gxuxrbTTBu0EYap7oH13w75L6C/+7e9mcoF9akhcR6GyYajwVMQEjdapJg==,
       }
     peerDependencies:
       async-validator: ^4
       axios: ^1
-      change-case: ^4
-      drauu: ^0.3
+      change-case: ^5
+      drauu: ^0.4
       focus-trap: ^7
-      fuse.js: ^6
+      fuse.js: ^7
       idb-keyval: ^6
-      jwt-decode: ^3
+      jwt-decode: ^4
       nprogress: ^0.2
       qrcode: ^1.5
       sortablejs: ^1
-      universal-cookie: ^6
+      universal-cookie: ^7
     peerDependenciesMeta:
       async-validator:
         optional: true
@@ -1664,16 +1664,16 @@ packages:
       universal-cookie:
         optional: true
 
-  '@vueuse/metadata@10.11.1':
+  '@vueuse/metadata@11.0.3':
     resolution:
       {
-        integrity: sha512-IGa5FXd003Ug1qAZmyE8wF3sJ81xGLSqTqtQ6jaVfkeZ4i5kS2mwQF61yhVqojRnenVew5PldLyRgvdl4YYuSw==,
+        integrity: sha512-+FtbO4SD5WpsOcQTcC0hAhNlOid6QNLzqedtquTtQ+CRNBoAt9GuV07c6KNHK1wCmlq8DFPwgiLF2rXwgSHX5Q==,
       }
 
-  '@vueuse/shared@10.11.1':
+  '@vueuse/shared@11.0.3':
     resolution:
       {
-        integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==,
+        integrity: sha512-0rY2m6HS5t27n/Vp5cTDsKTlNnimCqsbh/fmT2LgE+aaU42EMfXo8+bNX91W9I7DDmxfuACXMmrd7d79JxkqWA==,
       }
 
   JSONStream@1.3.5:
@@ -4345,10 +4345,10 @@ packages:
       terser:
         optional: true
 
-  vitepress@1.3.2:
+  vitepress@1.3.4:
     resolution:
       {
-        integrity: sha512-6gvecsCuR6b1Cid4w19KQiQ02qkpgzFRqiG0v1ZBekGkrZCzsxdDD5y4WH82HRXAOhU4iZIpzA1CsWqs719rqA==,
+        integrity: sha512-I1/F6OW1xl3kW4PaIMC6snxjWgf3qfziq2aqsDoFc/Gt41WbcRv++z8zjw8qGRIJ+I4bUW7ZcKFDHHN/jkH9DQ==,
       }
     hasBin: true
     peerDependencies:
@@ -5623,20 +5623,20 @@ snapshots:
 
   '@vue/shared@3.4.38': {}
 
-  '@vueuse/core@10.11.1(vue@3.4.38(typescript@5.5.4))':
+  '@vueuse/core@11.0.3(vue@3.4.38(typescript@5.5.4))':
     dependencies:
       '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 10.11.1
-      '@vueuse/shared': 10.11.1(vue@3.4.38(typescript@5.5.4))
+      '@vueuse/metadata': 11.0.3
+      '@vueuse/shared': 11.0.3(vue@3.4.38(typescript@5.5.4))
       vue-demi: 0.14.10(vue@3.4.38(typescript@5.5.4))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@10.11.1(focus-trap@7.5.4)(vue@3.4.38(typescript@5.5.4))':
+  '@vueuse/integrations@11.0.3(focus-trap@7.5.4)(vue@3.4.38(typescript@5.5.4))':
     dependencies:
-      '@vueuse/core': 10.11.1(vue@3.4.38(typescript@5.5.4))
-      '@vueuse/shared': 10.11.1(vue@3.4.38(typescript@5.5.4))
+      '@vueuse/core': 11.0.3(vue@3.4.38(typescript@5.5.4))
+      '@vueuse/shared': 11.0.3(vue@3.4.38(typescript@5.5.4))
       vue-demi: 0.14.10(vue@3.4.38(typescript@5.5.4))
     optionalDependencies:
       focus-trap: 7.5.4
@@ -5644,9 +5644,9 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/metadata@10.11.1': {}
+  '@vueuse/metadata@11.0.3': {}
 
-  '@vueuse/shared@10.11.1(vue@3.4.38(typescript@5.5.4))':
+  '@vueuse/shared@11.0.3(vue@3.4.38(typescript@5.5.4))':
     dependencies:
       vue-demi: 0.14.10(vue@3.4.38(typescript@5.5.4))
     transitivePeerDependencies:
@@ -7123,7 +7123,7 @@ snapshots:
       '@types/node': 12.20.55
       fsevents: 2.3.3
 
-  vitepress@1.3.2(@algolia/client-search@4.24.0)(@types/node@12.20.55)(postcss@8.4.41)(react@18.3.1)(search-insights@2.16.3)(typescript@5.5.4):
+  vitepress@1.3.4(@algolia/client-search@4.24.0)(@types/node@12.20.55)(postcss@8.4.41)(react@18.3.1)(search-insights@2.16.3)(typescript@5.5.4):
     dependencies:
       '@docsearch/css': 3.6.1
       '@docsearch/js': 3.6.1(@algolia/client-search@4.24.0)(react@18.3.1)(search-insights@2.16.3)
@@ -7133,8 +7133,8 @@ snapshots:
       '@vitejs/plugin-vue': 5.1.2(vite@5.4.1(@types/node@12.20.55))(vue@3.4.38(typescript@5.5.4))
       '@vue/devtools-api': 7.3.8
       '@vue/shared': 3.4.38
-      '@vueuse/core': 10.11.1(vue@3.4.38(typescript@5.5.4))
-      '@vueuse/integrations': 10.11.1(focus-trap@7.5.4)(vue@3.4.38(typescript@5.5.4))
+      '@vueuse/core': 11.0.3(vue@3.4.38(typescript@5.5.4))
+      '@vueuse/integrations': 11.0.3(focus-trap@7.5.4)(vue@3.4.38(typescript@5.5.4))
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 7.1.0

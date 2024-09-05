@@ -20,9 +20,9 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 ## 기능
 
-- **Fetch API의 확장**: Fetch API에서 더 풍부한 기능을 제공해요. Instance, Interceptor, Effect 등의 기능을 통해 복잡한 설정을 최소화하고 유연한 HTTP 통신을 구현할 수 있어요.
-- **다양한 환경 지원**: 다양한 환경에서 손쉽게 사용할 수 있도록 설계되었어요. Query Fetch를 단순히 어댑터처럼 활용하여, Next.js, React Native, Tauri와 같이 특수한 Fetch API 환경에서도 완벽히 동작해요.
-- **강력한 타입 세이프**: TypeScript를 100% 지원하며, 정확한 타입추론을 위해 필요한 타입만을 요구해요. 덕분에 불필요한 타입을 최소화하고 강력하게 타입 안정성을 보장해요.
+- **🧰 Fetch API의 확장**: Fetch API에서 더 풍부한 기능을 제공해요. Instance, Interceptor, Effect 등의 기능을 통해 복잡한 설정을 최소화하고 유연한 HTTP 통신을 구현할 수 있어요.
+- **🧩 다양한 환경 지원**: 다양한 환경에서 손쉽게 사용할 수 있도록 설계되었어요. Query Fetch를 단순히 어댑터처럼 활용하여, Next.js, React Native, Tauri와 같이 특수한 Fetch API 환경에서도 완벽히 동작해요.
+- **✨ 강력한 타입 세이프**: TypeScript를 100% 지원하며, 정확한 타입추론을 위해 필요한 타입만을 요구해요. 덕분에 불필요한 타입을 최소화하고 강력하게 타입 안정성을 보장해요.
 
 ## Packages
 
@@ -33,7 +33,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 - queryFetch
 - createQueryFetch
 - queryOptions
-- migration utils for Axios, Fetch API
+- migration utils for other fetch packages..
 
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
 
@@ -56,7 +56,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 ## 공식 문서
 
-[공식 문서](https://offlegacy.org/)에 방문하시면 설치, 사용 방법 등 더 자세한 정보를 확인할 수 있어요.
+[공식 문서](https://query-fecth.offlegacy.org)에 방문하시면 설치, 사용 방법 등 더 자세한 정보를 확인할 수 있어요.
 
 ## 기여하기
 

@@ -20,9 +20,9 @@ To overcome these limitations, Query Fetch was developed. As the name suggests, 
 
 ## Features
 
-- **Extension of Fetch API**: Provides richer functionality than Fetch API. With features like Instance, Interceptor, and Effect, it minimizes complex configurations and enables flexible HTTP communication.
-- **Support for Various Environments**: Designed for easy use in various environments. Query Fetch works seamlessly in specialized Fetch API environments like Next.js, React Native, and Tauri by simply being used as an adapter.
-- **Strong Type Safety**: Fully supports TypeScript and requires only the necessary types for precise type inference. This minimizes unnecessary types and ensures robust type safety.
+- **🧰 Extension of Fetch API**: Provides richer functionality than Fetch API. With features like Instance, Interceptor, and Effect, it minimizes complex configurations and enables flexible HTTP communication.
+- **🧩 Support for Various Environments**: Designed for easy use in various environments. Query Fetch works seamlessly in specialized Fetch API environments like Next.js, React Native, and Tauri by simply being used as an adapter.
+- **✨ Strong Type Safety**: Fully supports TypeScript and requires only the necessary types for precise type inference. This minimizes unnecessary types and ensures robust type safety.
 
 ## Packages
 
@@ -33,7 +33,7 @@ To overcome these limitations, Query Fetch was developed. As the name suggests, 
 - queryFetch
 - createQueryFetch
 - queryOptions
-- migration utils for Axios, Fetch API
+- migration utils for other fetch packages..
 
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Freact-query?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/react-query)
 
@@ -56,7 +56,7 @@ To overcome these limitations, Query Fetch was developed. As the name suggests, 
 
 ## Official Documentation
 
-Visit the [official documentation](https://offlegacy.org/) for detailed information on installation, usage, and more.
+Visit the [official documentation](https://query-fecth.offlegacy.org) for detailed information on installation, usage, and more.
 
 ## Contributing
 

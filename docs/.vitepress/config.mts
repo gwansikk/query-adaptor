@@ -2,28 +2,26 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: '🔗 chain',
-  description: 'Lightweight and Easy-to-Use Fetch API Extension Library',
+  title: '🔗 Query Fetch',
+  description: 'Powerful and flexible Fetch API Adaptor Library',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/markdown-examples' },
+      { text: 'Docs', link: '/what-is-query-fetch' },
     ],
-
     sidebar: [
       {
         text: 'Introduction',
-        items: [{ text: 'Markdown Examples', link: '/markdown-examples' }],
+        items: [{ text: 'What is Query Fetch?', link: '/what-is-query-fetch' }],
       },
     ],
-
     socialLinks: [
       {
         icon: 'npm',
-        link: 'https://www.npmjs.com/package/@gwansikk/server-chain',
+        link: 'https://www.npmjs.com/package/@query-fetch/core',
       },
-      { icon: 'github', link: 'https://github.com/gwansikk/chain' },
+      { icon: 'github', link: 'https://github.com/gwansikk/query-fetch' },
     ],
   },
 });

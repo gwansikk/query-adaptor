@@ -4,24 +4,24 @@ layout: home
 
 hero:
   name: '🔗 Query Fetch'
-  text: 'Extension Library for Fetch API'
-  tagline: Lightweight and Easy-to-Use Fetch API Extension Library.
+  text: 'Powerful and flexible Fetch API Adaptor'
+  tagline: 'Use the Fetch API easily and declaratively!'
   actions:
     - theme: brand
       text: Get Started
-      link: /markdown-examples
+      link: /what-is-query-fetch
     - theme: alt
       text: View on GitHub
-      link: https://github.com/gwansikk/chain
+      link: https://github.com/gwansikk/query-fetch
 
 features:
-  - icon: ⚡️
-    title: Lightweight
-    details: 작고 가벼운 라이브러리입니다. 필요한 기능만 제공합니다.
+  - icon: 🧰
+    title: Extension of Fetch API
+    details: Provides richer functionality than Fetch API. With features like Instance, Interceptor, and Effect, it minimizes complex configurations and enables flexible HTTP communication.
+  - icon: 🧩
+    title: Support for Various Environments
+    details: Designed for easy use in various environments. Query Fetch works seamlessly in specialized Fetch API environments like Next.js, React Native, and Tauri by simply being used as an adapter.
   - icon: ✨
-    title: Zero Dependency
-    details: 단순히 Fetch API를 확장한 것입니다. 그게 전부입니다.
-  - icon: 📦
-    title: Easy to Use
-    details: 필요한 기능이 준비되어 있습니다. 사용법도 간단합니다.
+    title: Strong Type Safety
+    details: Fully supports TypeScript and requires only the necessary types for precise type inference. This minimizes unnecessary types and ensures robust type safety.
 ---
