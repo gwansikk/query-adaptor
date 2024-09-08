@@ -15,6 +15,32 @@ export default defineConfig({
         text: 'Introduction',
         items: [{ text: 'What is Query Fetch?', link: '/what-is-query-fetch' }],
       },
+      {
+        text: 'APIs',
+        items: [
+          {
+            text: 'queryFetch',
+            link: '/query-fetch',
+          },
+          {
+            text: 'createQueryFetch',
+            link: '/create-query-fetch',
+          },
+          {
+            text: 'fetchOptions',
+            link: '/fetch-options',
+          },
+        ],
+      },
+      {
+        text: 'Framework Guides',
+        items: [
+          { text: 'React Query' },
+          { text: 'NEXT.js' },
+          { text: 'React Native' },
+          { text: 'Tauri' },
+        ],
+      },
     ],
     socialLinks: [
       {
