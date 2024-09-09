@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: '🔗 Query Fetch'
+  name: '🔌🌐 Query Fetch'
   text: 'Powerful and flexible Fetch API Adaptor'
   tagline: 'Use the Fetch API easily and declaratively!'
   actions:

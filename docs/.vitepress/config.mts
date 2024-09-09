@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: '🔗 Query Fetch',
+  title: '🔌🌐 Query Fetch',
   description: 'Powerful and flexible Fetch API Adaptor Library',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -49,5 +49,8 @@ export default defineConfig({
       },
       { icon: 'github', link: 'https://github.com/gwansikk/query-fetch' },
     ],
+    footer: {
+      copyright: 'MIT © gwansikk',
+    },
   },
 });
