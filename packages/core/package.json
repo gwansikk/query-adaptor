@@ -42,7 +42,9 @@
     "test:watch": "vitest --coverage",
     "check-types": "tsc --noEmit --skipLibCheck"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@query-fetch/utils": "workspace:*"
+  },
   "publishConfig": {
     "access": "public"
   }

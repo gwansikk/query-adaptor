@@ -1,4 +1,5 @@
 import { createQueryFetch } from './createQueryFetch';
+import { BASE_URL } from '@query-fetch/utils';
 
 type TResponseData = {
   id: number;
@@ -8,7 +9,7 @@ type TResponseData = {
 };
 
 const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: BASE_URL,
 });
 
 describe('createQueryFetch', () => {
@@ -22,8 +23,8 @@ describe('createQueryFetch', () => {
     expect(data).toEqual({
       userId: 1,
       id: 1,
-      title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-      body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+      title: 'title',
+      body: 'body',
     });
   });
 
@@ -47,9 +48,9 @@ describe('createQueryFetch', () => {
     expect(data[0]).toEqual({
       postId: 1,
       id: 1,
-      name: 'id labore ex et quam laborum',
-      email: 'Eliseo@gardner.biz',
-      body: 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
+      name: 'name',
+      email: 'email',
+      body: 'body',
     });
   });
 
@@ -63,14 +64,16 @@ describe('createQueryFetch', () => {
     const data = await queryFetch.post<object, TRequestData>({
       endpoint: ['posts', 1],
       body: {
-        title: 'foo',
-        body: 'bar',
+        title: 'title',
+        body: 'body',
         userId: 1,
       },
     });
 
     expectTypeOf(data).toEqualTypeOf<object>();
-    expect(data).toEqual({});
+    expect(data).toEqual({
+      id: 1,
+    });
   });
 
   it('should handle PATCH requests', async () => {
@@ -81,15 +84,15 @@ describe('createQueryFetch', () => {
     const data = await queryFetch.patch<TResponseData, TRequestData>({
       endpoint: ['posts', 1],
       body: {
-        title: 'foo',
+        title: 'title',
       },
     });
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({
       id: 1,
-      title: 'foo',
-      body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+      title: 'title',
+      body: 'body',
       userId: 1,
     });
   });
@@ -99,8 +102,8 @@ describe('createQueryFetch', () => {
       endpoint: ['posts', 1],
       body: {
         id: 1,
-        title: 'foo',
-        body: 'bar',
+        title: 'title',
+        body: 'body',
         userId: 1,
       },
     });
@@ -108,16 +111,22 @@ describe('createQueryFetch', () => {
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({
       id: 1,
-      title: 'foo',
-      body: 'bar',
+      title: 'title',
+      body: 'body',
       userId: 1,
     });
   });
 
   it('should handle DELETE requests', async () => {
-    const data = await queryFetch.delete({ endpoint: ['post', 1] });
+    type TResponseData = {
+      id: number;
+    };
 
-    expectTypeOf(data).toEqualTypeOf<unknown>();
-    expect(data).toEqual({});
+    const data = await queryFetch.delete<TResponseData>({ endpoint: ['post', 1] });
+
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expect(data).toEqual({
+      id: 1,
+    });
   });
 });

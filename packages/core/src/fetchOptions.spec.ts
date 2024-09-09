@@ -1,5 +1,6 @@
 import { createQueryFetch } from './createQueryFetch';
 import { fetchOptions } from './fetchOptions';
+import { BASE_URL } from '@query-fetch/utils';
 
 type TResponseData = {
   id: number;
@@ -9,7 +10,7 @@ type TResponseData = {
 };
 
 const queryFetch = createQueryFetch({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: BASE_URL,
 });
 
 function postsFetchOptions(id: number) {
@@ -26,8 +27,8 @@ describe('fetchOptions', () => {
     expect(data).toEqual({
       userId: 1,
       id: 1,
-      title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-      body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+      title: 'title',
+      body: 'body',
     });
   });
 
@@ -41,13 +42,15 @@ describe('fetchOptions', () => {
     const data = await queryFetch.post<TResponseData, TRequestData>({
       ...postsFetchOptions(1),
       body: {
-        title: 'foo',
-        body: 'bar',
+        title: 'title',
+        body: 'body',
         userId: 1,
       },
     });
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
-    expect(data).toEqual({});
+    expect(data).toEqual({
+      id: 1,
+    });
   });
 });
