@@ -48,8 +48,8 @@ export type CreateQueryFetch = {
 /**
  * Creates a QueryFetch instance.
  *
- * @param createQueryFetchOptions - The options for createQueryFetch.
- * @returns The QueryFetch instance.
+ * @param options - The options for createQueryFetch.
+ * @see {@link https://query-fecth.offlegacy.org/create-query-fetch}
  */
 export function createQueryFetch(
   createQueryFetchOptions: CreateQueryFetchOptions

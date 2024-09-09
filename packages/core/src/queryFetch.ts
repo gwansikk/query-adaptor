@@ -38,6 +38,9 @@ export type FetchAdaptor<TData> = (
   request: TRequestOptions
 ) => Promise<TResponseData<TData>>;
 
+/**
+ * @see {@link https://query-fecth.offlegacy.org/query-fetch}
+ */
 export const queryFetch: QueryFetch = {
   async request<TData, TBodyData>(
     { method, endpoint, queryParameter, body, options }: TFetchOptionsWithMethod<TBodyData>,
