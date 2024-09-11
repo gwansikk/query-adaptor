@@ -7,7 +7,7 @@ function createPath(...path: string[]): string {
 }
 
 export const handlers = [
-  http.get(createPath('posts', ':id'), async ({ params }) => {
+  http.get(createPath('posts', ':id'), ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
@@ -18,47 +18,47 @@ export const handlers = [
     });
   }),
   http.get(createPath('comments'), async ({ request }) => {
-    const url = new URL(request.url);
-    const postId = url.searchParams.get('postId');
+    const postId = new URL(request.url).searchParams.get('postId');
 
     return HttpResponse.json([
       {
         postId: Number(postId),
-        id: 1,
+        id: Number(postId),
         name: 'name',
         email: 'email',
         body: 'body',
       },
     ]);
   }),
-  http.post(createPath('posts', ':id'), async ({ params }) => {
+  http.post(createPath('posts', ':id'), ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
       id: Number(id),
     });
   }),
-  http.patch(createPath('posts', ':id'), async ({ params }) => {
+  http.patch(createPath('posts', ':id'), async ({ request, params }) => {
     const { id } = params;
+    const requestBody = await request.json();
 
     return HttpResponse.json({
+      ...(requestBody as object),
       id: Number(id),
-      title: 'title',
       body: 'body',
-      userId: 1,
+      userId: Number(id),
     });
   }),
-  http.put(createPath('posts', ':id'), async ({ params }) => {
+  http.put(createPath('posts', ':id'), async ({ request, params }) => {
     const { id } = params;
+    const requestBody = await request.json();
 
     return HttpResponse.json({
+      ...(requestBody as object),
       id: Number(id),
-      title: 'title',
-      body: 'body',
-      userId: 1,
+      userId: Number(id),
     });
   }),
-  http.delete(createPath('post', ':id'), async ({ params }) => {
+  http.delete(createPath('post', ':id'), ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
