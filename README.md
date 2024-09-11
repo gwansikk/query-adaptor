@@ -56,7 +56,7 @@ To overcome these limitations, Query Fetch was developed. As the name suggests, 
 
 ## Official Documentation
 
-Visit the [official documentation](https://query-fecth.offlegacy.org) for detailed information on installation, usage, and more.
+Visit the [official documentation](https://query-fetch.gwansik.dev) for detailed information on installation, usage, and more.
 
 ## Contributing
 
