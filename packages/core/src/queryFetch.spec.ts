@@ -12,7 +12,6 @@ describe('createQueryFetch', () => {
   it('should handle GET requests', async () => {
     const data = await queryFetch.get<TResponseData>({
       endpoint: [BASE_URL, 'posts', 1],
-      body: undefined,
     });
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();

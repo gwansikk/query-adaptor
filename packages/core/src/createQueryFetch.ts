@@ -1,15 +1,26 @@
 import { queryFetch } from './queryFetch';
 import type {
   TInterceptor,
-  TResponseData,
   TRequestInterceptor,
   TRequestOptions,
   TFetchOptions,
   TFetchOptionsWithMethod,
 } from './types';
-import { createBaseURL } from './utils';
 
-export type CreateQueryFetchOptions = {
+export interface CreateQueryFetch {
+  setHeaders: (newHeaders: HeadersInit) => void;
+  setRequestInterceptor: (interceptor: TRequestInterceptor) => void;
+  setResponseInterceptor: (interceptor: TInterceptor<Response>) => void;
+  setErrorInterceptor: (interceptor: TInterceptor<Response>) => void;
+  request: <TData, TBodyData>(options: TFetchOptionsWithMethod<TBodyData>) => Promise<TData>;
+  get: <TData, TBodyData = never>(options: TFetchOptions<TBodyData>) => Promise<TData>;
+  post: <TData, TBodyData = TData>(options: TFetchOptions<TBodyData>) => Promise<TData>;
+  patch: <TData, TBodyData = TData>(options: TFetchOptions<TBodyData>) => Promise<TData>;
+  put: <TData, TBodyData = TData>(options: TFetchOptions<TBodyData>) => Promise<TData>;
+  delete: <TData, TBodyData = TData>(options: TFetchOptions<TBodyData>) => Promise<TData>;
+}
+
+export interface CreateQueryFetchOptions {
   baseURL: string;
   headers?: HeadersInit;
   options?: TRequestOptions;
@@ -18,51 +29,24 @@ export type CreateQueryFetchOptions = {
     response?: TInterceptor;
     error?: TInterceptor;
   };
-};
-
-export type CreateQueryFetch = {
-  setHeaders: (newHeaders: HeadersInit) => void;
-  setRequestInterceptor: (interceptor: TRequestInterceptor) => void;
-  setResponseInterceptor: (interceptor: TInterceptor<Response>) => void;
-  setErrorInterceptor: (interceptor: TInterceptor<Response>) => void;
-  request: <TData, TBodyData>(
-    options: TFetchOptionsWithMethod<TBodyData>
-  ) => Promise<TResponseData<TData>>;
-  get: <TData, TBodyData = never>(
-    options: TFetchOptions<TBodyData>
-  ) => Promise<TResponseData<TData>>;
-  post: <TData, TBodyData = TData>(
-    options: TFetchOptions<TBodyData>
-  ) => Promise<TResponseData<TData>>;
-  patch: <TData, TBodyData = TData>(
-    options: TFetchOptions<TBodyData>
-  ) => Promise<TResponseData<TData>>;
-  put: <TData, TBodyData = TData>(
-    options: TFetchOptions<TBodyData>
-  ) => Promise<TResponseData<TData>>;
-  delete: <TData, TBodyData = TData>(
-    options: TFetchOptions<TBodyData>
-  ) => Promise<TResponseData<TData>>;
-};
+}
 
 /**
  * Creates a QueryFetch instance.
  *
- * @param options - The options for createQueryFetch.
+ * @param createQueryFetchOptions - The options for createQueryFetch.
  * @see {@link https://query-fecth.offlegacy.org/create-query-fetch}
  */
 export function createQueryFetch(
   createQueryFetchOptions: CreateQueryFetchOptions
 ): CreateQueryFetch {
-  const _baseURL = createBaseURL(createQueryFetchOptions.baseURL);
+  const _baseURL: URL = new URL(createQueryFetchOptions.baseURL);
   const _options = createQueryFetchOptions.options ?? {};
   const _interceptors = createQueryFetchOptions.interceptors ?? {};
   let _headers = createQueryFetchOptions.headers ?? {};
 
-  async function _fetchFn<TData>(
-    path: string,
-    request: TRequestOptions
-  ): Promise<TResponseData<TData>> {
+  async function _fetchFn<TData>(path: string, request: TRequestOptions): Promise<TData> {
+    const url: URL = new URL(path, _baseURL);
     request.headers = Object.assign(_headers, request.headers);
 
     if (_interceptors.request) {
@@ -70,7 +54,7 @@ export function createQueryFetch(
       request = Object.assign(request, newRequest);
     }
 
-    const response = await fetch(`${_baseURL}/${path}`, Object.assign(_options, request));
+    const response = await fetch(url, Object.assign(_options, request));
 
     if (response.status >= 400) {
       if (_interceptors.error) {
@@ -80,8 +64,8 @@ export function createQueryFetch(
     }
 
     if (_interceptors.response) {
-      const modifiedResponse = await Promise.resolve(_interceptors.response(response, request));
-      return await modifiedResponse.json();
+      const newResponse = await Promise.resolve(_interceptors.response(response, request));
+      return await newResponse.json();
     }
 
     return await response.json();
@@ -90,7 +74,7 @@ export function createQueryFetch(
   async function request<TData, TBodyData>({
     options,
     ...rest
-  }: TFetchOptionsWithMethod<TBodyData>): Promise<TResponseData<TData>> {
+  }: TFetchOptionsWithMethod<TBodyData>): Promise<TData> {
     return await queryFetch.request(
       Object.assign(Object.assign(_headers, options), rest),
       _fetchFn<TData>
@@ -113,41 +97,31 @@ export function createQueryFetch(
     _interceptors.error = interceptor;
   }
 
-  function get<TData, TBodyData>(
-    fetchOptions: TFetchOptions<TBodyData>
-  ): Promise<TResponseData<TData>> {
+  function get<TData, TBodyData>(fetchOptions: TFetchOptions<TBodyData>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.get(fetchOptions, _fetchFn<TData>);
   }
 
-  function post<TData, TBodyData>(
-    fetchOptions: TFetchOptions<TBodyData>
-  ): Promise<TResponseData<TData>> {
+  function post<TData, TBodyData>(fetchOptions: TFetchOptions<TBodyData>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.post(fetchOptions, _fetchFn<TData>);
   }
 
-  function patch<TData, TBodyData>(
-    fetchOptions: TFetchOptions<TBodyData>
-  ): Promise<TResponseData<TData>> {
+  function patch<TData, TBodyData>(fetchOptions: TFetchOptions<TBodyData>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.patch(fetchOptions, _fetchFn<TData>);
   }
 
-  function put<TData, TBodyData>(
-    fetchOptions: TFetchOptions<TBodyData>
-  ): Promise<TResponseData<TData>> {
+  function put<TData, TBodyData>(fetchOptions: TFetchOptions<TBodyData>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.put(fetchOptions, _fetchFn<TData>);
   }
 
-  function del<TData, TBodyData>(
-    fetchOptions: TFetchOptions<TBodyData>
-  ): Promise<TResponseData<TData>> {
+  function del<TData, TBodyData>(fetchOptions: TFetchOptions<TBodyData>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.delete(fetchOptions, _fetchFn<TData>);

@@ -1,35 +1,27 @@
-export type THTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-
-export type TEndpoint = Array<string | number> | string;
-
-export type TQueryParameter<TValue = unknown> = Record<string, TValue>;
-
-export type TDefaultBodyData<TValue = unknown> = Record<string, TValue>;
+export type TMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type TDefaultData<TValue = unknown> = Record<string, TValue>;
 
-export type TRequestOptions = Omit<RequestInit, 'method'> & {
-  method?: THTTPMethod;
+export type TRequestOptions = RequestInit & {
+  method?: TMethod;
 };
 
-export type TFetchOptions<TBodyData = TDefaultBodyData> = {
-  endpoint: TEndpoint;
+export type TFetchOptions<TBodyData = TDefaultData, TQueryParameter = TDefaultData> = {
+  endpoint: Array<string | number> | string;
   queryParameter?: TQueryParameter;
-  options?: TRequestOptions;
   body?: TBodyData;
+  options?: TRequestOptions;
 };
 
 export type TFetchOptionsWithMethod<TBodyData> = TFetchOptions<TBodyData> & {
-  method: THTTPMethod;
+  method: TMethod;
 };
-
-export type TResponseData<TData = TDefaultData> = TData;
 
 export type TInterceptor<TResponse = Response, TRequest = TRequestOptions> = (
   response: TResponse,
   request: TRequest
 ) => TResponse | Promise<TResponse>;
 
-export type TRequestInterceptor = (
-  request: TRequestOptions
-) => TRequestOptions | Promise<TRequestOptions>;
+export type TRequestInterceptor = (request: TRequestOptions) => Promise<TRequestOptions>;
+
+export type TFetchAdaptor<TData> = (path: string, options: TRequestOptions) => Promise<TData>;
