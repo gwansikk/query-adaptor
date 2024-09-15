@@ -1,7 +1,7 @@
 {
   "name": "query-fetch",
   "private": true,
-  "packageManager": "pnpm@9.7.1",
+  "packageManager": "pnpm@9.10.0",
   "homepage": "https://github.com/gwansikk/query-fetch",
   "bugs": "https://github.com/gwansikk/query-fetch/issues",
   "repository": {
@@ -37,7 +37,7 @@
     "lint-staged": "^15.2.9",
     "prettier": "^3.1.1",
     "tsup": "^8.2.4",
-    "turbo": "^2.0.14",
+    "turbo": "^2.1.2",
     "typescript": "^5.3.3",
     "vite": "^5.4.1",
     "vitest": "^2.0.5"
