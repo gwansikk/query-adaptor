@@ -8,12 +8,12 @@ The `fetchOptions` function is an experimental feature that helps configure opti
 
 ## Parameters
 
-- `options`: An object of type `TFetchOptions<TBodyData>` that contains the configuration for the fetch request.
+- `options`: An object of type `TFetchOptions<TBody>` that contains the configuration for the fetch request.
   - `endpoint`: An array of strings that define the endpoint URL.
 
 ## Returns
 
-- A `TFetchOptions<TBodyData>` object containing the configured options.
+- A `TFetchOptions<TBody>` object containing the configured options.
 
 ### Example
 
