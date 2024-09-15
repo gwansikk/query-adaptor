@@ -1,36 +1,50 @@
-import { fetchOptions } from '@query-fetch/core';
+import { type TFetchOptions } from '@query-fetch/core';
 import type { ElementTypeof } from './types';
+import { QueryKey } from '@tanstack/react-query';
 
-export type TQueryFetchKey =
-  | ElementTypeof<Parameters<typeof fetchOptions>[0]['endpoint']>
-  | Parameters<typeof fetchOptions>[0]['queryParameter'];
+export interface TQueryFetchKeyOptions<TBody, TQueryParameter, TEndpoint>
+  extends TFetchOptions<TBody, TQueryParameter, TEndpoint> {
+  queryKey?: Array<unknown>;
+}
+
+type TQueryFetchKey<TBody, TQueryParameter, TEndpoint> =
+  | ElementTypeof<TFetchOptions<TBody, TQueryParameter, TEndpoint>['endpoint']>
+  | TFetchOptions<TBody, TQueryParameter, TEndpoint>['queryParameter'];
 
 /**
  * You can inject a Fetch Query into the `queryFn` of `useQuery`
  *
  * @experimental This is experimental feature.
  */
-export function queryFetchKey<TBodyData>(
-  options: Parameters<typeof fetchOptions<TBodyData>>[0],
-  additionalKey?: TQueryFetchKey[]
-): TQueryFetchKey[] {
-  const key: TQueryFetchKey[] = [...options.endpoint];
+export function queryFetchKey<TBody, TEndpoint extends QueryKey, TQueryParameter>({
+  endpoint,
+  queryParameter,
+  queryKey,
+}: TQueryFetchKeyOptions<TBody, TEndpoint, TQueryParameter>): QueryKey {
+  const key = [...endpoint];
 
-  if (additionalKey) {
-    key.push(...additionalKey);
+  if (queryKey) {
+    key.push(...queryKey);
   }
 
-  if (options.queryParameter) {
-    const filteredObject: Record<string, TQueryFetchKey> = {};
+  if (queryParameter) {
+    const queryKeyFormQueryParameter: Record<
+      string,
+      TQueryFetchKey<TBody, TQueryParameter, TEndpoint>
+    > = {};
 
-    Object.entries(options.queryParameter).forEach(([param, value]) => {
+    Object.entries(queryParameter).forEach(([param, value]) => {
       if (value !== undefined) {
-        filteredObject[param] = value as TQueryFetchKey;
+        queryKeyFormQueryParameter[param] = value as TQueryFetchKey<
+          TBody,
+          TQueryParameter,
+          TEndpoint
+        >;
       }
     });
 
-    if (Object.keys(filteredObject).length > 0) {
-      key.push(filteredObject);
+    if (Object.keys(queryKeyFormQueryParameter).length > 0) {
+      key.push(queryKeyFormQueryParameter);
     }
   }
 

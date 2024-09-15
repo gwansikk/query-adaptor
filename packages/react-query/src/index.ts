@@ -1,3 +1,3 @@
 export { queryFetchKey } from './queryFetchKey';
-export type { TQueryFetchKey } from './queryFetchKey';
+export type { TQueryFetchKeyOptions } from './queryFetchKey';
 export { queryFetchFn } from './queryFetchFn';
