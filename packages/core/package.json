@@ -14,7 +14,7 @@
     "url": "git+https://github.com/gwansikk/query-fetch.git"
   },
   "license": "MIT",
-  "author": "GwanSik Kim <Seorit98@gmail.com>",
+  "author": "Gwansik Kim <gwansik.kim@gwansik.dev>",
   "type": "module",
   "exports": {
     ".": {
