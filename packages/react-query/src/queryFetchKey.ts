@@ -6,6 +6,8 @@ export type TQueryFetchKey =
   | Parameters<typeof fetchOptions>[0]['queryParameter'];
 
 /**
+ * You can inject a Fetch Query into the `queryFn` of `useQuery`
+ *
  * @experimental This is experimental feature.
  */
 export function queryFetchKey<TBodyData>(

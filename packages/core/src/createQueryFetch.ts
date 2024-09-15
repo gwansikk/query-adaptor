@@ -32,10 +32,9 @@ export interface CreateQueryFetchOptions {
 }
 
 /**
- * Creates a QueryFetch instance.
+ * Creates a QueryFetch instance
  *
- * @param createQueryFetchOptions - The options for createQueryFetch.
- * @see {@link https://query-fecth.offlegacy.org/create-query-fetch}
+ * @see {@link https://query-fetch.gwansik.dev/create-query-fetch}
  */
 export function createQueryFetch(
   createQueryFetchOptions: CreateQueryFetchOptions

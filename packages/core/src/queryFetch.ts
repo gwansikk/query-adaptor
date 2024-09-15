@@ -34,7 +34,9 @@ export interface QueryFetch {
 }
 
 /**
- * @see {@link https://query-fecth.offlegacy.org/query-fetch}
+ * Use the Fetch API easily and declaratively
+ *
+ * @see {@link https://query-fetch.gwansik.dev/query-fetch}
  */
 export const queryFetch: QueryFetch = {
   async request<TData, TBodyData>(
