@@ -15,6 +15,7 @@
   },
   "license": "MIT",
   "author": "Gwansik Kim <gwansik.kim@gwansik.dev>",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
