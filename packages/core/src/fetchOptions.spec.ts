@@ -1,6 +1,6 @@
 import { createQueryFetch } from './createQueryFetch';
 import { fetchOptions } from './fetchOptions';
-import { BASE_URL } from '@query-fetch/utils';
+import { MSW_BASE_URL } from '@query-fetch/utils';
 
 type TResponseData = {
   id: number;
@@ -10,18 +10,18 @@ type TResponseData = {
 };
 
 const queryFetch = createQueryFetch({
-  baseURL: BASE_URL,
+  baseURL: MSW_BASE_URL,
 });
 
 function postsFetchOptions(id: number) {
-  return fetchOptions<TResponseData>({
+  return fetchOptions({
     endpoint: ['posts', id],
   });
 }
 
 describe('fetchOptions', () => {
   it('should handle GET requests', async () => {
-    const data = await queryFetch.get<TResponseData, TResponseData>(postsFetchOptions(1));
+    const data = await queryFetch.get<TResponseData>(postsFetchOptions(1));
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({
@@ -39,7 +39,7 @@ describe('fetchOptions', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<TResponseData, TRequestData>({
+    const data = await queryFetch.post<{ id: 1 }, TRequestData>({
       ...postsFetchOptions(1),
       body: {
         title: 'title',
@@ -48,7 +48,7 @@ describe('fetchOptions', () => {
       },
     });
 
-    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expectTypeOf(data).toEqualTypeOf<{ id: 1 }>();
     expect(data).toEqual({
       id: 1,
     });

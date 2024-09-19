@@ -1,2 +1,2 @@
 export { server } from './server';
-export { BASE_URL } from './handlers';
+export { MSW_BASE_URL, MSW_END_POINT } from './handlers';

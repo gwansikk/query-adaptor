@@ -1,5 +1,5 @@
+import { MSW_BASE_URL } from '@query-fetch/utils';
 import { createQueryFetch } from './createQueryFetch';
-import { BASE_URL } from '@query-fetch/utils';
 
 type TResponseData = {
   id: number;
@@ -9,14 +9,13 @@ type TResponseData = {
 };
 
 const queryFetch = createQueryFetch({
-  baseURL: BASE_URL,
+  baseURL: MSW_BASE_URL,
 });
 
 describe('createQueryFetch', () => {
   it('should handle GET requests', async () => {
     const data = await queryFetch.get<TResponseData>({
       endpoint: ['posts', 1],
-      body: undefined,
     });
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
@@ -61,7 +60,7 @@ describe('createQueryFetch', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<object, TRequestData>({
+    const data = await queryFetch.post<{ id: 1 }, TRequestData>({
       endpoint: ['posts', 1],
       body: {
         title: 'title',
@@ -70,18 +69,14 @@ describe('createQueryFetch', () => {
       },
     });
 
-    expectTypeOf(data).toEqualTypeOf<object>();
+    expectTypeOf(data).toEqualTypeOf<{ id: 1 }>();
     expect(data).toEqual({
       id: 1,
     });
   });
 
   it('should handle PATCH requests', async () => {
-    type TRequestData = {
-      title: string;
-    };
-
-    const data = await queryFetch.patch<TResponseData, TRequestData>({
+    const data = await queryFetch.patch<TResponseData, { title: string }>({
       endpoint: ['posts', 1],
       body: {
         title: 'title',
@@ -118,13 +113,9 @@ describe('createQueryFetch', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    type TResponseData = {
-      id: number;
-    };
+    const data = await queryFetch.delete<{ id: number }>({ endpoint: ['posts', 1] });
 
-    const data = await queryFetch.delete<TResponseData>({ endpoint: ['post', 1] });
-
-    expectTypeOf(data).toEqualTypeOf<TResponseData>();
+    expectTypeOf(data).toEqualTypeOf<{ id: number }>();
     expect(data).toEqual({
       id: 1,
     });

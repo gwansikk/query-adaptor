@@ -1,13 +1,11 @@
 import { http, HttpResponse } from 'msw';
 
-export const BASE_URL = 'http://localhost:8585';
+export const MSW_BASE_URL = 'http://localhost:8585';
 
-function createPath(...path: string[]): string {
-  return [BASE_URL, ...path].join('/');
-}
+export const MSW_END_POINT = (...path: Array<string | number>) => [MSW_BASE_URL, ...path].join('/');
 
 export const handlers = [
-  http.get(createPath('posts', ':id'), ({ params }) => {
+  http.get(MSW_END_POINT('posts', ':id'), ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
@@ -17,7 +15,7 @@ export const handlers = [
       body: 'body',
     });
   }),
-  http.get(createPath('comments'), async ({ request }) => {
+  http.get(MSW_END_POINT('comments'), async ({ request }) => {
     const postId = new URL(request.url).searchParams.get('postId');
 
     return HttpResponse.json([
@@ -30,14 +28,14 @@ export const handlers = [
       },
     ]);
   }),
-  http.post(createPath('posts', ':id'), ({ params }) => {
+  http.post(MSW_END_POINT('posts', ':id'), ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
       id: Number(id),
     });
   }),
-  http.patch(createPath('posts', ':id'), async ({ request, params }) => {
+  http.patch(MSW_END_POINT('posts', ':id'), async ({ request, params }) => {
     const { id } = params;
     const requestBody = await request.json();
 
@@ -48,7 +46,7 @@ export const handlers = [
       userId: Number(id),
     });
   }),
-  http.put(createPath('posts', ':id'), async ({ request, params }) => {
+  http.put(MSW_END_POINT('posts', ':id'), async ({ request, params }) => {
     const { id } = params;
     const requestBody = await request.json();
 
@@ -58,7 +56,7 @@ export const handlers = [
       userId: Number(id),
     });
   }),
-  http.delete(createPath('post', ':id'), ({ params }) => {
+  http.delete(MSW_END_POINT('posts', ':id'), ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
