@@ -1,6 +1,6 @@
 {
   "name": "@query-fetch/react-query",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Lightweight and Easy-to-Use Fetch API Extension Library for @tanstack/react-query",
   "keywords": [
     "fetch",
