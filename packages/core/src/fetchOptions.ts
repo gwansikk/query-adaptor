@@ -1,19 +1,14 @@
-import type {
-  TDefaultBody,
-  TDefaultEndpoint,
-  TDefaultQueryParameter,
-  TRequestOptions,
-} from './types';
+import type { TEndpoint, TMethod, TQueryParameter, TRequestOptions } from './types';
 
-export interface TFetchOptions<
-  TBody = TDefaultBody,
-  TEndpoint = TDefaultEndpoint,
-  TQueryParameter = TDefaultQueryParameter,
-> {
+export interface TFetchOptions<TBody = never> {
   endpoint: TEndpoint;
   queryParameter?: TQueryParameter;
   body?: TBody;
   options?: TRequestOptions;
+}
+
+export interface TFetchOptionsWithMethod<TBody = never> extends TFetchOptions<TBody> {
+  method: TMethod;
 }
 
 /**
@@ -23,12 +18,6 @@ export interface TFetchOptions<
  * @see {@link https://query-fetch.gwansik.dev/fetch-options}
  * @experimental This is experimental feature.
  */
-export function fetchOptions<
-  TBody = TDefaultBody,
-  TEndpoint = TDefaultEndpoint,
-  TQueryParameter = TDefaultQueryParameter,
->(
-  options: TFetchOptions<TBody, TEndpoint, TQueryParameter>
-): TFetchOptions<TBody, TEndpoint, TQueryParameter> {
+export function fetchOptions<TBody = never>(options: TFetchOptions<TBody>): TFetchOptions<TBody> {
   return options;
 }

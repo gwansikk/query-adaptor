@@ -1,5 +1,5 @@
-import type { TFetchOptions } from './fetchOptions';
-import type { TFetchAdaptor, TFetchOptionsWithMethod, TRequestOptions } from './types';
+import type { TFetchOptions, TFetchOptionsWithMethod } from './fetchOptions';
+import type { TFetchAdaptor, TRequestOptions } from './types';
 import { formatPath, isContentTypeJson } from './utils';
 
 export interface QueryFetch {
@@ -39,7 +39,7 @@ export const queryFetch: QueryFetch = {
     { method, endpoint, queryParameter, body, options }: TFetchOptionsWithMethod<TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
-    let path = formatPath(...endpoint);
+    let path = formatPath(endpoint);
     const isJson = isContentTypeJson(body);
 
     const requestOptions: TRequestOptions = {

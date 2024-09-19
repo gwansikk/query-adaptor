@@ -2,44 +2,36 @@ import { type TFetchOptions } from '@query-fetch/core';
 import type { ElementTypeof } from './types';
 import { QueryKey } from '@tanstack/react-query';
 
-export interface TQueryFetchKeyOptions<TBody, TQueryParameter, TEndpoint>
-  extends TFetchOptions<TBody, TQueryParameter, TEndpoint> {
+type TQueryFetchKey<TBody> =
+  | ElementTypeof<TFetchOptions<TBody>['endpoint']>
+  | TFetchOptions<TBody>['queryParameter'];
+
+export interface TQueryFetchKeyOptions<TBody> extends TFetchOptions<TBody> {
   queryKey?: Array<unknown>;
 }
-
-type TQueryFetchKey<TBody, TQueryParameter, TEndpoint> =
-  | ElementTypeof<TFetchOptions<TBody, TQueryParameter, TEndpoint>['endpoint']>
-  | TFetchOptions<TBody, TQueryParameter, TEndpoint>['queryParameter'];
 
 /**
  * You can inject a Fetch Query into the `queryFn` of `useQuery`
  *
  * @experimental This is experimental feature.
  */
-export function queryFetchKey<TBody, TEndpoint extends QueryKey, TQueryParameter>({
+export function queryFetchKey<TBody>({
   endpoint,
   queryParameter,
   queryKey,
-}: TQueryFetchKeyOptions<TBody, TEndpoint, TQueryParameter>): QueryKey {
-  const key = [...endpoint];
+}: TQueryFetchKeyOptions<TBody>): QueryKey {
+  const key: Array<unknown> = [...endpoint];
 
   if (queryKey) {
     key.push(...queryKey);
   }
 
   if (queryParameter) {
-    const queryKeyFormQueryParameter: Record<
-      string,
-      TQueryFetchKey<TBody, TQueryParameter, TEndpoint>
-    > = {};
+    const queryKeyFormQueryParameter: Record<string, TQueryFetchKey<TBody>> = {};
 
     Object.entries(queryParameter).forEach(([param, value]) => {
       if (value !== undefined) {
-        queryKeyFormQueryParameter[param] = value as TQueryFetchKey<
-          TBody,
-          TQueryParameter,
-          TEndpoint
-        >;
+        queryKeyFormQueryParameter[param] = value as TQueryFetchKey<TBody>;
       }
     });
 

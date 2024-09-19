@@ -1,11 +1,6 @@
-import type { TFetchOptions } from './fetchOptions';
+import type { TFetchOptions, TFetchOptionsWithMethod } from './fetchOptions';
 import { queryFetch } from './queryFetch';
-import type {
-  TInterceptor,
-  TRequestInterceptor,
-  TRequestOptions,
-  TFetchOptionsWithMethod,
-} from './types';
+import type { TInterceptor, TRequestInterceptor, TRequestOptions } from './types';
 
 export interface CreateQueryFetch {
   setHeaders: (newHeaders: HeadersInit) => void;
