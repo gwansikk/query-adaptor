@@ -30,10 +30,9 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 > Query Fetch의 핵심 기능을 제공해요.
 
+- queryOptions
 - queryFetch
 - createQueryFetch
-- queryOptions
-- migration utils for other fetch packages..
 
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
 
@@ -41,18 +40,6 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 - queryFetchKey
 - queryFetchFn
-
-### @query-fetch/nextjs &middot; ![POC](https://img.shields.io/badge/POC-black)
-
-> Query Fetch를 NEXT.js와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
-
-### @query-fetch/react-native &middot; ![POC](https://img.shields.io/badge/POC-black)
-
-> Query Fetch를 React Native와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
-
-### @query-fetch/tauri &middot; ![POC](https://img.shields.io/badge/POC-black)
-
-> Query Fetch를 Tauri와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
 ## 공식 문서
 
