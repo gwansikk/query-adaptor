@@ -1,5 +1,5 @@
-import { MSW_BASE_URL } from '@query-fetch/utils';
-import { createQueryFetch } from './createQueryFetch';
+import { MSW_BASE_URL } from '@query-adaptor/utils';
+import { createQueryAdapter } from './createQueryAdapter';
 
 type TResponseData = {
   id: number;
@@ -8,13 +8,13 @@ type TResponseData = {
   userId: number;
 };
 
-const queryFetch = createQueryFetch({
+const queryAdaptor = createQueryAdapter({
   baseURL: MSW_BASE_URL,
 });
 
-describe('createQueryFetch', () => {
+describe('createQueryAdapter', () => {
   it('should handle GET requests', async () => {
-    const data = await queryFetch.get<TResponseData>({
+    const data = await queryAdaptor.get<TResponseData>({
       endpoint: ['posts', 1],
     });
 
@@ -36,7 +36,7 @@ describe('createQueryFetch', () => {
       body: string;
     };
 
-    const data = await queryFetch.get<TResponseData[]>({
+    const data = await queryAdaptor.get<TResponseData[]>({
       endpoint: ['comments'],
       queryParameter: {
         postId: 1,
@@ -60,7 +60,7 @@ describe('createQueryFetch', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<{ id: 1 }, TRequestData>({
+    const data = await queryAdaptor.post<{ id: 1 }, TRequestData>({
       endpoint: ['posts', 1],
       body: {
         title: 'title',
@@ -76,7 +76,7 @@ describe('createQueryFetch', () => {
   });
 
   it('should handle PATCH requests', async () => {
-    const data = await queryFetch.patch<TResponseData, { title: string }>({
+    const data = await queryAdaptor.patch<TResponseData, { title: string }>({
       endpoint: ['posts', 1],
       body: {
         title: 'title',
@@ -93,7 +93,7 @@ describe('createQueryFetch', () => {
   });
 
   it('should handle PUT requests', async () => {
-    const data = await queryFetch.put<TResponseData>({
+    const data = await queryAdaptor.put<TResponseData>({
       endpoint: ['posts', 1],
       body: {
         id: 1,
@@ -113,7 +113,7 @@ describe('createQueryFetch', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    const data = await queryFetch.delete<{ id: number }>({ endpoint: ['posts', 1] });
+    const data = await queryAdaptor.delete<{ id: number }>({ endpoint: ['posts', 1] });
 
     expectTypeOf(data).toEqualTypeOf<{ id: number }>();
     expect(data).toEqual({

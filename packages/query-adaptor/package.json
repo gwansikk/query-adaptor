@@ -1,7 +1,7 @@
 {
-  "name": "@query-fetch/core",
-  "version": "0.7.0",
-  "description": "Lightweight and Easy-to-Use Fetch API Extension Library",
+  "name": "query-adaptor",
+  "version": "0.1.1",
+  "description": "Powerful and flexible HTTP client management",
   "keywords": [
     "fetch",
     "http",
@@ -44,7 +44,7 @@
     "check-types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "@query-fetch/utils": "workspace:*"
+    "@query-adaptor/utils": "workspace:*"
   },
   "publishConfig": {
     "access": "public"
