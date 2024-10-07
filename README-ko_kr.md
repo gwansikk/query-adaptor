@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔌🌐 Query Adaptor</h1>
-<p><b>강력하고 유연한 HTTP 클라이언트 어댑터 라이브러리</b></p>
+<p><b>강력하고 유연한 HTTP 클라이언트 관리</b></p>
 
 ![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
