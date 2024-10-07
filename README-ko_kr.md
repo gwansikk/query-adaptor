@@ -49,7 +49,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
-[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTREIBUTING.md)
+[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTRIBUTING.md)
 
 ### 기여자
 

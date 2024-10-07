@@ -49,7 +49,7 @@ Visit the [official documentation](https://query-fetch.gwansik.dev) for detailed
 
 We welcome contribution from everyone in the community. Read below for detailed contribution guide.
 
-[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTREIBUTING.md)
+[CONTRIBUTING.md](https://github.com/gwansikk/query-fetch/blob/main/CONTRIBUTING.md)
 
 ### Contributors
 
