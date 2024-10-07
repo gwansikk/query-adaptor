@@ -1,7 +1,7 @@
 {
-  "name": "@query-fetch/react-query",
-  "version": "0.7.0",
-  "description": "Lightweight and Easy-to-Use Fetch API Extension Library for @tanstack/react-query",
+  "name": "@query-adaptor/react-query",
+  "version": "0.1.1",
+  "description": "Powerful and flexible HTTP client management for @tanstack/react-query",
   "keywords": [
     "fetch",
     "http",
@@ -45,11 +45,9 @@
     "test:watch": "vitest --coverage",
     "check-types": "tsc --noEmit --skipLibCheck"
   },
-  "devDependencies": {},
   "peerDependencies": {
-    "@query-fetch/core": "workspace:*",
-    "@tanstack/react-query": "^5",
-    "react": "^18"
+    "query-adaptor": "workspace:*",
+    "@tanstack/react-query": "^5"
   },
   "publishConfig": {
     "access": "public"

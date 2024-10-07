@@ -1,12 +1,12 @@
-import { type TFetchOptions } from '@query-fetch/core';
+import { type FetchOptions } from 'query-adaptor';
 import type { ElementTypeof } from './types';
 import { QueryKey } from '@tanstack/react-query';
 
 type TQueryFetchKey<TBody> =
-  | ElementTypeof<TFetchOptions<TBody>['endpoint']>
-  | TFetchOptions<TBody>['queryParameter'];
+  | ElementTypeof<FetchOptions<TBody>['endpoint']>
+  | FetchOptions<TBody>['queryParameter'];
 
-export interface TQueryFetchKeyOptions<TBody> extends TFetchOptions<TBody> {
+export interface TQueryFetchKeyOptions<TBody> extends FetchOptions<TBody> {
   queryKey?: Array<unknown>;
 }
 
