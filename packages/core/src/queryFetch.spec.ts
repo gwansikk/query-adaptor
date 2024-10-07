@@ -8,7 +8,7 @@ type TResponseData = {
   userId: number;
 };
 
-describe('createQueryFetch', () => {
+describe('queryFetch', () => {
   it('should handle GET requests', async () => {
     const data = await queryFetch.get<TResponseData>({
       endpoint: MSW_END_POINT('posts', 1),
@@ -118,6 +118,53 @@ describe('createQueryFetch', () => {
     });
 
     expectTypeOf(data).toEqualTypeOf<{ id: number }>();
+    expect(data).toEqual({
+      id: 1,
+    });
+  });
+
+  it('should handle side effects correctly', async () => {
+    type TResponseData = {
+      id: number;
+    };
+
+    type TRequestData = {
+      title: string;
+      body: string;
+      userId: number;
+    };
+
+    const body = {
+      title: 'title',
+      body: 'body',
+      userId: 1,
+    };
+
+    const data = await queryFetch.post<TResponseData, TRequestData>({
+      endpoint: MSW_END_POINT('posts', 1),
+      body: body,
+      onTry: (context) => {
+        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
+        expect(context).toEqual(body);
+      },
+      onSuccess: (context, data) => {
+        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
+        expect(context).toEqual(body);
+        expectTypeOf(data).toEqualTypeOf<TResponseData>();
+        expect(data).toEqual({ id: 1 });
+      },
+      onCatch: (context) => {
+        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
+      },
+      onFinally: (context, data) => {
+        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
+        expect(context).toEqual(body);
+        expectTypeOf(data).toEqualTypeOf<TResponseData>();
+        expect(data).toEqual({ id: 1 });
+      },
+    });
+
+    expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({
       id: 1,
     });

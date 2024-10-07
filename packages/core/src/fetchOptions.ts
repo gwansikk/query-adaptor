@@ -1,13 +1,18 @@
 import type { TEndpoint, TMethod, TQueryParameter, TRequestOptions } from './types';
 
-export interface TFetchOptions<TBody = never> {
+export interface FetchOptions<TData = unknown, TBody = unknown> {
   endpoint: TEndpoint;
   queryParameter?: TQueryParameter;
   body?: TBody;
   options?: TRequestOptions;
+  onTry?: (context: TBody | undefined) => void;
+  onSuccess?: (context: TBody | undefined, data: TData) => void;
+  onCatch?: (context: TBody | undefined) => void;
+  onFinally?: (context: TBody | undefined, data: TData) => void;
 }
 
-export interface TFetchOptionsWithMethod<TBody = never> extends TFetchOptions<TBody> {
+export interface FetchOptionsWithMethod<TData = unknown, TBody = unknown>
+  extends FetchOptions<TData, TBody> {
   method: TMethod;
 }
 
@@ -18,6 +23,8 @@ export interface TFetchOptionsWithMethod<TBody = never> extends TFetchOptions<TB
  * @see {@link https://query-fetch.gwansik.dev/fetch-options}
  * @experimental This is experimental feature.
  */
-export function fetchOptions<TBody = never>(options: TFetchOptions<TBody>): TFetchOptions<TBody> {
+export function fetchOptions<TData = unknown, TBody = unknown>(
+  options: FetchOptions<TData, TBody>
+): FetchOptions<TData, TBody> {
   return options;
 }

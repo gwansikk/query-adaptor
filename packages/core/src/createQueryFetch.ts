@@ -1,5 +1,5 @@
-import type { TFetchOptions, TFetchOptionsWithMethod } from './fetchOptions';
 import { queryFetch } from './queryFetch';
+import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
 import type { TInterceptor, TRequestInterceptor, TRequestOptions } from './types';
 
 export interface CreateQueryFetch {
@@ -7,12 +7,12 @@ export interface CreateQueryFetch {
   setRequestInterceptor: (interceptor: TRequestInterceptor) => void;
   setResponseInterceptor: (interceptor: TInterceptor<Response>) => void;
   setErrorInterceptor: (interceptor: TInterceptor<Response>) => void;
-  request: <TData, TBody>(options: TFetchOptionsWithMethod<TBody>) => Promise<TData>;
-  get: <TData, TBody = never>(options: TFetchOptions<TBody>) => Promise<TData>;
-  post: <TData, TBody = TData>(options: TFetchOptions<TBody>) => Promise<TData>;
-  patch: <TData, TBody = TData>(options: TFetchOptions<TBody>) => Promise<TData>;
-  put: <TData, TBody = TData>(options: TFetchOptions<TBody>) => Promise<TData>;
-  delete: <TData, TBody = TData>(options: TFetchOptions<TBody>) => Promise<TData>;
+  request: <TData, TBody>(options: FetchOptionsWithMethod<TData, TBody>) => Promise<TData>;
+  get: <TData, TBody = unknown>(options: FetchOptions<TData, TBody>) => Promise<TData>;
+  post: <TData, TBody = TData>(options: FetchOptions<TData, TBody>) => Promise<TData>;
+  patch: <TData, TBody = TData>(options: FetchOptions<TData, TBody>) => Promise<TData>;
+  put: <TData, TBody = TData>(options: FetchOptions<TData, TBody>) => Promise<TData>;
+  delete: <TData, TBody = TData>(options: FetchOptions<TData, TBody>) => Promise<TData>;
 }
 
 export interface CreateQueryFetchOptions {
@@ -65,16 +65,6 @@ export function createQueryFetch(
     return await response.json();
   }
 
-  async function request<TData, TBody>({
-    options,
-    ...rest
-  }: TFetchOptionsWithMethod<TBody>): Promise<TData> {
-    return await queryFetch.request(
-      Object.assign(Object.assign(_headers, options), rest),
-      _fetchFn<TData>
-    );
-  }
-
   function setHeaders(newHeaders: HeadersInit) {
     _headers = Object.assign(_headers, newHeaders);
   }
@@ -91,31 +81,39 @@ export function createQueryFetch(
     _interceptors.error = interceptor;
   }
 
-  function get<TData, TBody>(fetchOptions: TFetchOptions<TBody>): Promise<TData> {
+  function request<TData, TBody>(
+    fetchOptions: FetchOptionsWithMethod<TData, TBody>
+  ): Promise<TData> {
+    fetchOptions.options = Object.assign(_headers, fetchOptions.options);
+
+    return queryFetch.request<TData, TBody>(fetchOptions, _fetchFn<TData>);
+  }
+
+  function get<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.get(fetchOptions, _fetchFn<TData>);
   }
 
-  function post<TData, TBody>(fetchOptions: TFetchOptions<TBody>): Promise<TData> {
+  function post<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.post(fetchOptions, _fetchFn<TData>);
   }
 
-  function patch<TData, TBody>(fetchOptions: TFetchOptions<TBody>): Promise<TData> {
+  function patch<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.patch(fetchOptions, _fetchFn<TData>);
   }
 
-  function put<TData, TBody>(fetchOptions: TFetchOptions<TBody>): Promise<TData> {
+  function put<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.put(fetchOptions, _fetchFn<TData>);
   }
 
-  function del<TData, TBody>(fetchOptions: TFetchOptions<TBody>): Promise<TData> {
+  function del<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
     return queryFetch.delete(fetchOptions, _fetchFn<TData>);

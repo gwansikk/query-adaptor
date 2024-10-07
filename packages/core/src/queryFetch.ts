@@ -1,30 +1,30 @@
-import type { TFetchOptions, TFetchOptionsWithMethod } from './fetchOptions';
+import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
 import type { TFetchAdaptor, TRequestOptions } from './types';
 import { formatPath, isContentTypeJson } from './utils';
 
 export interface QueryFetch {
   request: <TData, TBody>(
-    options: TFetchOptionsWithMethod<TBody>,
+    options: FetchOptionsWithMethod<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ) => Promise<TData>;
   get: <TData, TBody = never>(
-    options: TFetchOptions<TBody>,
+    options: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ) => Promise<TData>;
   post: <TData, TBody = TData>(
-    options: TFetchOptions<TBody>,
+    options: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ) => Promise<TData>;
   patch: <TData, TBody = TData>(
-    options: TFetchOptions<TBody>,
+    options: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ) => Promise<TData>;
   put: <TData, TBody = TData>(
-    options: TFetchOptions<TBody>,
+    options: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ) => Promise<TData>;
   delete: <TData, TBody = TData>(
-    options: TFetchOptions<TBody>,
+    options: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ) => Promise<TData>;
 }
@@ -36,30 +36,34 @@ export interface QueryFetch {
  */
 export const queryFetch: QueryFetch = {
   async request<TData, TBody>(
-    { method, endpoint, queryParameter, body, options }: TFetchOptionsWithMethod<TBody>,
+    options: FetchOptionsWithMethod<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
-    let path = formatPath(endpoint);
-    const isJson = isContentTypeJson(body);
+    let path = formatPath(options.endpoint);
+    const isJson = isContentTypeJson(options.body);
 
     const requestOptions: TRequestOptions = {
       ...options,
-      method,
+      method: options.method,
       headers: {
         'Content-Type': isJson ? 'application/json' : '',
-        ...options?.headers,
+        ...options.options?.headers,
       },
-      body: isJson ? JSON.stringify(body) : (body as BodyInit),
+      body: isJson ? JSON.stringify(options.body) : (options.body as BodyInit),
     };
 
-    if (queryParameter) {
+    if (options.queryParameter) {
       const searchParams = new URLSearchParams();
 
-      Object.entries(queryParameter).forEach(([key, value]) => {
+      Object.entries(options.queryParameter).forEach(([key, value]) => {
         searchParams.append(key, String(value));
       });
 
       path += `?${searchParams.toString()}`;
+    }
+
+    if (options.onTry) {
+      options.onTry(options.body);
     }
 
     if (fetchAdaptor) {
@@ -67,12 +71,23 @@ export const queryFetch: QueryFetch = {
     }
 
     const response = await fetch(formatPath(path), requestOptions);
+    const data = await response.json();
 
-    return await response.json();
+    if (response.ok && options.onSuccess) {
+      options.onSuccess(options.body, data);
+    } else if (options.onCatch) {
+      options.onCatch(options.body);
+    }
+
+    if (options.onFinally) {
+      options.onFinally(options.body, data);
+    }
+
+    return data;
   },
 
   get<TData, TBody>(
-    fetchOptions: TFetchOptions<TBody>,
+    fetchOptions: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
@@ -85,7 +100,7 @@ export const queryFetch: QueryFetch = {
   },
 
   post<TData, TBody>(
-    fetchOptions: TFetchOptions<TBody>,
+    fetchOptions: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
@@ -98,7 +113,7 @@ export const queryFetch: QueryFetch = {
   },
 
   patch<TData, TBody>(
-    fetchOptions: TFetchOptions<TBody>,
+    fetchOptions: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
@@ -111,14 +126,14 @@ export const queryFetch: QueryFetch = {
   },
 
   put<TData, TBody>(
-    fetchOptions: TFetchOptions<TBody>,
+    fetchOptions: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>({ ...fetchOptions, method: 'PUT' }, fetchAdaptor);
   },
 
   delete<TData, TBody>(
-    fetchOptions: TFetchOptions<TBody>,
+    fetchOptions: FetchOptions<TData, TBody>,
     fetchAdaptor?: TFetchAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>({ ...fetchOptions, method: 'DELETE' }, fetchAdaptor);
