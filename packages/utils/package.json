@@ -1,5 +1,5 @@
 {
-  "name": "@query-fetch/utils",
+  "name": "@query-adaptor/utils",
   "private": "true",
   "exports": {
     ".": {
