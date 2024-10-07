@@ -30,9 +30,9 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 > Query Fetch의 핵심 기능을 제공해요.
 
-- queryOptions
 - queryFetch
 - createQueryFetch
+- fetchOptions
 
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dm/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
 

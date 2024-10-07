@@ -30,9 +30,9 @@ To overcome these limitations, Query Fetch was developed. As the name suggests, 
 
 > Provides core features of Query Fetch.
 
-- queryOptions
 - queryFetch
 - createQueryFetch
+- fetchOptions
 
 ### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![NPM Downloads](https://img.shields.io/npm/dm/%40query-fetch%2Freact-query?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/react-query)
 
