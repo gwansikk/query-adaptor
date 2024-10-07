@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔌🌐 Query Adaptor</h1>
-<p><b>Powerful and flexible HTTP client management</b></p>
+<p><b>Powerful Fetch API, Flexible HTTP Client Management, compatible with all framework environments</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)](https://github.com/gwansikk/query-fetch?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
@@ -26,20 +26,21 @@ To overcome these limitations, Query Adaptor was developed. As the name suggests
 
 ## Packages
 
-### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![NPM Downloads](https://img.shields.io/npm/dt/%40query-fetch%2Fcore?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/core)
+### query-adaptor &middot; [![npm version](https://img.shields.io/npm/v/query-adaptor?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/query-adaptor) [![npm downloads](https://img.shields.io/npm/dm/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor) [![npm bundle size](https://img.shields.io/bundlephobia/min/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor)
 
 > Provides core features of Query Adaptor.
 
-- queryOptions
-- queryFetch
-- createQueryFetch
+- fetchOptions
+- createQueryAdapter
+- query
 
-### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=black&labelColor=black&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![NPM Downloads](https://img.shields.io/npm/dt/%40query-fetch%2Freact-query?labelColor=black&color=black)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=black&labelColor=black)](https://bundlephobia.com/package/@query-fetch/react-query)
+### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
 
 > Provides features to easily use Query Adaptor with React Query.
 
-- queryFetchKey
 - queryFetchFn
+- queryFetchKey
+- toQueryOptions
 
 ## Official Documentation
 

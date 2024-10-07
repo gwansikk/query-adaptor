@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔌🌐 Query Adaptor</h1>
-<p><b>강력하고 유연한 HTTP 클라이언트 관리</b></p>
+<p><b>모든 프레임워크 환경에서 호환되는 강력한 Fetch API와 유연한 HTTP 클라이언트 관리</b></p>
 
 ![GitHub License](https://img.shields.io/github/license/gwansikk/query-fetch?labelColor=black&color=black)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
@@ -26,20 +26,21 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 ## 패키지
 
-### @query-fetch/core &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/core?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/core) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/core?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/core)
+### query-adaptor &middot; [![npm version](https://img.shields.io/npm/v/query-adaptor?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/query-adaptor) [![npm downloads](https://img.shields.io/npm/dm/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor) [![npm bundle size](https://img.shields.io/bundlephobia/min/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor)
 
 > Query Adaptor의 핵심 기능을 제공해요.
 
-- queryOptions
-- queryFetch
-- createQueryFetch
+- fetchOptions
+- createQueryAdapter
+- query
 
-### @query-fetch/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-fetch/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm downloads](https://img.shields.io/npm/dt/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-fetch/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-fetch/react-query)
+### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
 
 > Query Adaptor를 React Query와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
-- queryFetchKey
 - queryFetchFn
+- queryFetchKey
+- toQueryOptions
 
 ## 공식 문서
 

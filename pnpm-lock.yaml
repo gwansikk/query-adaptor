@@ -62,23 +62,20 @@ importers:
         specifier: ^1.3.4
         version: 1.3.4(@algolia/client-search@4.24.0)(@types/node@22.5.4)(postcss@8.4.41)(react@18.3.1)(search-insights@2.16.3)(typescript@5.5.4)
 
-  packages/core:
+  packages/query-adaptor:
     devDependencies:
-      '@query-fetch/utils':
+      '@query-adaptor/utils':
         specifier: workspace:*
         version: link:../utils
 
   packages/react-query:
     dependencies:
-      '@query-fetch/core':
-        specifier: workspace:*
-        version: link:../core
       '@tanstack/react-query':
         specifier: ^5
         version: 5.51.23(react@18.3.1)
-      react:
-        specifier: ^18
-        version: 18.3.1
+      query-adaptor:
+        specifier: workspace:*
+        version: link:../query-adaptor
 
   packages/utils:
     dependencies:
