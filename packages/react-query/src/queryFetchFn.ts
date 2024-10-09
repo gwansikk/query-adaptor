@@ -1,5 +1,4 @@
-import { queryFetch, type FetchOptions } from '@query-fetch/core';
-
+import { FetchOptions, query } from 'query-adaptor';
 /**
  * You can inject a Fetch Query into the `queryFn` of `useQuery`
  *
@@ -8,5 +7,5 @@ import { queryFetch, type FetchOptions } from '@query-fetch/core';
 export async function queryFetchFn<TData, TBody = never>(
   options: FetchOptions<TData, TBody>
 ): Promise<() => Promise<TData>> {
-  return () => queryFetch.get<TData, TBody>(options);
+  return () => query.get<TData, TBody>(options);
 }

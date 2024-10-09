@@ -1,5 +1,5 @@
-import { queryFetch } from './queryFetch';
-import { MSW_END_POINT } from '@query-fetch/utils';
+import { query } from './query';
+import { MSW_END_POINT } from '@query-adaptor/utils';
 
 type TResponseData = {
   id: number;
@@ -8,9 +8,9 @@ type TResponseData = {
   userId: number;
 };
 
-describe('queryFetch', () => {
+describe('query', () => {
   it('should handle GET requests', async () => {
-    const data = await queryFetch.get<TResponseData>({
+    const data = await query.get<TResponseData>({
       endpoint: MSW_END_POINT('posts', 1),
     });
 
@@ -32,7 +32,7 @@ describe('queryFetch', () => {
       body: string;
     };
 
-    const data = await queryFetch.get<TResponseData[]>({
+    const data = await query.get<TResponseData[]>({
       endpoint: MSW_END_POINT('comments'),
       queryParameter: {
         postId: 1,
@@ -60,7 +60,7 @@ describe('queryFetch', () => {
       userId: number;
     };
 
-    const data = await queryFetch.post<TResponseData, TRequestData>({
+    const data = await query.post<TResponseData, TRequestData>({
       endpoint: MSW_END_POINT('posts', 1),
       body: {
         title: 'title',
@@ -76,7 +76,7 @@ describe('queryFetch', () => {
   });
 
   it('should handle PATCH requests', async () => {
-    const data = await queryFetch.patch<TResponseData, { title: string }>({
+    const data = await query.patch<TResponseData, { title: string }>({
       endpoint: MSW_END_POINT('posts', 1),
       body: {
         title: 'title',
@@ -93,7 +93,7 @@ describe('queryFetch', () => {
   });
 
   it('should handle PUT requests', async () => {
-    const data = await queryFetch.put<TResponseData>({
+    const data = await query.put<TResponseData>({
       endpoint: MSW_END_POINT('posts', 1),
       body: {
         id: 1,
@@ -113,7 +113,7 @@ describe('queryFetch', () => {
   });
 
   it('should handle DELETE requests', async () => {
-    const data = await queryFetch.delete<{ id: number }>({
+    const data = await query.delete<{ id: number }>({
       endpoint: MSW_END_POINT('posts', 1),
     });
 
@@ -140,7 +140,7 @@ describe('queryFetch', () => {
       userId: 1,
     };
 
-    const data = await queryFetch.post<TResponseData, TRequestData>({
+    const data = await query.post<TResponseData, TRequestData>({
       endpoint: MSW_END_POINT('posts', 1),
       body: body,
       onTry: (context) => {

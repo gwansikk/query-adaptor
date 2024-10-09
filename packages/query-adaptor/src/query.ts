@@ -1,31 +1,31 @@
 import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
-import type { TFetchAdaptor, TRequestOptions } from './types';
+import type { TQueryAdaptor, TRequestOptions } from './types';
 import { formatPath, isContentTypeJson } from './utils';
 
-export interface QueryFetch {
+export interface Query {
   request: <TData, TBody>(
     options: FetchOptionsWithMethod<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   get: <TData, TBody = never>(
     options: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   post: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   patch: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   put: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   delete: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ) => Promise<TData>;
 }
 
@@ -34,10 +34,10 @@ export interface QueryFetch {
  *
  * @see {@link https://query-fetch.gwansik.dev/query-fetch}
  */
-export const queryFetch: QueryFetch = {
+export const query: Query = {
   async request<TData, TBody>(
     options: FetchOptionsWithMethod<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
     let path = formatPath(options.endpoint);
     const isJson = isContentTypeJson(options.body);
@@ -66,8 +66,8 @@ export const queryFetch: QueryFetch = {
       options.onTry(options.body);
     }
 
-    if (fetchAdaptor) {
-      return fetchAdaptor(formatPath(path), requestOptions);
+    if (adapter) {
+      return adapter(formatPath(path), requestOptions);
     }
 
     const response = await fetch(formatPath(path), requestOptions);
@@ -88,54 +88,54 @@ export const queryFetch: QueryFetch = {
 
   get<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
       {
         ...fetchOptions,
         method: 'GET',
       },
-      fetchAdaptor
+      adapter
     );
   },
 
   post<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
       {
         ...fetchOptions,
         method: 'POST',
       },
-      fetchAdaptor
+      adapter
     );
   },
 
   patch<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
       {
         ...fetchOptions,
         method: 'PATCH',
       },
-      fetchAdaptor
+      adapter
     );
   },
 
   put<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
-    return this.request<TData, TBody>({ ...fetchOptions, method: 'PUT' }, fetchAdaptor);
+    return this.request<TData, TBody>({ ...fetchOptions, method: 'PUT' }, adapter);
   },
 
   delete<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    fetchAdaptor?: TFetchAdaptor<TData>
+    adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
-    return this.request<TData, TBody>({ ...fetchOptions, method: 'DELETE' }, fetchAdaptor);
+    return this.request<TData, TBody>({ ...fetchOptions, method: 'DELETE' }, adapter);
   },
 } as const;

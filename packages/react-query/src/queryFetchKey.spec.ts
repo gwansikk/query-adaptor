@@ -1,4 +1,4 @@
-import { fetchOptions } from '@query-fetch/core';
+import { fetchOptions } from 'query-adaptor';
 import { queryFetchKey } from './queryFetchKey';
 import { queryOptions } from '@tanstack/react-query';
 

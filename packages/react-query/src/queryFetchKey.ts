@@ -1,4 +1,4 @@
-import { type FetchOptions } from '@query-fetch/core';
+import { type FetchOptions } from 'query-adaptor';
 import type { ElementTypeof } from './types';
 import { QueryKey } from '@tanstack/react-query';
 

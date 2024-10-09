@@ -15,4 +15,4 @@ export type TInterceptor<
 
 export type TRequestInterceptor = (request: TRequestOptions) => Promise<TRequestOptions>;
 
-export type TFetchAdaptor<TData> = (path: string, options: TRequestOptions) => Promise<TData>;
+export type TQueryAdaptor<TData> = (path: string, options: TRequestOptions) => Promise<TData>;

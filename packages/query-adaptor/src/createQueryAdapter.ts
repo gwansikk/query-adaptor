@@ -1,8 +1,8 @@
-import { queryFetch } from './queryFetch';
+import { query } from './query';
 import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
 import type { TInterceptor, TRequestInterceptor, TRequestOptions } from './types';
 
-export interface CreateQueryFetch {
+export interface CreateQueryAdapter {
   setHeaders: (newHeaders: HeadersInit) => void;
   setRequestInterceptor: (interceptor: TRequestInterceptor) => void;
   setResponseInterceptor: (interceptor: TInterceptor<Response>) => void;
@@ -15,7 +15,7 @@ export interface CreateQueryFetch {
   delete: <TData, TBody = TData>(options: FetchOptions<TData, TBody>) => Promise<TData>;
 }
 
-export interface CreateQueryFetchOptions {
+export interface CreateQueryAdapterOptions {
   baseURL: string;
   headers?: HeadersInit;
   options?: TRequestOptions;
@@ -31,9 +31,9 @@ export interface CreateQueryFetchOptions {
  *
  * @see {@link https://query-fetch.gwansik.dev/create-query-fetch}
  */
-export function createQueryFetch(
-  createQueryFetchOptions: CreateQueryFetchOptions
-): CreateQueryFetch {
+export function createQueryAdapter(
+  createQueryFetchOptions: CreateQueryAdapterOptions
+): CreateQueryAdapter {
   const _baseURL: URL = new URL(createQueryFetchOptions.baseURL);
   const _options = createQueryFetchOptions.options ?? {};
   const _interceptors = createQueryFetchOptions.interceptors ?? {};
@@ -86,37 +86,37 @@ export function createQueryFetch(
   ): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
-    return queryFetch.request<TData, TBody>(fetchOptions, _fetchFn<TData>);
+    return query.request<TData, TBody>(fetchOptions, _fetchFn<TData>);
   }
 
   function get<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
-    return queryFetch.get(fetchOptions, _fetchFn<TData>);
+    return query.get(fetchOptions, _fetchFn<TData>);
   }
 
   function post<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
-    return queryFetch.post(fetchOptions, _fetchFn<TData>);
+    return query.post(fetchOptions, _fetchFn<TData>);
   }
 
   function patch<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
-    return queryFetch.patch(fetchOptions, _fetchFn<TData>);
+    return query.patch(fetchOptions, _fetchFn<TData>);
   }
 
   function put<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
-    return queryFetch.put(fetchOptions, _fetchFn<TData>);
+    return query.put(fetchOptions, _fetchFn<TData>);
   }
 
   function del<TData, TBody>(fetchOptions: FetchOptions<TData, TBody>): Promise<TData> {
     fetchOptions.options = Object.assign(_headers, fetchOptions.options);
 
-    return queryFetch.delete(fetchOptions, _fetchFn<TData>);
+    return query.delete(fetchOptions, _fetchFn<TData>);
   }
 
   return {
