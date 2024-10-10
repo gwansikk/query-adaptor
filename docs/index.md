@@ -3,16 +3,15 @@
 layout: home
 
 hero:
-  name: '🔌🌐 Query Fetch'
-  text: 'Powerful and flexible Fetch API Adaptor'
-  tagline: 'Use the Fetch API easily and declaratively!'
+  name: 'Query Adaptor'
+  text: 'Powerful fetch, Flexible HTTP client management'
   actions:
     - theme: brand
       text: Get Started
-      link: /what-is-query-fetch
+      link: /welcome
     - theme: alt
       text: View on GitHub
-      link: https://github.com/gwansikk/query-fetch
+      link: https://github.com/gwansikk/query-adaptor
 
 features:
   - icon: 🧰

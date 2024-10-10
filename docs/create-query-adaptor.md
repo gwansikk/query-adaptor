@@ -1,6 +1,6 @@
-# createQueryFetch
+# createQueryAdaptor
 
-`CreateQueryFetch` is a utility function that allows you to create a customized `QueryFetch` instance. This instance can be configured with a base URL, default headers, and interceptors for requests, responses, and errors. The instance provides flexibility in managing HTTP requests by applying global settings across multiple requests.
+`CreateQueryAdaptor` is a utility function that allows you to create a customized `QueryFetch` instance. This instance can be configured with a base URL, default headers, and interceptors for requests, responses, and errors. The instance provides flexibility in managing HTTP requests by applying global settings across multiple requests.
 
 ## Key Features
 
@@ -93,12 +93,12 @@ In this example, an error interceptor checks if the response status is 401 (Unau
 
 ## Creating a QueryFetch Instance
 
-The `createQueryFetch` function returns an instance of `QueryFetch` that can be reused across multiple requests. You can customize the base URL, headers, and interceptors during the creation of the instance.
+The `createQueryAdaptor` function returns an instance of `QueryFetch` that can be reused across multiple requests. You can customize the base URL, headers, and interceptors during the creation of the instance.
 
 ### Example
 
 ```ts
-const queryFetch = createQueryFetch({
+const queryFetch = createQueryAdaptor({
   baseURL: 'https://api.example.com',
   headers: {
     'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 {
-  "name": "@query-fetch/docs",
+  "name": "@query-adaptor/docs",
   "private": true,
   "scripts": {
     "dev": "vitepress dev",

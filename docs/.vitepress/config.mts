@@ -2,29 +2,33 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: '🔌🌐 Query Fetch',
+  title: 'Query Adaptor',
   description: 'Powerful and flexible Fetch API Adaptor Library',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/what-is-query-fetch' },
+      { text: 'Docs', link: '/welcome' },
     ],
     sidebar: [
       {
-        text: 'Introduction',
-        items: [{ text: 'What is Query Fetch?', link: '/what-is-query-fetch' }],
+        text: 'INTRODUCTION',
+        items: [
+          { text: 'Welcome', link: '/welcome' },
+          { text: 'Why Query Adaptor?', link: '/why-query-adaptor' },
+          { text: 'Quickstart', link: '/quickstart' },
+        ],
       },
       {
-        text: 'APIs',
+        text: 'APIS',
         items: [
           {
-            text: 'queryFetch',
-            link: '/query-fetch',
+            text: 'query',
+            link: '/query',
           },
           {
-            text: 'createQueryFetch',
-            link: '/create-query-fetch',
+            text: 'createQueryAdaptor',
+            link: '/create-query-adaptor',
           },
           {
             text: 'fetchOptions',
@@ -33,24 +37,22 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Framework Guides',
-        items: [
-          { text: 'React Query' },
-          { text: 'NEXT.js' },
-          { text: 'React Native' },
-          { text: 'Tauri' },
-        ],
+        text: 'GUIDES',
+        items: [{ text: 'Next.js' }, { text: 'Tauri' }],
       },
     ],
     socialLinks: [
       {
         icon: 'npm',
-        link: 'https://www.npmjs.com/package/@query-fetch/core',
+        link: 'https://www.npmjs.com/package/query-adaptor',
       },
-      { icon: 'github', link: 'https://github.com/gwansikk/query-fetch' },
+      { icon: 'github', link: 'https://github.com/gwansikk/query-adaptor' },
     ],
     footer: {
       copyright: 'MIT © gwansikk',
+    },
+    search: {
+      provider: 'local',
     },
   },
 });

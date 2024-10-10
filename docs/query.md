@@ -1,6 +1,6 @@
-# queryFetch
+# query
 
-`QueryFetch` is a library designed to simplify HTTP requests by providing easy-to-use methods for GET, POST, PATCH, PUT, and DELETE operations. It acts as an abstraction over the Fetch API, making it easier to handle requests and manage common concerns such as JSON handling, headers, and query parameters.
+`query` is a library designed to simplify HTTP requests by providing easy-to-use methods for GET, POST, PATCH, PUT, and DELETE operations. It acts as an abstraction over the Fetch API, making it easier to handle requests and manage common concerns such as JSON handling, headers, and query parameters.
 
 ## Key Features
 
@@ -30,7 +30,7 @@ Performs an HTTP request with the given method. This function is the core of the
 ### Example
 
 ```ts
-const data = await queryFetch.request<TResponseData, never>({
+const data = await query.request<TResponseData, never>({
   method: 'GET',
   endpoint: ['https://api.example.com', 'items', '1'],
 });
@@ -48,7 +48,7 @@ Handles HTTP `GET` requests. Use this method to fetch data from the server.
 ### Example
 
 ```ts
-const data = await queryFetch.get<TResponseData>({
+const data = await query.get<TResponseData>({
   endpoint: ['https://jsonplaceholder.typicode.com', 'posts', 1],
 });
 ```
@@ -60,7 +60,7 @@ Handles HTTP `POST` requests. Use this method to send data to the server.
 ### Example
 
 ```ts
-const response = await queryFetch.post<TResponseData, TRequestData>({
+const response = await query.post<TResponseData, TRequestData>({
   endpoint: ['https://jsonplaceholder.typicode.com', 'posts'],
   body: {
     title: 'foo',
@@ -77,7 +77,7 @@ Handles HTTP `PATCH` requests. Use this method to update part of a resource on t
 ### Example
 
 ```ts
-const response = await queryFetch.patch<TResponseData, TRequestData>({
+const response = await query.patch<TResponseData, TRequestData>({
   endpoint: ['https://jsonplaceholder.typicode.com', 'posts', 1],
   body: {
     title: 'updated title',
@@ -92,7 +92,7 @@ Handles HTTP `PUT` requests. Use this method to replace a resource on the server
 ### Example
 
 ```ts
-const response = await queryFetch.put<TResponseData>({
+const response = await query.put<TResponseData>({
   endpoint: ['https://jsonplaceholder.typicode.com', 'posts', 1],
   body: {
     id: 1,
@@ -110,7 +110,7 @@ Handles HTTP `DELETE` requests. Use this method to remove a resource from the se
 ### Example
 
 ```ts
-const response = await queryFetch.delete({
+const response = await query.delete({
   endpoint: ['https://jsonplaceholder.typicode.com', 'posts', 1],
 });
 ```
