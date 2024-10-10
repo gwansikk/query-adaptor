@@ -10,4 +10,4 @@ npm install query-adaptor
 
 ## Official Documentation
 
-Visit the [official documentation](https://query-fetch.gwansik.dev) for detailed information on installation, usage, and more.
+Visit the [official documentation](https://query-adaptor.gwansik.dev) for detailed information on installation, usage, and more.

@@ -44,7 +44,7 @@ To overcome these limitations, Query Adaptor was developed. As the name suggests
 
 ## Official Documentation
 
-Visit the [official documentation](https://query-fetch.gwansik.dev) for detailed information on installation, usage, and more.
+Visit the [official documentation](https://query-adaptor.gwansik.dev) for detailed information on installation, usage, and more.
 
 ## Contributing
 
