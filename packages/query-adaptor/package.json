@@ -1,6 +1,6 @@
 {
   "name": "query-adaptor",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Powerful fetch, Flexible HTTP client management",
   "keywords": [
     "fetch",
@@ -9,7 +9,7 @@
     "query",
     "client"
   ],
-  "homepage": "https://github.com/gwansikk/query-adaptor",
+  "homepage": "https://query-adaptor.gwansik.dev",
   "bugs": "https://github.com/gwansikk/query-adaptor/issues",
   "repository": {
     "type": "git",
