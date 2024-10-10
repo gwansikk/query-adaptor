@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🔌🌐 Query Adaptor</h1>
-<p><b>Powerful Fetch API, Flexible HTTP Client Management, compatible with all framework environments</b></p>
+<p><b>Powerful fetch, Flexible HTTP client management, compatible with all framework environments</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-adaptor?labelColor=black&color=black)](https://github.com/gwansikk/query-adaptor?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
