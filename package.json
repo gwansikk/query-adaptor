@@ -2,11 +2,11 @@
   "name": "query-adaptor",
   "private": true,
   "packageManager": "pnpm@9.10.0",
-  "homepage": "https://github.com/gwansikk/query-fetch",
-  "bugs": "https://github.com/gwansikk/query-fetch/issues",
+  "homepage": "https://github.com/gwansikk/query-adaptor",
+  "bugs": "https://github.com/gwansikk/query-adaptor/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gwansikk/query-fetch.git"
+    "url": "git+https://github.com/gwansikk/query-adaptor.git"
   },
   "license": "MIT",
   "author": "Gwansik Kim <gwansik.kim@gwansik.dev>",

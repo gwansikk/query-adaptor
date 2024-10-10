@@ -1,17 +1,19 @@
 {
   "name": "query-adaptor",
-  "version": "0.1.2",
-  "description": "Powerful and flexible HTTP client management",
+  "version": "0.1.3",
+  "description": "Powerful fetch, Flexible HTTP client management",
   "keywords": [
     "fetch",
     "http",
-    "request"
+    "request",
+    "query",
+    "client"
   ],
-  "homepage": "https://github.com/gwansikk/query-fetch",
-  "bugs": "https://github.com/gwansikk/query-fetch/issues",
+  "homepage": "https://github.com/gwansikk/query-adaptor",
+  "bugs": "https://github.com/gwansikk/query-adaptor/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gwansikk/query-fetch.git"
+    "url": "git+https://github.com/gwansikk/query-adaptor.git"
   },
   "license": "MIT",
   "author": "Gwansik Kim <gwansik.kim@gwansik.dev>",
