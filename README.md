@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>🔌🌐 Query Adaptor</h1>
+<h1>Query Adaptor</h1>
 <p><b>Powerful fetch, Flexible HTTP client management, compatible with all framework environments</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-adaptor?labelColor=black&color=black)](https://github.com/gwansikk/query-adaptor?tab=MIT-1-ov-file)
