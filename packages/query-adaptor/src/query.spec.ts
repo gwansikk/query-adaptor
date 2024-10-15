@@ -156,17 +156,33 @@ describe('query', () => {
       onCatch: (context) => {
         expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
       },
-      onFinally: (context, data) => {
+      onFinally: (context) => {
         expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
         expect(context).toEqual(body);
-        expectTypeOf(data).toEqualTypeOf<TResponseData>();
-        expect(data).toEqual({ id: 1 });
       },
     });
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
-    expect(data).toEqual({
-      id: 1,
-    });
+    expect(data).toEqual({ id: 1 });
+  });
+
+  it('should retry the specified number of times on failure', async () => {
+    const retry = 3;
+    let count = 0;
+
+    try {
+      await query.get({
+        endpoint: 'error-url',
+        options: {
+          retry: retry,
+        },
+        onCatch: () => {
+          count = count + 1;
+        },
+      });
+    } catch (error) {
+      expect(error).toBeDefined();
+      expect(count).toEqual(4);
+    }
   });
 });

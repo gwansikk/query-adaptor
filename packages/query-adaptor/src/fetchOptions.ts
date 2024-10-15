@@ -8,7 +8,7 @@ export interface FetchOptions<TData = unknown, TBody = unknown> {
   onTry?: (context: TBody | undefined) => void;
   onSuccess?: (context: TBody | undefined, data: TData) => void;
   onCatch?: (context: TBody | undefined) => void;
-  onFinally?: (context: TBody | undefined, data: TData) => void;
+  onFinally?: (context: TBody | undefined) => void;
 }
 
 export interface FetchOptionsWithMethod<TData = unknown, TBody = unknown>

@@ -1,6 +1,8 @@
 import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
-import type { TQueryAdaptor, TRequestOptions } from './types';
-import { formatPath, isContentTypeJson } from './utils';
+import type { TQueryAdaptor } from './types';
+import { formatPath } from './utils';
+import { createQueryParameter } from './utils/createQueryParameter';
+import { createRequestOptions } from './utils/createRequestOptions';
 
 export interface Query {
   request: <TData, TBody>(
@@ -40,50 +42,50 @@ export const query: Query = {
     adapter?: TQueryAdaptor<TData>
   ): Promise<TData> {
     let path = formatPath(options.endpoint);
-    const isJson = isContentTypeJson(options.body);
-
-    const requestOptions: TRequestOptions = {
-      ...options,
-      method: options.method,
-      headers: {
-        'Content-Type': isJson ? 'application/json' : '',
-        ...options.options?.headers,
-      },
-      body: isJson ? JSON.stringify(options.body) : (options.body as BodyInit),
-    };
+    const requestOptions = createRequestOptions(options);
 
     if (options.queryParameter) {
-      const searchParams = new URLSearchParams();
-
-      Object.entries(options.queryParameter).forEach(([key, value]) => {
-        searchParams.append(key, String(value));
-      });
-
-      path += `?${searchParams.toString()}`;
+      path = createQueryParameter(path, options.queryParameter);
     }
 
-    if (options.onTry) {
-      options.onTry(options.body);
+    try {
+      if (options.onTry) {
+        options.onTry(options.body);
+      }
+
+      if (adapter) {
+        return adapter(formatPath(path), requestOptions);
+      }
+
+      const response = await fetch(formatPath(path), requestOptions);
+      const responsedata = await response.json();
+
+      if (response.ok && options.onSuccess) {
+        options.onSuccess(options.body, responsedata);
+      }
+
+      return responsedata;
+    } catch (error) {
+      if (options.onCatch) {
+        options.onCatch(options.body);
+      }
+
+      if (!options?.options?.retry) {
+        throw new Error('retry is undefined');
+      }
+
+      if (options.options.retry <= 0) {
+        throw new Error('retry is over');
+      }
+
+      options.options.retry = options.options.retry - 1;
+
+      return this.request(options, adapter);
+    } finally {
+      if (options.onFinally) {
+        options.onFinally(options.body);
+      }
     }
-
-    if (adapter) {
-      return adapter(formatPath(path), requestOptions);
-    }
-
-    const response = await fetch(formatPath(path), requestOptions);
-    const data = await response.json();
-
-    if (response.ok && options.onSuccess) {
-      options.onSuccess(options.body, data);
-    } else if (options.onCatch) {
-      options.onCatch(options.body);
-    }
-
-    if (options.onFinally) {
-      options.onFinally(options.body, data);
-    }
-
-    return data;
   },
 
   get<TData, TBody>(

@@ -6,6 +6,7 @@ export type TQueryParameter = Record<string, string | number | undefined>;
 
 export type TRequestOptions = RequestInit & {
   method?: TMethod;
+  retry?: number;
 };
 
 export type TInterceptor<
