@@ -1,7 +1,7 @@
 {
   "name": "query-adaptor",
-  "version": "0.1.4",
-  "description": "Powerful fetch, Flexible HTTP client management",
+  "version": "0.2.0",
+  "description": "Powerful fetch handling, flexible HTTP client management compatible with all frameworks",
   "keywords": [
     "fetch",
     "http",
