@@ -32,7 +32,7 @@ To overcome these limitations, Query Adaptor was developed. As the name suggests
 > Provides core features of Query Adaptor.
 
 - query
-- createQueryAdapter
+- createQueryAdaptor
 - fetchOptions
 
 ### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)

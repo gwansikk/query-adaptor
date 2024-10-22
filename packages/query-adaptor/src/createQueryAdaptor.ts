@@ -2,7 +2,7 @@ import { query } from './query';
 import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
 import type { TInterceptor, TRequestInterceptor, TRequestOptions } from './types';
 
-export interface CreateQueryAdapter {
+export interface CreateQueryAdaptor {
   setHeaders: (newHeaders: HeadersInit) => void;
   setRequestInterceptor: (interceptor: TRequestInterceptor) => void;
   setResponseInterceptor: (interceptor: TInterceptor<Response>) => void;
@@ -15,7 +15,7 @@ export interface CreateQueryAdapter {
   delete: <TData, TBody = TData>(options: FetchOptions<TData, TBody>) => Promise<TData>;
 }
 
-export interface CreateQueryAdapterOptions {
+export interface CreateQueryAdaptorOptions {
   baseURL: string;
   headers?: HeadersInit;
   options?: TRequestOptions;
@@ -31,9 +31,9 @@ export interface CreateQueryAdapterOptions {
  *
  * @see {@link https://query-fetch.gwansik.dev/create-query-fetch}
  */
-export function createQueryAdapter(
-  createQueryFetchOptions: CreateQueryAdapterOptions
-): CreateQueryAdapter {
+export function createQueryAdaptor(
+  createQueryFetchOptions: CreateQueryAdaptorOptions
+): CreateQueryAdaptor {
   const _baseURL: URL = new URL(createQueryFetchOptions.baseURL);
   const _options = createQueryFetchOptions.options ?? {};
   const _interceptors = createQueryFetchOptions.interceptors ?? {};

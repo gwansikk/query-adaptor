@@ -5,5 +5,5 @@
  * @returns A boolean indicating whether the content type is JSON or not.
  */
 export function isContentTypeJson<T>(body: T): boolean {
-  return !(body instanceof FormData || body instanceof URLSearchParams);
+  return typeof body === 'object' && body !== null;
 }

@@ -1,5 +1,5 @@
 import { MSW_BASE_URL } from '@query-adaptor/utils';
-import { createQueryAdapter } from './createQueryAdapter';
+import { createQueryAdaptor } from './createQueryAdaptor';
 
 type TResponseData = {
   id: number;
@@ -8,11 +8,11 @@ type TResponseData = {
   userId: number;
 };
 
-const queryAdaptor = createQueryAdapter({
+const queryAdaptor = createQueryAdaptor({
   baseURL: MSW_BASE_URL,
 });
 
-describe('createQueryAdapter', () => {
+describe('createQueryAdaptor', () => {
   it('should handle GET requests', async () => {
     const data = await queryAdaptor.get<TResponseData>({
       endpoint: ['posts', 1],

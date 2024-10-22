@@ -1,4 +1,4 @@
-import { createQueryAdapter } from './createQueryAdapter';
+import { createQueryAdaptor } from './createQueryAdaptor';
 import { fetchOptions } from './fetchOptions';
 import { MSW_BASE_URL } from '@query-adaptor/utils';
 
@@ -9,7 +9,7 @@ type TResponseData = {
   userId: number;
 };
 
-const queryAdapter = createQueryAdapter({
+const queryAdaptor = createQueryAdaptor({
   baseURL: MSW_BASE_URL,
 });
 
@@ -21,7 +21,7 @@ function postsFetchOptions(id: number) {
 
 describe('fetchOptions', () => {
   it('should handle GET requests', async () => {
-    const data = await queryAdapter.get<TResponseData>(postsFetchOptions(1));
+    const data = await queryAdaptor.get<TResponseData>(postsFetchOptions(1));
 
     expectTypeOf(data).toEqualTypeOf<TResponseData>();
     expect(data).toEqual({
@@ -39,7 +39,7 @@ describe('fetchOptions', () => {
       userId: number;
     };
 
-    const data = await queryAdapter.post<{ id: 1 }, TRequestData>({
+    const data = await queryAdaptor.post<{ id: 1 }, TRequestData>({
       ...postsFetchOptions(1),
       body: {
         title: 'title',

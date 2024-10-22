@@ -7,27 +7,27 @@ import { createRequestOptions } from './utils/createRequestOptions';
 export interface Query {
   request: <TData, TBody>(
     options: FetchOptionsWithMethod<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   get: <TData, TBody = never>(
     options: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   post: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   patch: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   put: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ) => Promise<TData>;
   delete: <TData, TBody = TData>(
     options: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ) => Promise<TData>;
 }
 
@@ -39,7 +39,7 @@ export interface Query {
 export const query: Query = {
   async request<TData, TBody>(
     options: FetchOptionsWithMethod<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ): Promise<TData> {
     let path = formatPath(options.endpoint);
     const requestOptions = createRequestOptions(options);
@@ -53,8 +53,8 @@ export const query: Query = {
         options.onTry(options.body);
       }
 
-      if (adapter) {
-        return adapter(formatPath(path), requestOptions);
+      if (adaptor) {
+        return adaptor(formatPath(path), requestOptions);
       }
 
       const response = await fetch(formatPath(path), requestOptions);
@@ -80,7 +80,7 @@ export const query: Query = {
 
       options.options.retry = options.options.retry - 1;
 
-      return this.request(options, adapter);
+      return this.request(options, adaptor);
     } finally {
       if (options.onFinally) {
         options.onFinally(options.body);
@@ -90,54 +90,54 @@ export const query: Query = {
 
   get<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
       {
         ...fetchOptions,
         method: 'GET',
       },
-      adapter
+      adaptor
     );
   },
 
   post<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
       {
         ...fetchOptions,
         method: 'POST',
       },
-      adapter
+      adaptor
     );
   },
 
   patch<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ): Promise<TData> {
     return this.request<TData, TBody>(
       {
         ...fetchOptions,
         method: 'PATCH',
       },
-      adapter
+      adaptor
     );
   },
 
   put<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ): Promise<TData> {
-    return this.request<TData, TBody>({ ...fetchOptions, method: 'PUT' }, adapter);
+    return this.request<TData, TBody>({ ...fetchOptions, method: 'PUT' }, adaptor);
   },
 
   delete<TData, TBody>(
     fetchOptions: FetchOptions<TData, TBody>,
-    adapter?: TQueryAdaptor<TData>
+    adaptor?: TQueryAdaptor<TData>
   ): Promise<TData> {
-    return this.request<TData, TBody>({ ...fetchOptions, method: 'DELETE' }, adapter);
+    return this.request<TData, TBody>({ ...fetchOptions, method: 'DELETE' }, adaptor);
   },
 } as const;

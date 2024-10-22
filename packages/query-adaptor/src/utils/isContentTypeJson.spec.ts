@@ -13,29 +13,29 @@ describe('isContentTypeJson', () => {
     expect(result).toBe(true);
   });
 
-  it('should return false for FormData', () => {
+  it('should return true for FormData', () => {
     const formData = new FormData();
     const result = isContentTypeJson(formData);
 
-    expect(result).toBe(false);
+    expect(result).toBe(true);
   });
 
-  it('should return false for URLSearchParams', () => {
+  it('should return true for URLSearchParams', () => {
     const params = new URLSearchParams();
     const result = isContentTypeJson(params);
 
+    expect(result).toBe(true);
+  });
+
+  it('should return false for string values', () => {
+    const result = isContentTypeJson('string value');
+
     expect(result).toBe(false);
   });
 
-  it('should return true for string values', () => {
-    const result = isContentTypeJson('string value');
-
-    expect(result).toBe(true);
-  });
-
-  it('should return true for numbers', () => {
+  it('should return false for numbers', () => {
     const result = isContentTypeJson(123);
 
-    expect(result).toBe(true);
+    expect(result).toBe(false);
   });
 });
