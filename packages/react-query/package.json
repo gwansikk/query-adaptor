@@ -1,13 +1,15 @@
 {
   "name": "@query-adaptor/react-query",
-  "version": "0.3.0",
-  "description": "Powerful fetch handling, flexible HTTP client management for @tanstack/react-query",
+  "version": "0.3.1",
+  "description": "Powerful fetching middleware, flexible HTTP client management for @tanstack/react-query",
   "keywords": [
     "fetch",
     "http",
+    "middleware",
+    "http-client",
     "request",
+    "adaptor",
     "query",
-    "client",
     "query-adaptor",
     "react-query"
   ],
