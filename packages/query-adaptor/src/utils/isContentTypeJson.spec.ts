@@ -38,4 +38,10 @@ describe('isContentTypeJson', () => {
 
     expect(result).toBe(false);
   });
+
+  it('should return false for string', () => {
+    const result = isContentTypeJson('');
+
+    expect(result).toBe(false);
+  });
 });
