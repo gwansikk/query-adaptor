@@ -143,22 +143,21 @@ describe('query', () => {
     const data = await query.post<TResponseData, TRequestData>({
       endpoint: MSW_END_POINT('posts', 1),
       body: body,
-      onTry: (context) => {
-        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
-        expect(context).toEqual(body);
+      onTry: (body) => {
+        expectTypeOf(body).toEqualTypeOf<TRequestData | undefined>();
+        expect(body).toEqual(body);
       },
-      onSuccess: (context, data) => {
-        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
-        expect(context).toEqual(body);
-        expectTypeOf(data).toEqualTypeOf<TResponseData>();
-        expect(data).toEqual({ id: 1 });
+      onSuccess: (body, repose) => {
+        expectTypeOf(body).toEqualTypeOf<TRequestData | undefined>();
+        expect(body).toEqual(body);
+        expectTypeOf(repose).toEqualTypeOf<Response>();
       },
-      onCatch: (context) => {
-        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
+      onCatch: (body) => {
+        expectTypeOf(body).toEqualTypeOf<TRequestData | undefined>();
       },
-      onFinally: (context) => {
-        expectTypeOf(context).toEqualTypeOf<TRequestData | undefined>();
-        expect(context).toEqual(body);
+      onFinally: (body) => {
+        expectTypeOf(body).toEqualTypeOf<TRequestData | undefined>();
+        expect(body).toEqual(body);
       },
     });
 
@@ -173,9 +172,7 @@ describe('query', () => {
     try {
       await query.get({
         endpoint: 'error-url',
-        options: {
-          retry: retry,
-        },
+        retry: retry,
         onCatch: () => {
           count = count + 1;
         },

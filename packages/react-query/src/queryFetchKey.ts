@@ -2,11 +2,11 @@ import { type FetchOptions } from 'query-adaptor';
 import type { ElementTypeof } from './types';
 import { QueryKey } from '@tanstack/react-query';
 
-type TQueryFetchKey<TData, TBody> =
-  | ElementTypeof<FetchOptions<TData, TBody>['endpoint']>
-  | FetchOptions<TData, TBody>['queryParameter'];
+type TQueryFetchKey<TBody> =
+  | ElementTypeof<FetchOptions<TBody>['endpoint']>
+  | FetchOptions<TBody>['queryParameter'];
 
-export interface TQueryFetchKeyOptions<TData, TBody> extends FetchOptions<TData, TBody> {
+export interface TQueryFetchKeyOptions<TBody> extends FetchOptions<TBody> {
   queryKey?: Array<unknown>;
 }
 
@@ -15,11 +15,11 @@ export interface TQueryFetchKeyOptions<TData, TBody> extends FetchOptions<TData,
  *
  * @experimental This is experimental feature.
  */
-export function queryFetchKey<TData, TBody>({
+export function queryFetchKey<TBody>({
   endpoint,
   queryParameter,
   queryKey,
-}: TQueryFetchKeyOptions<TData, TBody>): QueryKey {
+}: TQueryFetchKeyOptions<TBody>): QueryKey {
   const key: Array<unknown> = [...endpoint];
 
   if (queryKey) {
@@ -27,11 +27,11 @@ export function queryFetchKey<TData, TBody>({
   }
 
   if (queryParameter) {
-    const queryKeyFormQueryParameter: Record<string, TQueryFetchKey<TData, TBody>> = {};
+    const queryKeyFormQueryParameter: Record<string, TQueryFetchKey<TBody>> = {};
 
     Object.entries(queryParameter).forEach(([param, value]) => {
       if (value !== undefined) {
-        queryKeyFormQueryParameter[param] = value as TQueryFetchKey<TData, TBody>;
+        queryKeyFormQueryParameter[param] = value as TQueryFetchKey<TBody>;
       }
     });
 

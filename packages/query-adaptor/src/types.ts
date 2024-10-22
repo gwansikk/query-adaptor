@@ -4,16 +4,19 @@ export type TEndpoint = Array<string | number> | string;
 
 export type TQueryParameter = Record<string, string | number | undefined>;
 
-export type TRequestOptions = RequestInit & {
+export type TRequestOptions = Omit<RequestInit, 'body' | 'method'> & {
   method?: TMethod;
+  body?: unknown;
   retry?: number;
 };
 
 export type TInterceptor<
   TResponse extends Response = Response,
-  TRequest extends TRequestOptions = TRequestOptions,
+  TRequest extends RequestInit = RequestInit,
 > = (response: TResponse, request: TRequest) => TResponse | Promise<TResponse>;
 
-export type TRequestInterceptor = (request: TRequestOptions) => Promise<TRequestOptions>;
+export type TRequestInterceptor = (request: RequestInit) => RequestInit | Promise<RequestInit>;
 
-export type TQueryAdaptor<TData> = (path: string, options: TRequestOptions) => Promise<TData>;
+export type TErrorInterceptor = (error: unknown, request: RequestInit) => void;
+
+export type TQueryAdaptor<TData> = (path: string, options: RequestInit) => Promise<TData>;

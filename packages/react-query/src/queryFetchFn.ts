@@ -5,7 +5,13 @@ import { FetchOptions, query } from 'query-adaptor';
  * @experimental This is experimental feature.
  */
 export async function queryFetchFn<TData, TBody = never>(
-  options: FetchOptions<TData, TBody>
+  fetchOptions: FetchOptions<TBody>
 ): Promise<() => Promise<TData>> {
-  return () => query.get<TData, TBody>(options);
+  return {
+    GET: () => query.get<TData, TBody>(fetchOptions),
+    POST: () => query.post<TData, TBody>(fetchOptions),
+    PATCH: () => query.patch<TData, TBody>(fetchOptions),
+    DELETE: () => query.delete<TData, TBody>(fetchOptions),
+    PUT: () => query.put<TData, TBody>(fetchOptions),
+  }[fetchOptions.method ?? 'GET'];
 }

@@ -1,143 +1,83 @@
 import type { FetchOptions, FetchOptionsWithMethod } from './fetchOptions';
-import type { TQueryAdaptor } from './types';
 import { formatPath } from './utils';
-import { createQueryParameter } from './utils/createQueryParameter';
 import { createRequestOptions } from './utils/createRequestOptions';
 
 export interface Query {
-  request: <TData, TBody>(
-    options: FetchOptionsWithMethod<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ) => Promise<TData>;
-  get: <TData, TBody = never>(
-    options: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ) => Promise<TData>;
-  post: <TData, TBody = TData>(
-    options: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ) => Promise<TData>;
-  patch: <TData, TBody = TData>(
-    options: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ) => Promise<TData>;
-  put: <TData, TBody = TData>(
-    options: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ) => Promise<TData>;
-  delete: <TData, TBody = TData>(
-    options: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ) => Promise<TData>;
+  request: <TBody>(fetchOptions: FetchOptionsWithMethod<TBody>) => Promise<Response>;
+  get: <TData, TBody = never>(fetchOptions: FetchOptions<TBody>) => Promise<TData>;
+  post: <TData, TBody = TData>(fetchOptions: FetchOptions<TBody>) => Promise<TData>;
+  patch: <TData, TBody = TData>(fetchOptions: FetchOptions<TBody>) => Promise<TData>;
+  put: <TData, TBody = TData>(fetchOptions: FetchOptions<TBody>) => Promise<TData>;
+  delete: <TData, TBody = TData>(fetchOptions: FetchOptions<TBody>) => Promise<TData>;
 }
 
 /**
  * Use the Fetch API easily and declaratively
  *
- * @see {@link https://query-fetch.gwansik.dev/query-fetch}
+ * @see {@link https://query-adaptor.gwansik.dev/query.html}
  */
 export const query: Query = {
-  async request<TData, TBody>(
-    options: FetchOptionsWithMethod<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ): Promise<TData> {
-    let path = formatPath(options.endpoint);
-    const requestOptions = createRequestOptions(options);
-
-    if (options.queryParameter) {
-      path = createQueryParameter(path, options.queryParameter);
-    }
+  async request<TBody>(fetchOptions: FetchOptionsWithMethod<TBody>): Promise<Response> {
+    const url = formatPath(fetchOptions.endpoint, fetchOptions.queryParameter);
+    const options = createRequestOptions(fetchOptions);
 
     try {
-      if (options.onTry) {
-        options.onTry(options.body);
+      if (fetchOptions.onTry) {
+        fetchOptions.onTry(fetchOptions.body);
       }
 
-      if (adaptor) {
-        return adaptor(formatPath(path), requestOptions);
+      const response = await fetch(url, options);
+
+      if (response.ok && fetchOptions.onSuccess) {
+        fetchOptions.onSuccess(fetchOptions.body, response);
       }
 
-      const response = await fetch(formatPath(path), requestOptions);
-      const responsedata = await response.json();
-
-      if (response.ok && options.onSuccess) {
-        options.onSuccess(options.body, responsedata);
-      }
-
-      return responsedata;
+      return response;
     } catch (error) {
-      if (options.onCatch) {
-        options.onCatch(options.body);
+      if (fetchOptions.onCatch) {
+        fetchOptions.onCatch(fetchOptions.body);
       }
 
-      if (!options?.options?.retry) {
-        throw new Error('retry is undefined');
+      if (fetchOptions.retry) {
+        if (fetchOptions.retry <= 0) {
+          throw new Error();
+        }
+
+        fetchOptions.retry = fetchOptions.retry - 1;
+
+        return this.request(fetchOptions);
       }
 
-      if (options.options.retry <= 0) {
-        throw new Error('retry is over');
-      }
-
-      options.options.retry = options.options.retry - 1;
-
-      return this.request(options, adaptor);
+      throw new Error(error instanceof Error ? error.message : String(error));
     } finally {
-      if (options.onFinally) {
-        options.onFinally(options.body);
+      if (fetchOptions.onFinally) {
+        fetchOptions.onFinally(fetchOptions.body);
       }
     }
   },
 
-  get<TData, TBody>(
-    fetchOptions: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ): Promise<TData> {
-    return this.request<TData, TBody>(
-      {
-        ...fetchOptions,
-        method: 'GET',
-      },
-      adaptor
-    );
+  async get<TData, TBody>(fetchOptions: FetchOptions<TBody>): Promise<TData> {
+    const response = await this.request<TBody>(Object.assign(fetchOptions, { method: 'GET' }));
+    return response.json();
   },
 
-  post<TData, TBody>(
-    fetchOptions: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ): Promise<TData> {
-    return this.request<TData, TBody>(
-      {
-        ...fetchOptions,
-        method: 'POST',
-      },
-      adaptor
-    );
+  async post<TData, TBody>(fetchOptions: FetchOptions<TBody>): Promise<TData> {
+    const response = await this.request<TBody>(Object.assign(fetchOptions, { method: 'POST' }));
+    return response.json();
   },
 
-  patch<TData, TBody>(
-    fetchOptions: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ): Promise<TData> {
-    return this.request<TData, TBody>(
-      {
-        ...fetchOptions,
-        method: 'PATCH',
-      },
-      adaptor
-    );
+  async patch<TData, TBody>(fetchOptions: FetchOptions<TBody>): Promise<TData> {
+    const response = await this.request<TBody>(Object.assign(fetchOptions, { method: 'PATCH' }));
+    return response.json();
   },
 
-  put<TData, TBody>(
-    fetchOptions: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ): Promise<TData> {
-    return this.request<TData, TBody>({ ...fetchOptions, method: 'PUT' }, adaptor);
+  async put<TData, TBody>(fetchOptions: FetchOptions<TBody>): Promise<TData> {
+    const response = await this.request<TBody>(Object.assign(fetchOptions, { method: 'PUT' }));
+    return response.json();
   },
 
-  delete<TData, TBody>(
-    fetchOptions: FetchOptions<TData, TBody>,
-    adaptor?: TQueryAdaptor<TData>
-  ): Promise<TData> {
-    return this.request<TData, TBody>({ ...fetchOptions, method: 'DELETE' }, adaptor);
+  async delete<TData, TBody>(fetchOptions: FetchOptions<TBody>): Promise<TData> {
+    const response = await this.request<TBody>(Object.assign(fetchOptions, { method: 'DELETE' }));
+    return response.json();
   },
 } as const;

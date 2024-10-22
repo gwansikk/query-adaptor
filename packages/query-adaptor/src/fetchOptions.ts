@@ -1,18 +1,16 @@
 import type { TEndpoint, TMethod, TQueryParameter, TRequestOptions } from './types';
 
-export interface FetchOptions<TData = unknown, TBody = unknown> {
+export interface FetchOptions<TBody = unknown> extends TRequestOptions {
   endpoint: TEndpoint;
   queryParameter?: TQueryParameter;
   body?: TBody;
-  options?: TRequestOptions;
-  onTry?: (context: TBody | undefined) => void;
-  onSuccess?: (context: TBody | undefined, data: TData) => void;
-  onCatch?: (context: TBody | undefined) => void;
-  onFinally?: (context: TBody | undefined) => void;
+  onTry?: (body: TBody | undefined) => void;
+  onSuccess?: (body: TBody | undefined, response: Response) => void;
+  onCatch?: (body: TBody | undefined) => void;
+  onFinally?: (body: TBody | undefined) => void;
 }
 
-export interface FetchOptionsWithMethod<TData = unknown, TBody = unknown>
-  extends FetchOptions<TData, TBody> {
+export interface FetchOptionsWithMethod<TBody = unknown> extends FetchOptions<TBody> {
   method: TMethod;
 }
 
@@ -20,11 +18,9 @@ export interface FetchOptionsWithMethod<TData = unknown, TBody = unknown>
  * You can pass it to all Query Fetch interface options
  *
  * @description You can conveniently manage it by passing `fetchOptions` to the Query Fetch API.
- * @see {@link https://query-fetch.gwansik.dev/fetch-options}
+ * @see {@link https://query-adaptor.gwansik.dev/fetch-options.html}
  * @experimental This is experimental feature.
  */
-export function fetchOptions<TData = unknown, TBody = unknown>(
-  options: FetchOptions<TData, TBody>
-): FetchOptions<TData, TBody> {
+export function fetchOptions<TBody = unknown>(options: FetchOptions<TBody>): FetchOptions<TBody> {
   return options;
 }
