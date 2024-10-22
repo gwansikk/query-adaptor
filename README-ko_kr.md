@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<p><b>모든 프레임워크 환경에서 호환되는 강력한 패칭과 유연한 HTTP 클라이언트 관리</b></p>
+<p><b>다양한 프레임워크를 위한 강력한 패칭 미들웨어, 유연한 HTTP 클라이언트 관리</b></p>
 
 ![GitHub License](https://img.shields.io/github/license/gwansikk/query-adaptor?labelColor=black&color=black)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
@@ -35,11 +35,13 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 - createQueryAdaptor
 - fetchOptions
 
-### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)
+<!-- ### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)
 
 > Query Adaptor를 React 환경에서 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
 - QueryAdaptorProvider
+- Query
+- Suspense Options -->
 
 ### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
 
@@ -47,7 +49,6 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 - queryFetchFn
 - queryFetchKey
-- toQueryOptions
 
 ## 공식 문서
 
