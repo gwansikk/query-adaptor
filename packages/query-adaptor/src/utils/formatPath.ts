@@ -1,14 +1,16 @@
-/**
- * Formats the given path by removing leading and trailing slashes,
- * and replacing multiple consecutive slashes with a single slash.
- *
- * @param path - The path to be formatted.
- * @returns The formatted path.
- */
-export function formatPath(path: Array<string | number> | string): string {
-  if (typeof path === 'string') {
-    return path.replace(/^\//, '').replace(/\/+/g, '/').replace(/\/$/, '');
+import type { TQueryParameter } from '../types';
+
+export function formatPath(
+  path: Array<string | number> | string,
+  parameter?: TQueryParameter
+): string {
+  let url = Array.isArray(path) ? path.join('/') : path;
+
+  if (parameter) {
+    const searchParams = new URLSearchParams(parameter as Record<string, string>);
+
+    url += `?${searchParams.toString()}`;
   }
 
-  return path.join('/').replace(/^\//, '').replace(/\/+/g, '/').replace(/\/$/, '');
+  return url.trim().replace(/^\//, '').replace(/\/+/g, '/').replace(/\/$/, '');
 }
