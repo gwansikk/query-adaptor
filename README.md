@@ -27,7 +27,7 @@ To overcome these limitations, Query Adaptor was developed. As the name suggests
 
 ## Packages
 
-### query-adaptor &middot; [![npm version](https://img.shields.io/npm/v/query-adaptor?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/query-adaptor) [![npm downloads](https://img.shields.io/npm/dm/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor) [![npm bundle size](https://img.shields.io/bundlephobia/min/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor)
+### query-adaptor &middot; [![npm version](https://img.shields.io/npm/v/query-adaptor?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/query-adaptor) [![npm bundle size](https://img.shields.io/bundlephobia/min/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor)
 
 > Provides core features of Query Adaptor.
 
@@ -35,7 +35,7 @@ To overcome these limitations, Query Adaptor was developed. As the name suggests
 - createQueryAdaptor
 - fetchOptions
 
-<!-- ### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)
+<!-- ### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)
 
 > Provides features to easily use Query Adaptor with React environment.
 
@@ -43,7 +43,7 @@ To overcome these limitations, Query Adaptor was developed. As the name suggests
 - Query
 - Suspense Options -->
 
-### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
+### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
 
 > Provides features to easily use Query Adaptor with React Query.
 

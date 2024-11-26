@@ -27,7 +27,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 
 ## 패키지
 
-### query-adaptor &middot; [![npm version](https://img.shields.io/npm/v/query-adaptor?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/query-adaptor) [![npm downloads](https://img.shields.io/npm/dm/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor) [![npm bundle size](https://img.shields.io/bundlephobia/min/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor)
+### query-adaptor &middot; [![npm version](https://img.shields.io/npm/v/query-adaptor?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/query-adaptor) [![npm bundle size](https://img.shields.io/bundlephobia/min/query-adaptor?color=000&labelColor=000)](https://www.npmjs.com/package/query-adaptor)
 
 > Query Adaptor의 핵심 기능을 제공해요.
 
@@ -35,7 +35,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 - createQueryAdaptor
 - fetchOptions
 
-<!-- ### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)
+<!-- ### @query-adaptor/react &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react)
 
 > Query Adaptor를 React 환경에서 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
@@ -43,7 +43,7 @@ Fetch API는 기본적인 기능만 제공하기 때문에 개발자가 필요�
 - Query
 - Suspense Options -->
 
-### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm downloads](https://img.shields.io/npm/dm/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
+### @query-adaptor/react-query &middot; [![npm version](https://img.shields.io/npm/v/@query-adaptor/react-query?color=000&labelColor=000&logo=npm)](https://www.npmjs.com/package/@query-adaptor/react-query) [![npm bundle size](https://img.shields.io/bundlephobia/min/@query-adaptor/react-query?color=000&labelColor=000)](https://www.npmjs.com/package/@query-adaptor/react-query)
 
 > Query Adaptor를 React Query와 쉽게 사용할 수 있도록 도와주는 기능을 제공해요.
 
