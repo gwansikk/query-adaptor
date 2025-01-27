@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: 'Query Adaptor'
-  text: 'Flexible HTTP client management'
-  tagline: 'Powerful fetching middleware, flexible on everywhere.'
+  text: 'HTTP client management'
+  tagline: 'Creating a powerful HTTP client for anywhere'
   actions:
     - theme: brand
       text: Get Started

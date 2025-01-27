@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<p><b>Powerful fetching middleware, flexible HTTP client management for various frameworks</b></p>
+<p><b>Creating a powerful HTTP client for anywhere</b></p>
 
 [![GitHub License](https://img.shields.io/github/license/gwansikk/query-adaptor?labelColor=black&color=black)](https://github.com/gwansikk/query-adaptor?tab=MIT-1-ov-file)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)

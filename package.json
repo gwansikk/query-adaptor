@@ -12,7 +12,6 @@
   "author": "Gwansik Kim <gwansik.kim@gwansik.dev>",
   "type": "module",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
     "test": "turbo run test",
     "check-types": "turbo run check-types",

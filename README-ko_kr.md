@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<p><b>다양한 프레임워크를 위한 강력한 패칭 미들웨어, 유연한 HTTP 클라이언트 관리</b></p>
+<p><b>어디서나 사용할 수 있는 강력한 HTTP 클라이언트를 만들어보세요</b></p>
 
 ![GitHub License](https://img.shields.io/github/license/gwansikk/query-adaptor?labelColor=black&color=black)
 ![Codacy grade](https://img.shields.io/codacy/grade/bf89208f2e9f4590832d09131dd207c2?logo=codacy&labelColor=black&color=black)
